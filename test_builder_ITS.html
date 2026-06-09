@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тямущий — Конструктор тестів</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+  :root{--ink:#0D0D14;--gold:#C8A84B;--paper:#F4F3EF;--card:#fffdf9;--line:#e4e0d4;--muted:#8a8578;
+        --ok:#2a7a4a;--warn:#b8860b;--bad:#c0392b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5}
+  .topbar{background:var(--ink);color:#fff;padding:16px 22px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .topbar .logo{font-family:Georgia,serif;font-size:22px;font-weight:700}.topbar .logo b{color:var(--gold)}
+  .topbar .tag{font-size:12px;color:var(--gold);letter-spacing:.6px;text-transform:uppercase}
+  .wrap{max-width:920px;margin:0 auto;padding:20px 16px}
+  h2{font-family:Georgia,serif;font-size:18px;margin:16px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:0 1px 0 rgba(13,13,20,.03)}
+  label{font-size:13px;font-weight:600;display:block;margin:6px 0 3px}
+  input[type=text],input[type=number],textarea,select{font:inherit;width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:7px;background:#fff}
+  textarea{resize:vertical;min-height:42px}
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  button{font:inherit;font-weight:700;background:var(--ink);color:var(--gold);border:none;border-radius:8px;padding:9px 16px;cursor:pointer}
+  button.sec{background:#efeadb;color:var(--ink);border:1px solid var(--line)}
+  button.mini{padding:4px 9px;font-size:13px}
+  button:disabled{opacity:.5;cursor:default}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .q{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff}
+  .q .qh{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .qnum{font-weight:800;color:var(--gold);background:var(--ink);border-radius:6px;padding:2px 9px;font-size:13px}
+  .opt{display:flex;gap:8px;align-items:center;margin:4px 0}
+  .opt .L{width:22px;text-align:center;font-weight:700}
+  .thumb{height:46px;border:1px solid var(--line);border-radius:6px;background:#fff;vertical-align:middle}
+  .imgrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .msgs{margin:0;padding-left:16px} .msgs li{margin:2px 0} li.e{color:var(--bad)} li.w{color:var(--warn)}
+  .note{color:var(--muted);font-size:12.5px;margin-top:6px}
+  .pill{display:inline-block;background:#efeadb;border-radius:20px;padding:2px 10px;font-size:12px;color:#6a6555}
+  code{font-family:ui-monospace,Menlo,monospace;background:#efeadb;padding:1px 5px;border-radius:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="logo">🎓 <b>ТЯМУЩИЙ</b></span><span class="tag">Конструктор тестів · локально, без сервера</span></div>
+<div class="wrap">
+
+  <div class="card">
+    <h2>Режим</h2>
+    <div class="row">
+      <button class="sec" onclick="newTest()">🆕 Новий тест</button>
+      <label style="margin:0">Відкрити тест (.xlsx):</label>
+      <input type="file" id="openX" accept=".xlsx,.xls" style="width:auto" onchange="openTestFile()">
+      <label style="margin:0">Зображення теста (тека):</label>
+      <input type="file" id="openImgs" accept="image/*" multiple webkitdirectory directory style="width:auto" onchange="openImages()">
+    </div>
+    <p class="note" id="modeNote">Режим: створення нового тесту. Для редагування — відкрийте наявний .xlsx (і за потреби теку зображень).</p>
+  </div>
+
+  <div class="card">
+    <h2>Мета тесту</h2>
+    <div class="grid">
+      <div><label>Предмет *</label><select id="m_subject" onchange="onSubject()"><option value="">— оберіть —</option></select></div>
+      <div><label>Клас *</label><select id="m_grade" onchange="onMeta()"><option value="">—</option></select></div>
+      <div><label>Модуль (для manifest)</label><input type="text" id="m_module" oninput="onMeta()" placeholder="напр. 2"></div>
+    </div>
+    <label>Тема *</label><input type="text" id="m_theme" oninput="onMeta()">
+    <div class="grid2" style="margin-top:8px">
+      <div><label>Питань (скільки показувати) *</label><input type="number" id="m_count" min="1" value="15" oninput="onMeta()"></div>
+      <div><label>Автор</label><input type="text" id="m_author" value="Тямущий v5.0"></div>
+    </div>
+    <div class="grid2" style="margin-top:8px">
+      <div><label>ID / ім'я файлу <button class="mini sec" onclick="autoId()">авто</button></label><input type="text" id="m_id" placeholder="латиницею, напр. zu_10_m2"></div>
+      <div><label>Код (для запуску/посилання) <button class="mini sec" onclick="autoCode()">авто</button></label><input type="text" id="m_code" placeholder="напр. ZU10M2"></div>
+    </div>
+    <p class="note">ID — латиницею (ім'я файлу <code>&lt;id&gt;.xlsx</code> і тека зображень <code>images/&lt;id&gt;/</code>). ГР — необов'язкові: де нема ГР → одна оцінка, де є → оцінка + ГР.</p>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <h2 style="margin:0">Питання</h2>
+      <div class="row">
+        <span class="pill" id="qcount">0 питань</span>
+        <button class="mini" onclick="addQ()">+ Додати питання</button>
+      </div>
+    </div>
+    <div id="qlist"></div>
+  </div>
+
+  <div class="card">
+    <h2>Перевірка</h2>
+    <ul class="msgs" id="valid"><li class="note">додайте дані…</li></ul>
+  </div>
+
+  <div class="card">
+    <h2>Збереження</h2>
+    <div class="row">
+      <button onclick="saveTest()">💾 Зберегти тест (.xlsx / ZIP)</button>
+      <span class="note">якщо є зображення — буде ZIP із текою <code>images/&lt;id&gt;/</code></span>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <label style="margin:0">manifest.json (наявний):</label>
+      <input type="file" id="mf" accept=".json" style="width:auto">
+      <button class="sec" onclick="addToManifest()">➕ Додати запис і зберегти manifest</button>
+    </div>
+    <p class="note" id="manNote"></p>
+  </div>
+
+<script>
+const LET=['А','Б','В','Г']; const LAT={'А':'a','Б':'b','В':'v','Г':'g'};
+const TYPES=[['single','один правильний'],['multiple','кілька правильних'],['truefalse','так/ні']];
+// ── Довідник: галузь → набір ГР (наказ №1093) ──
+const GAL={
+ mova:[{code:'ГР1',name:'Аудіювання (усне сприймання)'},{code:'ГР2',name:'Читання'},{code:'ГР3',name:'Письмо'},{code:'ГР4',name:'Усна взаємодія / мова'}],
+ lit:[{code:'ГР1',name:'Сприймає художній текст'},{code:'ГР2',name:'Аналізує та інтерпретує'},{code:'ГР3',name:'Творча діяльність'}],
+ math:[{code:'ГР1',name:'Моделює ситуації'},{code:'ГР2',name:'Розв\u2019язує задачі'},{code:'ГР3',name:'Критично оцінює'}],
+ nat:[{code:'ГР1',name:'Досліджує природу'},{code:'ГР2',name:'Опрацьовує інформацію'},{code:'ГР3',name:'Застосовує знання'}],
+ hist:[{code:'ГР1',name:'Час і простір'},{code:'ГР2',name:'Працює з джерелами'},{code:'ГР3',name:'Громадянська позиція'}],
+ inf:[{code:'ГР1',name:'Створює продукти'},{code:'ГР2',name:'Працює з даними'},{code:'ГР3',name:'Алгоритмічне мислення'},{code:'ГР4',name:'Безпека ІТ'}],
+ tech:[{code:'ГР1',name:'Проєктує вироби'},{code:'ГР2',name:'Застосовує технології'},{code:'ГР3',name:'Ресурси й безпека'},{code:'ГР4',name:'Оцінює результат'}],
+ art:[{code:'ГР1',name:'Сприймає мистецтво'},{code:'ГР2',name:'Творить'},{code:'ГР3',name:'Інтерпретує / ідентичність'}],
+ pe:[{code:'ГР1',name:'Техніка рухів'},{code:'ГР2',name:'Оздоровча діяльність'},{code:'ГР3',name:'Соціальна поведінка'}],
+ health:[{code:'ГР1',name:'Здоров\u2019я й безпека'},{code:'ГР2',name:'Безпечна поведінка'},{code:'ГР3',name:'Взаємодія / етика'}],
+};
+// ── Довідник: предмет → класи + галузь ГР (класи орієнтовні — підлаштуйте) ──
+const SUBJECTS=[
+ {n:'Українська мова',cl:[5,6,7,8,9,10,11],g:'mova'},
+ {n:'Українська література',cl:[5,6,7,8,9,10,11],g:'lit'},
+ {n:'Зарубіжна література',cl:[5,6,7,8,9,10,11],g:'lit'},
+ {n:'Іноземна мова',cl:[5,6,7,8,9,10,11],g:'mova'},
+ {n:'Математика',cl:[5,6],g:'math'},
+ {n:'Алгебра',cl:[7,8,9,10,11],g:'math'},
+ {n:'Геометрія',cl:[7,8,9,10,11],g:'math'},
+ {n:'Пізнаємо природу',cl:[5,6],g:'nat'},
+ {n:'Біологія',cl:[6,7,8,9,10,11],g:'nat'},
+ {n:'Хімія',cl:[7,8,9,10,11],g:'nat'},
+ {n:'Фізика',cl:[7,8,9,10,11],g:'nat'},
+ {n:'Географія',cl:[6,7,8,9,10,11],g:'nat'},
+ {n:'Історія України',cl:[5,6,7,8,9,10,11],g:'hist'},
+ {n:'Всесвітня історія',cl:[6,7,8,9,10,11],g:'hist'},
+ {n:'Громадянська освіта',cl:[10,11],g:'hist'},
+ {n:'Інформатика',cl:[5,6,7,8,9,10,11],g:'inf'},
+ {n:'Технології',cl:[5,6,7,8,9,10,11],g:'tech'},
+ {n:'Мистецтво',cl:[5,6,7,8,9,10,11],g:'art'},
+ {n:'Фізична культура',cl:[5,6,7,8,9,10,11],g:'pe'},
+ {n:'Здоров\u2019я, безпека та добробут',cl:[5,6,7,8,9],g:'health'},
+ {n:'Захист України',cl:[10,11],g:null},
+];
+let curSet=[];
+function grOptions(sel){ let h='<option value="">—</option>';
+  curSet.forEach(e=>{ const nm=e.name.length>24?e.name.slice(0,22)+'…':e.name;
+    h+=`<option value="${e.code}" ${sel===e.code?'selected':''}>${e.code} · ${nm}</option>`; });
+  return h; }
+function fillSubjects(){ document.getElementById('m_subject').innerHTML='<option value="">— оберіть —</option>'+SUBJECTS.map(o=>`<option>${o.n}</option>`).join(''); }
+function fillClasses(subj){ const cls=subj?subj.cl:[];
+  document.getElementById('m_grade').innerHTML='<option value="">—</option>'+cls.map(c=>`<option>${c}</option>`).join(''); }
+function onSubject(){ const name=v('m_subject'); const subj=SUBJECTS.find(o=>o.n===name);
+  curSet=(subj&&subj.g)?GAL[subj.g]:[]; fillClasses(subj);
+  const codes=curSet.map(e=>e.code); questions.forEach(q=>{ if(q.gr&&!codes.includes(q.gr))q.gr=''; });
+  onMeta(); renderQs(); }
+const Q_MAX_SIDE=1000, OPT_MAX_SIDE=600, WEBP_Q=0.82;
+const meta={subject:'',grade:'',module:'',theme:'',count:15,author:'Тямущий v5.0',id:'',code:''};
+let questions=[];
+let mode='new';
+
+function blankQ(){ return {group:'Г1',text:'',type:'single',opts:{А:'',Б:'',В:'',Г:''},correct:[],gr:'',imgQ:null,imgOpts:{}}; }
+
+// ── транслітерація для ID ──
+const TR={а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ie',ж:'zh',з:'z',и:'y',і:'i',ї:'i',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ь:'',ю:'iu',я:'ia',' ':'_'};
+function translit(s){ return String(s||'').toLowerCase().split('').map(c=>TR[c]!==undefined?TR[c]:(/[a-z0-9]/.test(c)?c:'')).join(''); }
+function autoId(){ const t=translit(meta.theme).replace(/_+/g,'_').replace(/^_|_$/g,'').slice(0,18);
+  const id=[translit(meta.subject).slice(0,4),meta.grade?translit(meta.grade):'' ,meta.module?('m'+meta.module):'',t].filter(Boolean).join('_').replace(/_+/g,'_');
+  meta.id=id; document.getElementById('m_id').value=id; }
+function autoCode(){ const ini=String(meta.subject||'').split(/\s+/).map(w=>translit(w[0]||'')).join('').toUpperCase().slice(0,3);
+  const c=(ini+(meta.grade||'').replace(/\D/g,'')+(meta.module?('M'+meta.module):'')).toUpperCase();
+  meta.code=c; document.getElementById('m_code').value=c; }
+
+function onMeta(){
+  meta.subject=v('m_subject'); meta.grade=v('m_grade'); meta.module=v('m_module');
+  meta.theme=v('m_theme'); meta.count=+v('m_count')||0; meta.author=v('m_author');
+  meta.id=v('m_id'); meta.code=v('m_code'); validate();
+}
+function v(id){ return document.getElementById(id).value.trim(); }
+
+// ── зображення → WebP + зменшення ──
+function processImage(file, maxSide){
+  return new Promise((res)=>{
+    const url=URL.createObjectURL(file); const im=new Image();
+    im.onload=()=>{ let {width:w,height:h}=im; const k=Math.max(w,h);
+      if(k>maxSide){ const s=maxSide/k; w=Math.round(w*s); h=Math.round(h*s); }
+      const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+      cv.getContext('2d').drawImage(im,0,0,w,h);
+      cv.toBlob(b=>{ URL.revokeObjectURL(url);
+        if(!b){ res(null); return; }
+        res({blob:b,url:URL.createObjectURL(b),kb:Math.round(b.size/1024),ext:'webp'});
+      },'image/webp',WEBP_Q);
+    };
+    im.onerror=()=>{URL.revokeObjectURL(url);res(null);};
+    im.src=url;
+  });
+}
+async function attachImg(qi,which){
+  const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*';
+  inp.onchange=async()=>{ const f=inp.files[0]; if(!f)return;
+    const isQ=(which==='Q'); const r=await processImage(f, isQ?Q_MAX_SIDE:OPT_MAX_SIDE);
+    if(!r){ alert('Не вдалося обробити зображення.'); return; }
+    if(r.kb>400) alert('Увага: зображення ~'+r.kb+' КБ (>400). Бажано зменшити вихідник.');
+    if(isQ) questions[qi].imgQ=r; else questions[qi].imgOpts[which]=r;
+    renderQs(); validate();
+  };
+  inp.click();
+}
+function delImg(qi,which){ if(which==='Q')questions[qi].imgQ=null; else delete questions[qi].imgOpts[which]; renderQs(); validate(); }
+
+// ── керування питаннями ──
+function addQ(){ questions.push(blankQ()); renderQs(); validate(); }
+function delQ(i){ questions.splice(i,1); renderQs(); validate(); }
+function moveQ(i,d){ const j=i+d; if(j<0||j>=questions.length)return; const t=questions[i];questions[i]=questions[j];questions[j]=t; renderQs(); validate(); }
+function setF(i,f,val){ questions[i][f]=val; if(f==='type'){ questions[i].correct=[]; renderQs(); } validate(); }
+function setOpt(i,L,val){ questions[i].opts[L]=val; validate(); }
+function toggleCorrect(i,L,multi){ const q=questions[i];
+  if(multi){ const k=q.correct.indexOf(L); if(k>=0)q.correct.splice(k,1); else q.correct.push(L); }
+  else q.correct=[L];
+  validate(); }
+
+function renderQs(){
+  const box=document.getElementById('qlist'); box.innerHTML='';
+  document.getElementById('qcount').textContent=questions.length+' питань';
+  questions.forEach((q,i)=>{
+    const multi=q.type==='multiple';
+    const d=document.createElement('div'); d.className='q';
+    let opts='';
+    LET.forEach(L=>{
+      const checked=q.correct.includes(L)?'checked':'';
+      const ctrl=multi
+        ? `<input type="checkbox" ${checked} onchange="toggleCorrect(${i},'${L}',true)">`
+        : `<input type="radio" name="c${i}" ${checked} onchange="toggleCorrect(${i},'${L}',false)">`;
+      const img=q.imgOpts[L];
+      const imgbtn=img
+        ? `<img class="thumb" src="${img.url}"> <button class="mini sec" onclick="delImg(${i},'${L}')">×</button> <span>${img.kb}КБ</span>`
+        : `<button class="mini sec" onclick="attachImg(${i},'${L}')">🖼 варіант</button>`;
+      opts+=`<div class="opt"><span class="L">${L}</span>${ctrl}
+        <input type="text" value="${esc(q.opts[L])}" oninput="setOpt(${i},'${L}',this.value)" placeholder="Варіант ${L}">
+        ${imgbtn}</div>`;
+    });
+    const typeSel=TYPES.map(t=>`<option value="${t[0]}" ${q.type===t[0]?'selected':''}>${t[1]}</option>`).join('');
+    const grSel=grOptions(q.gr);
+    const qimg=q.imgQ
+      ? `<img class="thumb" style="height:60px" src="${q.imgQ.url}"> <button class="mini sec" onclick="delImg(${i},'Q')">× прибрати</button> <span>${q.imgQ.kb}КБ</span>`
+      : `<button class="mini sec" onclick="attachImg(${i},'Q')">🖼 зображення питання</button>`;
+    d.innerHTML=`
+      <div class="qh"><span class="qnum">№ ${i+1}</span>
+        <div class="row">
+          <button class="mini sec" onclick="moveQ(${i},-1)">↑</button>
+          <button class="mini sec" onclick="moveQ(${i},1)">↓</button>
+          <button class="mini sec" onclick="delQ(${i})">видалити</button>
+        </div></div>
+      <div class="grid">
+        <div><label>Група (добір)</label><input type="text" value="${esc(q.group)}" oninput="setF(${i},'group',this.value)" placeholder="Г1"></div>
+        <div><label>Тип</label><select onchange="setF(${i},'type',this.value)">${typeSel}</select></div>
+        <div><label>ГР (необов'язково)</label><select onchange="setF(${i},'gr',this.value)">${grSel}</select></div>
+      </div>
+      <label>Питання</label><textarea oninput="setF(${i},'text',this.value)" placeholder="Текст питання">${esc(q.text)}</textarea>
+      <div class="imgrow" style="margin:6px 0">${qimg}</div>
+      <label>Варіанти (позначте правильні)</label>
+      ${opts}`;
+    box.appendChild(d);
+  });
+}
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── валідація ──
+function validate(){
+  const E=[],W=[]; const out=document.getElementById('valid');
+  if(!meta.subject)E.push('вкажіть Предмет'); if(!meta.grade)E.push('вкажіть Клас');
+  if(!meta.theme)E.push('вкажіть Тему'); if(!meta.id)W.push('вкажіть ID (кнопка «авто»)');
+  if(!meta.count||meta.count<1)E.push('вкажіть «Питань» (≥1)');
+  if(questions.length===0)E.push('додайте хоча б одне питання');
+  if(meta.count>questions.length)E.push(`«Питань»=${meta.count} більше за кількість питань (${questions.length})`);
+  let anyGR=false;
+  questions.forEach((q,i)=>{ const n=i+1;
+    if(!q.text.trim())E.push(`№${n}: порожнє питання`);
+    const ne=LET.filter(L=>q.opts[L].trim()); if(ne.length<2)E.push(`№${n}: менше 2 варіантів`);
+    if(q.correct.length===0)E.push(`№${n}: не позначено правильну відповідь`);
+    q.correct.forEach(L=>{ if(!q.opts[L].trim())E.push(`№${n}: правильна «${L}» — порожній варіант`); });
+    if(q.type==='single'&&q.correct.length>1)W.push(`№${n}: тип «один», а позначено кілька`);
+    if(q.type==='multiple'&&q.correct.length===1)W.push(`№${n}: тип «кілька», а позначено одну`);
+    if(q.type==='truefalse'&&(q.opts['В'].trim()||q.opts['Г'].trim()))W.push(`№${n}: так/ні, але заповнені В/Г`);
+    if(q.gr)anyGR=true;
+  });
+  const msgs=[...E.map(e=>`<li class="e">❌ ${e}</li>`),...W.map(w=>`<li class="w">⚠️ ${w}</li>`)];
+  if(!msgs.length)msgs.push(`<li class="note">✅ готово до збереження${anyGR?' · тест із ГР':' · тест на одну оцінку'}</li>`);
+  out.innerHTML=msgs.join('');
+  return E.length===0;
+}
+
+// ── побудова xlsx ──
+function buildWorkbook(){
+  const anyGR=questions.some(q=>q.gr);
+  const metaAoa=[['Предмет',meta.subject],['Клас',meta.grade],['Тема',meta.theme],['Питань',meta.count],['Автор',meta.author]];
+  const head=['Група','Питання','Варіант_А','Варіант_Б','Варіант_В','Варіант_Г','Правильна_відповідь','Тип'];
+  if(anyGR)head.push('ГР');
+  const qAoa=[head];
+  questions.forEach(q=>{
+    const row=[q.group,q.text,q.opts['А'],q.opts['Б'],q.opts['В'],q.opts['Г'],q.correct.join(','),q.type];
+    if(anyGR)row.push(q.gr||'');
+    qAoa.push(row);
+  });
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(metaAoa),'Мета');
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(qAoa),'Питання');
+  return XLSX.write(wb,{bookType:'xlsx',type:'array'});
+}
+function collectImages(){ // [{path, blob}]
+  const imgs=[]; const id=meta.id||'test';
+  questions.forEach((q,i)=>{ const nn=String(i+1).padStart(2,'0');
+    if(q.imgQ)imgs.push({name:`q${nn}.${q.imgQ.ext||'webp'}`,blob:q.imgQ.blob});
+    LET.forEach(L=>{ if(q.imgOpts[L])imgs.push({name:`q${nn}_${LAT[L]}.${q.imgOpts[L].ext||'webp'}`,blob:q.imgOpts[L].blob}); });
+  });
+  return imgs;
+}
+async function saveTest(){
+  if(!validate()){ alert('Є помилки — виправте перед збереженням.'); return; }
+  const id=meta.id||'test'; const xlsx=buildWorkbook(); const imgs=collectImages();
+  if(imgs.length===0){ dl(id+'.xlsx','application/octet-stream',new Blob([xlsx])); return; }
+  const zip=new JSZip();
+  zip.file(id+'.xlsx',xlsx);
+  imgs.forEach(im=>zip.file('images/'+id+'/'+im.name,im.blob));
+  zip.file('ПРОЧИТАЙ.txt','Покладіть '+id+'.xlsx у теку TESTS/, а теку images/'+id+'/ — у TESTS/images/.\nОновіть manifest.json (кнопка в конструкторі) і завантажте все на сервер (GitHub).');
+  const blob=await zip.generateAsync({type:'blob'});
+  dl(id+'_ZIP.zip','application/zip',blob);
+}
+
+// ── manifest ──
+function addToManifest(){
+  if(!validate()){ alert('Є помилки — виправте.'); return; }
+  const f=document.getElementById('mf').files[0]; const note=document.getElementById('manNote');
+  if(!f){ note.innerHTML='<span class="w">⚠️ додайте наявний manifest.json</span>'; return; }
+  const fr=new FileReader();
+  fr.onload=()=>{ let arr;
+    try{ const j=JSON.parse(fr.result); arr=Array.isArray(j)?j:(j.tests||[]); }catch(e){ note.textContent='manifest.json не прочитано: '+e.message; return; }
+    const id=meta.id||'test';
+    const gradeVal=(/^\d+$/.test(meta.grade)?+meta.grade:meta.grade);
+    const entry={file:id+'.xlsx',id:id,subject:meta.subject,grade:gradeVal,title:meta.theme,module:meta.module||null};
+    if(meta.code)entry.code=meta.code;
+    const exIdx=arr.findIndex(t=>t.id===id);
+    if(mode==='edit'){
+      if(exIdx>=0)arr[exIdx]=Object.assign({},arr[exIdx],entry); else arr.push(entry);
+      dl('manifest.json','application/json',new Blob([JSON.stringify(arr,null,2)],{type:'application/json'}));
+      note.innerHTML='✅ Запис '+(exIdx>=0?'оновлено':'додано')+'. <b>Завантажте на сервер:</b> оновлений <code>'+id+'.xlsx</code>, теку <code>images/'+id+'/</code> (якщо є) та <code>manifest.json</code>.';
+    } else {
+      if(exIdx>=0){ note.innerHTML=`<span class="w">⚠️ id «${id}» вже є — змініть ID або відкрийте тест у режимі редагування.</span>`; return; }
+      if(meta.code && arr.some(t=>t.code&&String(t.code).toUpperCase()===meta.code.toUpperCase())){ note.innerHTML=`<span class="w">⚠️ код «${meta.code}» уже зайнятий — змініть код.</span>`; return; }
+      arr.push(entry);
+      dl('manifest.json','application/json',new Blob([JSON.stringify(arr,null,2)],{type:'application/json'}));
+      note.innerHTML='✅ Запис додано. <b>Не забудьте завантажити на сервер (GitHub):</b> новий <code>'+id+'.xlsx</code>, теку <code>images/'+id+'/</code> (якщо є) та оновлений <code>manifest.json</code>.';
+    }
+  };
+  fr.readAsText(f);
+}
+
+function dl(name,type,blob){ const b=blob instanceof Blob?blob:new Blob([blob],{type}); const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); }
+
+const readBufB=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsArrayBuffer(f);});
+function ensureOption(selId,val){ const sel=document.getElementById(selId);
+  if(val && ![...sel.options].some(o=>o.value===String(val)||o.text===String(val))){ const o=document.createElement('option'); o.textContent=val; sel.appendChild(o); } }
+function newTest(){ mode='new';
+  meta.subject='';meta.grade='';meta.module='';meta.theme='';meta.count=15;meta.author='Тямущий v5.0';meta.id='';meta.code='';
+  ['m_module','m_theme','m_id','m_code'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('m_count').value=15; document.getElementById('m_author').value='Тямущий v5.0';
+  curSet=[]; fillSubjects(); document.getElementById('m_subject').value=''; fillClasses(null);
+  questions=[blankQ()]; renderQs(); validate();
+  document.getElementById('modeNote').textContent='Режим: створення нового тесту.';
+  document.getElementById('manNote').textContent='';
+  document.getElementById('openX').value=''; document.getElementById('openImgs').value=''; }
+async function openTestFile(){
+  const f=document.getElementById('openX').files[0]; if(!f)return;
+  let wb; try{ wb=XLSX.read(await readBufB(f),{type:'array'}); }catch(e){ alert('Не вдалося відкрити: '+e.message); return; }
+  const sn=wb.SheetNames; const mN=sn.find(n=>n.trim().toLowerCase()==='мета'); const qN=sn.find(n=>n.trim().toLowerCase().startsWith('питан'));
+  if(!mN||!qN){ alert('У файлі немає аркушів «Мета»/«Питання».'); return; }
+  const M={}; XLSX.utils.sheet_to_json(wb.Sheets[mN],{header:1,defval:''}).forEach(r=>{ if(r[0]!=null&&String(r[0]).trim())M[String(r[0]).trim()]=String(r[1]==null?'':r[1]).trim(); });
+  meta.subject=M['Предмет']||''; meta.grade=M['Клас']||''; meta.theme=M['Тема']||''; meta.count=+(M['Питань']||0)||1; meta.author=M['Автор']||''; meta.id=f.name.replace(/\.(xlsx|xls)$/i,''); meta.module='';
+  const grid=XLSX.utils.sheet_to_json(wb.Sheets[qN],{header:1,defval:''}); const hdr=grid[0].map(h=>String(h).trim()); const ix={}; hdr.forEach((h,i)=>ix[h]=i);
+  const grI = ix['ГР']!=null?ix['ГР']:ix['Група результатів'];
+  questions = grid.slice(1).filter(r=>r.some(c=>String(c).trim()!=='')).map(r=>{
+    const g=c=>(ix[c]!=null)?String(r[ix[c]]==null?'':r[ix[c]]).trim():'';
+    const q=blankQ(); q.group=g('Група')||'Г1'; q.text=g('Питання');
+    q.opts={'А':g('Варіант_А'),'Б':g('Варіант_Б'),'В':g('Варіант_В'),'Г':g('Варіант_Г')};
+    q.type=g('Тип')||'single';
+    q.correct=g('Правильна_відповідь').split(/[,;\/\s]+/).map(x=>x.trim()).filter(x=>['А','Б','В','Г'].includes(x));
+    q.gr = grI!=null?String(r[grI]==null?'':r[grI]).trim():''; q.imgQ=null; q.imgOpts={}; return q; });
+  fillSubjects(); ensureOption('m_subject',meta.subject); document.getElementById('m_subject').value=meta.subject;
+  const subj=SUBJECTS.find(o=>o.n===meta.subject); curSet=(subj&&subj.g)?GAL[subj.g]:[]; fillClasses(subj); ensureOption('m_grade',meta.grade); document.getElementById('m_grade').value=meta.grade;
+  document.getElementById('m_theme').value=meta.theme; document.getElementById('m_count').value=meta.count; document.getElementById('m_author').value=meta.author;
+  document.getElementById('m_id').value=meta.id; document.getElementById('m_code').value='';
+  mode='edit';
+  document.getElementById('modeNote').innerHTML='Режим: <b>редагування</b> «'+meta.id+'». За потреби відкрийте теку зображень. Збереження — тим самим іменем (заміна на сервері).';
+  renderQs(); validate(); }
+function openImages(){
+  if(!questions.length){ alert('Спершу відкрийте тест (.xlsx).'); return; }
+  const inv={a:'А',b:'Б',v:'В',g:'Г'}; const files=[...document.getElementById('openImgs').files]; let loaded=0;
+  files.forEach(f=>{ const nm=(f.webkitRelativePath||f.name).split('/').pop();
+    const m=nm.match(/^q(\d{1,3})(?:_([abvg]))?\.(png|jpe?g|webp)$/i); if(!m)return;
+    const idx=parseInt(m[1],10)-1; if(idx<0||idx>=questions.length)return;
+    const ext=m[3].toLowerCase(); const obj={blob:f,url:URL.createObjectURL(f),kb:Math.round(f.size/1024),ext:ext==='jpeg'?'jpg':ext};
+    if(m[2]) questions[idx].imgOpts[inv[m[2].toLowerCase()]]=obj; else questions[idx].imgQ=obj; loaded++; });
+  renderQs(); validate();
+  document.getElementById('modeNote').innerHTML += ' · завантажено зображень: '+loaded; }
+
+// старт
+fillSubjects(); addQ(); validate();
+</script>
+</div></body></html>

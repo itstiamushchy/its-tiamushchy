@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тямущий — Валідатор бази тестів</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{--ink:#0D0D14;--gold:#C8A84B;--paper:#F4F3EF;--card:#fffdf9;--line:#e4e0d4;--muted:#8a8578;
+        --ok:#2a7a4a;--warn:#b8860b;--bad:#c0392b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;font-size:15px;line-height:1.5}
+  .topbar{background:var(--ink);color:#fff;padding:16px 22px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .topbar .logo{font-family:Georgia,serif;font-size:22px;font-weight:700}
+  .topbar .logo b{color:var(--gold)}
+  .topbar .tag{font-size:12px;color:var(--gold);letter-spacing:.6px;text-transform:uppercase}
+  .wrap{max-width:1040px;margin:0 auto;padding:22px 16px}
+  h2{font-family:Georgia,serif;font-size:18px;margin:18px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:0 1px 0 rgba(13,13,20,.03)}
+  label.f{display:block;font-weight:600;margin-bottom:6px;font-size:14px}
+  input[type=file]{display:block;margin-bottom:12px;font:inherit;max-width:100%}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  button{font:inherit;font-weight:700;background:var(--ink);color:var(--gold);border:none;border-radius:8px;padding:10px 18px;cursor:pointer}
+  button.sec{background:#efeadb;color:var(--ink);border:1px solid var(--line)}
+  button:disabled{opacity:.5;cursor:default}
+  .summary{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 4px}
+  .chip{border-radius:8px;padding:9px 13px;font-weight:700;color:#fff;font-size:14px}
+  .chip.ok{background:var(--ok)} .chip.warn{background:var(--warn)} .chip.bad{background:var(--bad)} .chip.tot{background:var(--ink);color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+  th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{background:var(--ink);color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  tr.r-ok td{background:#f1f8f3} tr.r-warn td{background:#fbf6e8} tr.r-bad td{background:#fcefed}
+  .st{font-weight:800;white-space:nowrap}
+  .st.ok{color:var(--ok)} .st.warn{color:var(--warn)} .st.bad{color:var(--bad)}
+  ul.msgs{margin:0;padding-left:15px} ul.msgs li{margin:2px 0}
+  li.e{color:var(--bad)} li.w{color:var(--warn)} li.i{color:var(--muted)}
+  .note{color:var(--muted);font-size:12.5px;margin-top:6px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+  .stat{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}
+  .stat b{display:block;font-size:20px;font-family:ui-monospace,Menlo,monospace}
+  .stat span{font-size:11px;color:var(--muted)}
+  .ctrl{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:6px 0}
+  .ctrl input[type=text]{padding:7px 10px;border:1px solid var(--line);border-radius:8px;font:inherit;min-width:200px}
+  details{margin:12px 0} summary{cursor:pointer;font-weight:600}
+  code{font-family:ui-monospace,Menlo,monospace;background:#efeadb;padding:1px 5px;border-radius:4px;font-size:12px}
+  @media print{.topbar,.controls,.ctrl,button,input{display:none!important}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="logo">🎓 <b>ТЯМУЩИЙ</b></span><span class="tag">Валідатор бази тестів · локально, без сервера</span></div>
+<div class="wrap">
+
+  <div class="card controls">
+    <label class="f">Варіант 1 — завантажити всю теку <code>TESTS/</code> (з manifest.json і зображеннями):</label>
+    <input type="file" id="dir" webkitdirectory directory multiple>
+    <label class="f" style="margin-top:8px">Варіант 2 — окремо:</label>
+    <div class="row">
+      <div><span class="note">manifest.json</span><input type="file" id="mf" accept=".json"></div>
+      <div><span class="note">тести .xlsx (багато)</span><input type="file" id="xf" accept=".xlsx,.xls" multiple></div>
+      <div><span class="note">зображення (необов'язково)</span><input type="file" id="imf" accept="image/*" multiple></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <button id="run" onclick="run()">Перевірити</button>
+      <button class="sec" onclick="exportCSV()" id="bcsv" disabled>Звіт CSV</button>
+      <button class="sec" onclick="exportJSON()" id="bjson" disabled>Звіт JSON</button>
+      <button class="sec" onclick="window.print()" id="bprint" disabled>Друк</button>
+    </div>
+    <p class="note">Нічого не надсилається — усе перевіряється у вашому браузері.</p>
+  </div>
+
+  <div id="out"></div>
+
+  <details>
+    <summary>Що перевіряється (повний перелік)</summary>
+    <div class="card">
+      <b>Структура й відповіді (❌ помилки):</b>
+      <ul class="msgs">
+        <li>наявність аркушів <code>Мета</code>/<code>Питання</code>; ключі Мета; стовпці Питання;</li>
+        <li>порожнє питання; <code>Тип</code> поза {single, multiple, truefalse};</li>
+        <li><code>Правильна_відповідь</code>: порожня / поза А–Г / вказує на порожній варіант / усі варіанти правильні;</li>
+        <li><code>Питань</code> більше за кількість рядків.</li>
+      </ul>
+      <b>Якість (⚠️ попередження):</b>
+      <ul class="msgs">
+        <li><b>баланс правильних А/Б/В/Г</b> (перекіс до однієї літери / усі однакові);</li>
+        <li>дублікати питань; однакові варіанти в питанні; менше 2 варіантів;</li>
+        <li>single/multiple/truefalse-неузгодженості; надто довгі тексти; подвійні пробіли; «крякозябри»;</li>
+        <li>достатність питань у групах добору (Г1/Г2/…) для «Питань».</li>
+      </ul>
+      <b>Manifest і покриття:</b> дублі <code>id</code>/<code>code</code>; файли поза manifest; записи без файлу;
+      <code>id</code> ↔ ім'я файлу; статистика по предметах/класах/типах.<br>
+      <b>Готовність до версій:</b> v5.3 — стовпець <code>ГР</code> і коректність значень; v5.2 — імена/наявність зображень за конвенцією <code>qNN(_x).png</code>.
+    </div>
+  </details>
+
+<script>
+const REQ_META=['Предмет','Клас','Тема','Питань'];
+const REQ_COLS=['Питання','Варіант_А','Варіант_Б','Правильна_відповідь','Тип'];
+const LETTERS={'А':'Варіант_А','Б':'Варіант_Б','В':'Варіант_В','Г':'Варіант_Г'};
+const TYPES=['single','multiple','truefalse'];
+const Q_MAXLEN=180, OPT_MAXLEN=90;
+function maxGR(subject){
+  const s=(subject||'').toLowerCase();
+  if(/літератур/.test(s)) return 3;
+  if(/мова|іноземн/.test(s)) return 4;
+  if(/математ|алгебр|геометр/.test(s)) return 3;
+  if(/біолог|хім|фізик|географ|природ/.test(s)) return 3;
+  if(/істор|громадян|правознав/.test(s)) return 3;
+  if(/інформат/.test(s)) return 4;
+  if(/технолог|труд/.test(s)) return 4;
+  if(/мистецтв|музичн|образотвор/.test(s)) return 3;
+  if(/фізкультур|фізичн.культ/.test(s)) return 3;
+  if(/здоров|етик|безпек/.test(s)) return 3;
+  return 0;
+}
+const IMG_RE=/^q\d{1,3}(_[abvg])?\.(png|jpe?g|webp)$/i;
+
+let RESULTS=[], STATS=null, MANI=[];
+
+const readBuf=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsArrayBuffer(f);});
+const readTxt=f=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsText(f);});
+const splitL=s=>String(s==null?'':s).split(/[,;\/\s]+/).map(x=>x.trim()).filter(Boolean);
+const mojibake=s=>/Ð|Ñ|Â|�|Ã/.test(String(s));
+const idFromFile=fn=>String(fn).replace(/\.(xlsx|xls)$/i,'');
+
+function checkTest(name, wb, mEntry, imagesForId){
+  const E=[],W=[],I=[];
+  const sn=wb.SheetNames;
+  const metaName=sn.find(n=>n.trim().toLowerCase()==='мета');
+  const qName=sn.find(n=>n.trim().toLowerCase().startsWith('питан'));
+  if(!metaName) E.push('немає аркуша «Мета»');
+  if(!qName) E.push('немає аркуша «Питання»');
+  let meta={}, qCount=0, types={single:0,multiple:0,truefalse:0}, hasGR=false;
+  const corrCounts={'А':0,'Б':0,'В':0,'Г':0};
+
+  if(metaName){
+    XLSX.utils.sheet_to_json(wb.Sheets[metaName],{header:1,defval:''}).forEach(r=>{
+      if(r[0]!=null&&String(r[0]).trim()) meta[String(r[0]).trim()]=(r[1]==null?'':String(r[1]).trim());
+    });
+    REQ_META.forEach(k=>{ if(!(k in meta)||meta[k]==='') E.push('у «Мета» бракує/порожнє: '+k); });
+  }
+  if(qName){
+    const grid=XLSX.utils.sheet_to_json(wb.Sheets[qName],{header:1,defval:''});
+    if(grid.length<2){ E.push('у «Питання» немає рядків'); }
+    else{
+      const hdr=grid[0].map(h=>String(h).trim()); const idx={}; hdr.forEach((h,i)=>idx[h]=i);
+      REQ_COLS.forEach(c=>{ if(!(c in idx)) E.push('у «Питання» бракує стовпця: '+c); });
+      hasGR = ('ГР' in idx)||('Група результатів' in idx);
+      const grIdx = idx['ГР']!=null?idx['ГР']:idx['Група результатів'];
+      const grpIdx = idx['Група'];
+      const body=grid.slice(1).filter(r=>r.some(c=>String(c).trim()!==''));
+      qCount=body.length;
+      const seenQ={}; const groups={}; const mg=maxGR(meta['Предмет']);
+      body.forEach((r,n)=>{
+        const row=n+2; const get=c=>(c in idx)?String(r[idx[c]]==null?'':r[idx[c]]).trim():'';
+        const q=get('Питання');
+        if(!q) E.push('рядок '+row+': порожнє питання');
+        else{
+          const key=q.toLowerCase().replace(/\s+/g,' ');
+          if(seenQ[key]) W.push('рядок '+row+': дублікат питання (також рядок '+seenQ[key]+')'); else seenQ[key]=row;
+          if(q.length>Q_MAXLEN) W.push('рядок '+row+': дуже довге питання ('+q.length+')');
+          if(/\s{2,}/.test(q)) W.push('рядок '+row+': подвійні пробіли в питанні');
+          if(mojibake(q)) W.push('рядок '+row+': можливі «крякозябри»');
+        }
+        const type=get('Тип'); if(type){ if(!TYPES.includes(type)) E.push('рядок '+row+': невідомий Тип «'+type+'»'); else types[type]++; }
+        const opts={}; let ne=0; const optVals=[];
+        Object.keys(LETTERS).forEach(L=>{const v=get(LETTERS[L]); opts[L]=v; if(v){ne++; if(v.length>OPT_MAXLEN)W.push('рядок '+row+': дуже довгий варіант '+L); optVals.push(v.toLowerCase());}});
+        if(ne<2) W.push('рядок '+row+': менше 2 варіантів');
+        const dup=optVals.filter((v,i)=>optVals.indexOf(v)!==i); if(dup.length) W.push('рядок '+row+': однакові варіанти');
+        const corr=splitL(get('Правильна_відповідь'));
+        if(corr.length===0) E.push('рядок '+row+': порожня правильна відповідь');
+        if(corr.length>=ne && ne>0) E.push('рядок '+row+': усі варіанти позначені правильними');
+        corr.forEach(L=>{ if(!(L in LETTERS)) E.push('рядок '+row+': правильна «'+L+'» поза А–Г');
+          else { if(!opts[L]) E.push('рядок '+row+': правильна «'+L+'» — порожній варіант'); corrCounts[L]++; } });
+        if(type==='single'&&corr.length>1) W.push('рядок '+row+': single, але правильних кілька');
+        if(type==='multiple'&&corr.length===1) W.push('рядок '+row+': multiple, але правильна одна');
+        if(type==='truefalse'){ if(opts['В']||opts['Г']) W.push('рядок '+row+': truefalse із заповненими В/Г');
+          if(corr.some(L=>L!=='А'&&L!=='Б')) W.push('рядок '+row+': truefalse, правильна поза А/Б'); }
+        if(grpIdx!=null){ const g=get('Група')||'(без групи)'; groups[g]=(groups[g]||0)+1; }
+        if(hasGR){ const v=String(r[grIdx]==null?'':r[grIdx]).trim();
+          if(v){ const m=v.match(/^ГР([1-4])$/); if(!m) W.push('рядок '+row+': значення ГР «'+v+'» не у форматі ГР1–ГР4');
+            else if(mg && (+m[1])>mg) W.push('рядок '+row+': ГР'+m[1]+' перевищує набір предмета (макс ГР'+mg+')'); } }
+      });
+      const tot=Object.values(corrCounts).reduce((a,b)=>a+b,0);
+      if(tot>=5){ const mx=Math.max.apply(null,Object.values(corrCounts)); const top=Object.keys(corrCounts).find(k=>corrCounts[k]===mx);
+        if(mx===tot) W.push('усі правильні — «'+top+'» (перекіс відповідей)');
+        else if(mx/tot>0.7) W.push('перекіс правильних до «'+top+'» ('+Math.round(mx/tot*100)+'%)'); }
+      if(meta['Питань']){ const want=parseInt(meta['Питань']);
+        if(!isNaN(want)){ if(want>qCount) E.push('«Питань»='+want+' більше за рядків ('+qCount+')');
+          const gk=Object.keys(groups); if(gk.length>1){ const minG=Math.min.apply(null,gk.map(g=>groups[g]));
+            if(minG*gk.length < want) W.push('груп добору '+gk.length+', найменша має '+minG+' — можливо замало для «Питань»='+want); } } }
+      I.push(hasGR?'розмічено для ГР: так':'розмічено для ГР: ні');
+    }
+  }
+
+  if(MANI.length){
+    if(!mEntry) W.push('файл відсутній у manifest.json');
+    else{
+      if(meta['Предмет']&&mEntry.subject!=null&&String(mEntry.subject).trim()!==meta['Предмет']) W.push('Предмет ≠ manifest ('+meta['Предмет']+' / '+mEntry.subject+')');
+      if(meta['Клас']&&mEntry.grade!=null&&String(mEntry.grade).trim()!==String(meta['Клас']).trim()) W.push('Клас ≠ manifest ('+meta['Клас']+' / '+mEntry.grade+')');
+      if(mEntry.id && idFromFile(name)!==mEntry.id) I.push('id «'+mEntry.id+'» ≠ ім\u2019я файлу');
+    }
+  }
+  if(imagesForId){
+    imagesForId.forEach(img=>{ if(!IMG_RE.test(img)) W.push('зображення «'+img+'» не за конвенцією qNN(_x).png');
+      else { const num=parseInt(img.match(/\d+/)[0]); if(qCount && num>qCount) W.push('зображення «'+img+'» — номер > к-сті питань ('+qCount+')'); } });
+    if(imagesForId.length) I.push('зображень: '+imagesForId.length);
+  }
+
+  const status=E.length?'bad':(W.length?'warn':'ok');
+  return {name,status,errors:E,warns:W,infos:I,qCount,types,subject:meta['Предмет']||'',grade:meta['Клас']||'',hasGR};
+}
+
+async function gather(){
+  const dir=[...document.getElementById('dir').files];
+  let mf=document.getElementById('mf').files[0]||null;
+  let xs=[...document.getElementById('xf').files];
+  let ims=[...document.getElementById('imf').files];
+  const imgByPath=[];
+  if(dir.length){
+    dir.forEach(f=>{
+      const p=f.webkitRelativePath||f.name;
+      if(/manifest\.json$/i.test(p)) mf=f;
+      else if(/\.(xlsx|xls)$/i.test(p)) xs.push(f);
+      else if(/\.(png|jpe?g|webp)$/i.test(p)){ const m=p.match(/images\/([^\/]+)\/([^\/]+)$/i); if(m) imgByPath.push({id:m[1],name:m[2]}); }
+    });
+  }
+  ims.forEach(f=>{ const p=f.webkitRelativePath||f.name; const m=p.match(/images\/([^\/]+)\/([^\/]+)$/i); if(m) imgByPath.push({id:m[1],name:m[2]}); });
+  const seen={}; xs=xs.filter(f=>{ if(seen[f.name])return false; seen[f.name]=1; return true; });
+  return {mf,xs,imgByPath};
+}
+
+async function run(){
+  const out=document.getElementById('out'); out.innerHTML='<div class="card">Перевіряю…</div>';
+  const {mf,xs,imgByPath}=await gather();
+  if(!xs.length){ out.innerHTML='<div class="card">Додайте теку TESTS/ або файли .xlsx.</div>'; return; }
+
+  MANI=[]; const manifestByFile={}; let manIssues=[];
+  if(mf){ try{ const arr=JSON.parse(await readTxt(mf)); MANI=Array.isArray(arr)?arr:(arr.tests||[]);
+      const ids={},codes={}; MANI.forEach(t=>{ if(t.file)manifestByFile[t.file]=t;
+        if(t.id)ids[t.id]=(ids[t.id]||0)+1; if(t.code){const c=String(t.code).toUpperCase();codes[c]=(codes[c]||0)+1;} });
+      Object.keys(ids).forEach(k=>{if(ids[k]>1)manIssues.push('дубль id: '+k+' ('+ids[k]+'×)');});
+      Object.keys(codes).forEach(k=>{if(codes[k]>1)manIssues.push('дубль code: '+k+' ('+codes[k]+'×)');});
+      const up=new Set(xs.map(f=>f.name)); MANI.forEach(t=>{if(t.file&&!up.has(t.file))manIssues.push('запис без завантаженого файлу: '+t.file);});
+    }catch(e){ manIssues.push('manifest.json не прочитано: '+e.message); } }
+
+  const imgById={}; imgByPath.forEach(o=>{(imgById[o.id]=imgById[o.id]||[]).push(o.name);});
+
+  RESULTS=[];
+  for(const f of xs){ try{ const wb=XLSX.read(await readBuf(f),{type:'array'});
+      RESULTS.push(checkTest(f.name, wb, manifestByFile[f.name], imgById[idFromFile(f.name)]));
+    }catch(e){ RESULTS.push({name:f.name,status:'bad',errors:['не відкрито: '+e.message],warns:[],infos:[],qCount:0,types:{},subject:'',grade:'',hasGR:false}); } }
+
+  const bySub={},byCls={},byType={single:0,multiple:0,truefalse:0}; let totQ=0,grReady=0;
+  RESULTS.forEach(r=>{ bySub[r.subject||'—']=(bySub[r.subject||'—']||0)+1; byCls[r.grade||'—']=(byCls[r.grade||'—']||0)+1;
+    totQ+=r.qCount; if(r.hasGR)grReady++; Object.keys(byType).forEach(t=>byType[t]+=(r.types[t]||0)); });
+  STATS={count:RESULTS.length,totQ,bySub,byCls,byType,grReady,manIssues};
+  render();
+  ['bcsv','bjson','bprint'].forEach(id=>document.getElementById(id).disabled=false);
+}
+
+function render(){
+  const fEl=document.getElementById('fOnly'); const onlyProblems=fEl?fEl.checked:false;
+  const sEl=document.getElementById('fSearch'); const q=(sEl?sEl.value:'').toLowerCase();
+  const nOk=RESULTS.filter(r=>r.status==='ok').length, nW=RESULTS.filter(r=>r.status==='warn').length, nB=RESULTS.filter(r=>r.status==='bad').length;
+  let h='<div class="summary">'+
+    '<div class="chip tot">Усього: '+RESULTS.length+'</div>'+
+    '<div class="chip ok">✅ '+nOk+'</div><div class="chip warn">⚠️ '+nW+'</div><div class="chip bad">❌ '+nB+'</div></div>';
+
+  h+='<h2>Статистика бази</h2><div class="card"><div class="stats">'+
+    '<div class="stat"><b>'+STATS.count+'</b><span>тестів</span></div>'+
+    '<div class="stat"><b>'+STATS.totQ+'</b><span>питань (рядків)</span></div>'+
+    '<div class="stat"><b>'+STATS.byType.single+'/'+STATS.byType.multiple+'/'+STATS.byType.truefalse+'</b><span>single/multiple/tf</span></div>'+
+    '<div class="stat"><b>'+STATS.grReady+'</b><span>розмічено для ГР</span></div></div>'+
+    '<div class="note" style="margin-top:8px">За предметами: '+Object.keys(STATS.bySub).map(k=>k+' — '+STATS.bySub[k]).join(' · ')+
+    '<br>За класами: '+Object.keys(STATS.byCls).sort().map(k=>k+': '+STATS.byCls[k]).join(' · ')+'</div></div>';
+
+  if(STATS.manIssues.length) h+='<div class="card"><b>manifest.json:</b><ul class="msgs">'+STATS.manIssues.map(m=>'<li class="w">⚠️ '+m+'</li>').join('')+'</ul></div>';
+
+  h+='<h2>По тестах</h2><div class="ctrl">'+
+    '<label><input type="checkbox" id="fOnly" '+(onlyProblems?'checked':'')+' onchange="render()"> лише з проблемами</label>'+
+    '<input type="text" id="fSearch" placeholder="пошук за назвою…" value="'+q+'" oninput="render()">'+'</div>';
+
+  let rows=RESULTS.slice().sort((a,b)=>({bad:0,warn:1,ok:2}[a.status]-{bad:0,warn:1,ok:2}[b.status]));
+  if(onlyProblems) rows=rows.filter(r=>r.status!=='ok');
+  if(q) rows=rows.filter(r=>r.name.toLowerCase().includes(q));
+
+  h+='<div class="card"><table><thead><tr><th>Файл</th><th>Стат</th><th>Пит.</th><th>Проблеми</th></tr></thead><tbody>';
+  rows.forEach(r=>{ const ic={ok:'✅',warn:'⚠️',bad:'❌'}[r.status];
+    const msgs=[].concat(r.errors.map(e=>'<li class="e">❌ '+e+'</li>'),r.warns.map(w=>'<li class="w">⚠️ '+w+'</li>'),r.infos.map(i=>'<li class="i">· '+i+'</li>')).join('')||'<li>—</li>';
+    h+='<tr class="r-'+r.status+'"><td>'+r.name+'</td><td class="st '+r.status+'">'+ic+'</td><td>'+r.qCount+'</td><td><ul class="msgs">'+msgs+'</ul></td></tr>'; });
+  h+='</tbody></table></div>';
+  document.getElementById('out').innerHTML=h;
+}
+
+function exportCSV(){
+  const head=['Файл','Статус','Питань','Помилки','Попередження','Деталі'];
+  const lines=[head.join(';')];
+  RESULTS.forEach(r=>{ const det=[].concat(r.errors,r.warns).join(' | ').replace(/;/g,',').replace(/"/g,'""');
+    lines.push([r.name,r.status,r.qCount,r.errors.length,r.warns.length,'"'+det+'"'].join(';')); });
+  download('valid_report.csv','text/csv;charset=utf-8','\ufeff'+lines.join('\n'));
+}
+function exportJSON(){ download('valid_report.json','application/json',JSON.stringify({stats:STATS,results:RESULTS},null,2)); }
+function download(name,type,data){ const b=new Blob([data],{type}); const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+</script>
+</div></body></html>

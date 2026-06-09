@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<!-- © 2026 ITS_Tiamushchy. Всі права захищені. Автори: Хоменко Олексій, Устименко Іван, Наливайко Олена -->
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║  ТЯМУЩИЙ — Інтелектуальна тестова система v5.0                     ║
+     ║  Один файл + папка TESTS/ з xlsx-тестами та manifest.json          ║
+     ║                                                                     ║
+     ║  ⚠️  ВАЖЛИВО: не відкривайте цей файл напряму через file://        ║
+     ║     Потрібен локальний сервер: python -m http.server 8080           ║
+     ║     або розмістіть на хостингу (Wix, GitHub Pages тощо)            ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<title>Тямущий — Інтелектуальна тестова система</title>
+
+<!-- SheetJS — бібліотека для читання Excel (.xlsx/.xls) прямо в браузері -->
+<!-- ⚙️ Версія 0.18.5. Не змінюйте без необхідності -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<!-- EmailJS — відправка результатів на email вчителя без сервера -->
+<!-- ⚙️ Документація: https://www.emailjs.com/docs/ -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  // ⚙️ НАЛАШТУВАННЯ EMAIL — замініть значення нижче своїми ключами з emailjs.com
+  const EMAILJS_PUBLIC_KEY  = 'tTv4GSua9pf3zBcgw';   // Account → API Keys → Public Key
+  const EMAILJS_SERVICE_ID  = 'service_ovegp2t';        // Email Services → Service ID
+  const EMAILJS_TEMPLATE_ID = 'template_nlwwlhp';      // Email Templates → Template ID
+  const TEACHER_EMAIL       = 'libzosh3@gmail.com';    // Пошта вчителя (можна кілька через кому)
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ── Фіксація підозрілих клавіш під час тесту ──────────────────
+  const SUSPICIOUS_KEYS = {
+    'PrintScreen':    'PrintScreen',
+    'F12':            'F12',
+  };
+  const SUSPICIOUS_COMBOS = [
+    { ctrl:true,  shift:false, key:'c', label:'Ctrl+C' },
+    { ctrl:true,  shift:false, key:'a', label:'Ctrl+A' },
+    { ctrl:true,  shift:false, key:'u', label:'Ctrl+U' },
+    { ctrl:true,  shift:false, key:'p', label:'Ctrl+P' },
+    { ctrl:true,  shift:false, key:'s', label:'Ctrl+S' },
+    { ctrl:true,  shift:true,  key:'i', label:'Ctrl+Shift+I' },
+    { ctrl:true,  shift:true,  key:'j', label:'Ctrl+Shift+J' },
+    { ctrl:true,  shift:true,  key:'c', label:'Ctrl+Shift+C' },
+    { meta:true,  shift:true,  key:'s', label:'Win+Shift+S' },
+    { meta:true,  shift:false, key:'PrintScreen', label:'Win+PrintScreen' },
+    { alt:true,   shift:false, key:'PrintScreen', label:'Alt+PrintScreen' },
+  ];
+
+  document.addEventListener('keydown', (e) => {
+    const onQuiz = document.getElementById('quizScreen') &&
+                   document.getElementById('quizScreen').classList.contains('active');
+    if (!onQuiz) return;
+
+    let label = null;
+
+    // Прості клавіші
+    if (SUSPICIOUS_KEYS[e.key]) label = SUSPICIOUS_KEYS[e.key];
+
+    // Комбінації
+    if (!label) {
+      for (const combo of SUSPICIOUS_COMBOS) {
+        if (combo.ctrl  !== undefined && combo.ctrl  !== e.ctrlKey)  continue;
+        if (combo.shift !== undefined && combo.shift !== e.shiftKey) continue;
+        if (combo.alt   !== undefined && combo.alt   !== e.altKey)   continue;
+        if (combo.meta  !== undefined && combo.meta  !== e.metaKey)  continue;
+        if (e.key.toLowerCase() === combo.key.toLowerCase()) { label = combo.label; break; }
+      }
+    }
+
+    if (label) {
+      keyLog[label] = (keyLog[label] || 0) + 1;
+      e.preventDefault();
+    }
+  });
+
+  // keyup: ловить PrintScreen (вона часто не шле keydown)
+  document.addEventListener('keyup', (e) => {
+    const q = document.getElementById('quizScreen');
+    if (!q || !q.classList.contains('active')) return;
+    if (e.key !== 'PrintScreen') return;
+    let label = 'PrintScreen';
+    if (e.metaKey)     label = 'Win+PrintScreen';
+    else if (e.altKey) label = 'Alt+PrintScreen';
+    keyLog[label] = (keyLog[label] || 0) + 1;
+  });
+
+  // Будь-яке копіювання (не лише Ctrl+C)
+  document.addEventListener('copy', () => {
+    const q = document.getElementById('quizScreen');
+    if (q && q.classList.contains('active')) keyLog['Копіювання'] = (keyLog['Копіювання'] || 0) + 1;
+  });
+
+  // Залишення вікна тесту: інша вкладка / згортання / інший застосунок
+  function _quizActiveWL() { const q = document.getElementById('quizScreen'); return q && q.classList.contains('active'); }
+  function _leaveWindow()  { if (!_quizActiveWL() || _awayStart) return; _awayStart = Date.now(); }
+  function _returnWindow() { if (!_awayStart) return; windowAwayMs += Date.now() - _awayStart; windowLeaveCount++; _awayStart = 0; }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) _leaveWindow(); else _returnWindow(); });
+  window.addEventListener('blur',  _leaveWindow);
+  window.addEventListener('focus', _returnWindow);
+</script>
+<style>
+<!-- Google Fonts: Unbounded — заголовки, Manrope — основний текст -->
+<!-- ⚙️ Щоб змінити шрифт: замініть назви нижче і в body{font-family:...} та .btn{font-family:...} -->
+  @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600&display=swap');
+
+  /* ── КОЛЬОРОВА ПАЛІТРА ─────────────────────────────────────────────
+     ⚙️ Щоб змінити кольори системи — редагуйте значення нижче.
+     Всі елементи інтерфейсу автоматично підхоплять зміни через var(--назва).
+     --ink     = основний темний колір (фон хедера, кнопки, текст)
+     --paper   = фоновий колір сторінки
+     --gold    = акцентний золотий (логотип, рамки, підсвічування)
+     --crimson = колір помилки / неправильної відповіді
+     --sage    = колір правильної відповіді
+     --sky     = колір підказок та посилань                             */
+  :root{--ink:#0d0d14;--paper:#f5f2ea;--gold:#c8a84b;--crimson:#c0392b;--sage:#3a7d5e;--sky:#2c6e9e;--border:#2a2a3a;--card:#ffffff;--shadow:rgba(13,13,20,.15)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Manrope',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(200,168,75,.08) 39px,rgba(200,168,75,.08) 40px),
+    repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(200,168,75,.08) 39px,rgba(200,168,75,.08) 40px)}
+  header{background:var(--ink);color:var(--paper);padding:18px 40px;display:flex;align-items:center;justify-content:space-between;
+    border-bottom:3px solid var(--gold);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px var(--shadow)}
+  .logo{font-family:'Unbounded',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-1px;color:var(--gold);
+    position:relative;cursor:default;user-select:none}
+  .logo .tiamy{
+    background:linear-gradient(90deg,#c8a84b 0%,#ffe599 40%,#c8a84b 60%,#a07830 100%);
+    background-size:200% auto;
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    animation:logoShimmer 4s linear infinite}
+  .logo .shchy{color:var(--paper);-webkit-text-fill-color:var(--paper)}
+  @keyframes itsShimmer{0%,100%{color:#fff;-webkit-text-fill-color:#fff}50%{color:#555;-webkit-text-fill-color:#555}}
+  .logo .its{display:block;font-size:.45rem;font-weight:400;letter-spacing:.08em;margin-top:3px;text-transform:uppercase;animation:itsShimmer 5.3s ease-in-out infinite}
+  .logo .dot{
+    display:inline-block;width:8px;height:8px;border-radius:50%;
+    background:var(--gold);margin-left:3px;vertical-align:middle;margin-bottom:4px;
+    animation:logoPulse 1.8s ease-in-out infinite}
+  @keyframes logoShimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+  @keyframes logoPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.7}}
+  .header-meta{font-size:.78rem;opacity:.6;text-align:right;line-height:1.5}
+  .screen{display:none}
+  .screen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 73px);padding:40px 20px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;font-family:'Unbounded',sans-serif;
+    font-size:.85rem;font-weight:600;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;
+    text-transform:uppercase;letter-spacing:.5px}
+  .btn-primary{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 var(--gold)}
+  .btn-primary:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--gold)}
+  .btn-primary:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--gold)}
+  .btn-gold{background:var(--gold);color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+  .btn-gold:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+  .btn-gold:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+  .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+  .btn-full{width:100%;margin-top:8px}
+  /* catalog */
+  .catalog-wrap{max-width:860px;width:100%}
+  .catalog-header{text-align:center;margin-bottom:8px}
+  .catalog-header h2{font-family:'Unbounded',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:8px}
+  .catalog-header p{color:#666;font-size:.9rem}
+  .folder-hint{background:rgba(200,168,75,.1);border:1.5px solid rgba(200,168,75,.4);border-radius:10px;
+    padding:12px 16px;font-size:.82rem;color:#7a6020;margin-bottom:18px;line-height:1.6}
+  .folder-hint code{background:rgba(200,168,75,.2);border-radius:4px;padding:1px 5px;font-family:monospace}
+  .catalog-filters{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;align-items:flex-end}
+  .filter-block{flex:1;min-width:160px}
+  .filter-block label{display:block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#666;margin-bottom:6px}
+  .filter-block select{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:10px;
+    font-family:'Manrope',sans-serif;font-size:.92rem;font-weight:600;background:var(--card);cursor:pointer;
+    transition:border-color .2s;appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%230d0d14' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+  .filter-block select:focus{outline:none;border-color:var(--gold)}
+  .tests-section{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:20px 24px;
+    margin-bottom:16px;box-shadow:4px 4px 0 var(--shadow)}
+  .tests-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#999;margin-bottom:12px}
+  .test-radio-list{display:flex;flex-direction:column;gap:8px}
+  .test-radio-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border:2px solid #e0ddd4;
+    border-radius:10px;cursor:pointer;transition:all .15s;background:#fafaf8}
+  .test-radio-item:hover{border-color:var(--gold);background:rgba(200,168,75,.06)}
+  .test-radio-item.selected{border-color:var(--sky);background:rgba(44,110,158,.07)}
+  .test-radio-dot{width:18px;height:18px;border-radius:50%;border:2px solid #ccc;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;transition:all .15s}
+  .test-radio-item.selected .test-radio-dot{border-color:var(--sky);background:var(--sky)}
+  .test-radio-dot::after{content:'';width:7px;height:7px;border-radius:50%;background:white;display:none}
+  .test-radio-item.selected .test-radio-dot::after{display:block}
+  .test-radio-body{flex:1}
+  .test-radio-title{font-size:.95rem;font-weight:600;color:var(--ink)}
+  .test-radio-meta{font-size:.78rem;color:#888;margin-top:2px}
+  .test-radio-tag{font-size:.7rem;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:999px;
+    letter-spacing:.5px;background:rgba(200,168,75,.15);color:#7a6020;white-space:nowrap}
+  .no-tests-msg{text-align:center;padding:32px;color:#aaa;font-size:.9rem}
+  .no-tests-msg .no-icon{font-size:2.5rem;display:block;margin-bottom:10px}
+  .catalog-bottom{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:18px 22px;
+    display:flex;align-items:center;gap:16px;justify-content:space-between;flex-wrap:wrap;
+    box-shadow:4px 4px 0 var(--shadow);margin-bottom:8px}
+  .selected-test-info{font-size:.9rem;color:#666;font-style:italic}
+  .selected-test-info strong{color:var(--ink);font-style:normal}
+  .catalog-or{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 8px;
+    font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#bbb}
+  .catalog-or::before,.catalog-or::after{content:'';flex:1;height:1px;background:#ddd}
+  .upload-mini{background:var(--card);border:2px dashed #ccc;border-radius:12px;padding:20px;
+    text-align:center;cursor:pointer;transition:all .2s;font-size:.88rem;color:#888}
+  .upload-mini:hover{border-color:var(--gold);background:rgba(200,168,75,.04);color:var(--ink)}
+  .upload-mini strong{color:var(--gold)}
+  .upload-mini input{display:none}
+  .file-info{font-size:.82rem;margin-top:10px;color:var(--sage);font-weight:600}
+  .error-msg{color:var(--crimson);font-size:.82rem;margin-top:8px;font-weight:600}
+  /* identity */
+  .identity-card{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:48px;
+    max-width:500px;width:100%;box-shadow:8px 8px 0 var(--ink)}
+  .identity-card h2{font-family:'Unbounded',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:24px;text-align:center}
+  .field-group{margin-bottom:18px}
+  .field-group label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:#555;text-transform:uppercase;letter-spacing:.5px}
+  .field-group input,.field-group select{width:100%;padding:12px 16px;border:2px solid #ddd;border-radius:10px;
+    font-family:'Manrope',sans-serif;font-size:.95rem;transition:border-color .2s;background:#fafafa}
+  .field-group input:focus,.field-group select:focus{outline:none;border-color:var(--gold);background:#fff}
+  .chosen-test-banner{background:rgba(44,110,158,.08);border:1.5px solid rgba(44,110,158,.3);border-radius:10px;
+    padding:10px 14px;font-size:.85rem;margin-bottom:20px;color:#1a4f7a;font-weight:600}
+  .score-formula-box{background:rgba(200,168,75,.08);border:1px solid rgba(200,168,75,.3);border-radius:10px;
+    padding:12px 16px;font-size:.8rem;color:#7a6020;margin-bottom:20px;line-height:1.6}
+  .score-formula-box b{color:var(--ink)}
+  /* quiz */
+  #quizScreen{padding:24px 20px;justify-content:flex-start;align-items:stretch;max-width:900px;margin:0 auto;width:100%}
+  .progress-bar-wrap{background:#e0ddd4;border-radius:4px;height:6px;width:100%;margin-bottom:24px;overflow:hidden;border:1px solid var(--border)}
+  .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--crimson));transition:width .4s;border-radius:4px}
+  .timer-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+  .q-counter{font-size:.82rem;font-weight:600;color:#777;text-transform:uppercase;letter-spacing:.5px}
+  .timer-badge{display:flex;align-items:center;gap:8px;background:transparent;color:var(--gold);border-radius:999px;
+    padding:6px 16px;font-family:'Unbounded',sans-serif;font-size:1rem;font-weight:600;border:2px solid var(--gold);transition:background .5s,color .5s,border-color .5s}
+  .timer-badge.warn{background:var(--gold);color:var(--ink)}
+  .timer-badge.danger{background:var(--crimson);color:white;animation:pulse .8s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .question-box{background:var(--ink);color:var(--paper);border-radius:16px;padding:16px 24px;margin-bottom:12px;
+    border:2px solid var(--border);box-shadow:6px 6px 0 rgba(200,168,75,.35);position:relative;overflow:hidden;
+    -webkit-user-select:none;user-select:none}
+  .question-box::before{content:'?';position:absolute;right:20px;top:10px;font-family:'Unbounded',sans-serif;
+    font-size:5rem;font-weight:800;opacity:.07;color:var(--gold);line-height:1;pointer-events:none}
+  .question-type-tag{display:inline-block;background:var(--gold);color:var(--ink);font-size:.72rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:999px;margin-bottom:12px}
+  .question-text{font-size:1.15rem;font-weight:600;line-height:1.55}
+  .answers-box{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:20px 24px;
+    margin-bottom:20px;box-shadow:4px 4px 0 var(--shadow)}
+  .answers-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:14px}
+  .answers-grid{display:grid;gap:6px}
+  .answer-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #e0ddd4;border-radius:12px;
+    background:#fafaf8;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:500;
+    transition:all .15s;-webkit-user-select:none;user-select:none}
+  .answer-btn:hover:not(.disabled-no-select){border-color:var(--gold);background:rgba(200,168,75,.06);transform:translateX(4px)}
+  .answer-btn .letter{min-width:30px;height:30px;border-radius:8px;background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;font-family:'Unbounded',sans-serif;font-size:.75rem;
+    font-weight:700;flex-shrink:0;transition:background .15s}
+  .answer-btn.selected{border-color:var(--sky);background:rgba(44,110,158,.08)}
+  .answer-btn.selected .letter{background:var(--sky)}
+  .answer-btn.correct{border-color:var(--sage);background:rgba(58,125,94,.1)}
+  .answer-btn.correct .letter{background:var(--sage)}
+  .answer-btn.partial{border-color:var(--gold);background:rgba(200,168,75,.1)}
+  .answer-btn.partial .letter{background:var(--gold);color:var(--ink)}
+  .answer-btn.wrong{border-color:var(--crimson);background:rgba(192,57,43,.08)}
+  .answer-btn.wrong .letter{background:var(--crimson)}
+  .answer-btn.disabled-no-select{pointer-events:none}
+  .hint-text{font-size:.82rem;color:#888;margin-top:12px;font-style:italic}
+  .hint-text.correct-msg{color:var(--sage);font-style:normal;font-weight:600}
+  .hint-text.partial-msg{color:#8a6a00;font-style:normal;font-weight:600}
+  .hint-text.wrong-msg{color:var(--crimson);font-style:normal;font-weight:600}
+  .next-row{display:flex;justify-content:flex-end;min-height:56px}
+  /* results */
+  .results-card{background:var(--card);border:2px solid var(--border);border-radius:20px;padding:48px 52px;
+    max-width:680px;width:100%;box-shadow:10px 10px 0 var(--ink);text-align:center}
+  .results-trophy{font-size:4rem;margin-bottom:12px}
+  .results-name{font-family:'Unbounded',sans-serif;font-size:1rem;font-weight:600;color:#777;margin-bottom:20px}
+  .score-display{display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-bottom:6px}
+  .score-big{font-family:'Unbounded',sans-serif;font-size:5rem;font-weight:800;line-height:1;color:var(--gold)}
+  .score-max{font-size:2rem;font-weight:600;color:#bbb;align-self:flex-end;padding-bottom:8px}
+  .score-label{font-size:.85rem;color:#888;margin-bottom:28px}
+  .score-bar-wrap{background:#eee;border-radius:6px;height:10px;margin-bottom:32px;overflow:hidden;border:1px solid #ddd}
+  .score-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--crimson));border-radius:6px;transition:width 1s}
+  .results-summary{background:#f9f7f3;border:1px solid #e8e5dc;border-radius:12px;padding:20px;margin-bottom:28px;
+    text-align:left;max-height:280px;overflow-y:auto;font-size:.85rem}
+  .results-summary::-webkit-scrollbar{width:6px}
+  .results-summary::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+  .summary-row{padding:10px 0;border-bottom:1px solid #ede9e0;display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start}
+  .summary-row:last-child{border-bottom:none}
+  .summary-num{font-weight:700;color:var(--gold)}
+  .summary-q{color:#444;line-height:1.4}
+  .summary-pts{font-size:.78rem;color:#888;margin-top:2px;font-style:italic}
+  .summary-a{font-weight:600;white-space:nowrap}
+  .summary-a.ok{color:var(--sage)}.summary-a.partial{color:#8a6a00}.summary-a.bad{color:var(--crimson)}.summary-a.skipped{color:#aaa}
+  .results-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .site-footer{text-align:center;padding:8px 20px;font-size:.7rem;color:#999;border-top:1px solid #e8e5dc;background:var(--paper)}
+  @media print {
+    header, #catalogScreen, #identityScreen, #quizScreen, #timeUpOverlay,
+    #studentResultCard, .no-print { display:none !important; }
+    .screen { display:block !important; min-height:auto !important; padding:0 !important; }
+    #resultsScreen { display:block !important; }
+    #teacherPrintForm { display:block !important; }
+    body { background:#fff !important; }
+    @page { margin:1.2cm 1.5cm; }
+  }
+  .overlay{display:none;position:fixed;inset:0;background:rgba(13,13,20,.65);backdrop-filter:blur(4px);
+    z-index:200;align-items:center;justify-content:center}
+  .overlay.visible{display:flex}
+  .modal{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:36px 40px;
+    max-width:420px;width:90%;box-shadow:8px 8px 0 var(--ink);text-align:center}
+  .modal h3{font-family:'Unbounded',sans-serif;font-size:1.1rem;margin-bottom:12px}
+  .modal p{color:#666;font-size:.9rem;margin-bottom:24px;line-height:1.6}
+  .fade-in{animation:fadeIn .35s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .loading-state{text-align:center;padding:32px;color:#aaa;font-size:.9rem}
+  .loading-state .spin{font-size:2rem;display:block;margin-bottom:10px;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:600px){
+    .catalog-filters{flex-direction:column}.catalog-bottom{flex-direction:column;align-items:stretch}
+    .identity-card,.results-card{padding:28px 20px}.score-big{font-size:3.5rem}
+    header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="tiamy"><span style="font-size:1.25em">Т</span>ЯМУЩИЙ</span><span class="its">Інтелектуальна тестова система</span></div>
+  <div class="timer-badge" id="timerBadge" style="display:none">⏱ <span id="timerNum">45</span>с</div>
+  <div class="header-meta" id="headerMeta">Інтелектуальна тестова система</div>
+</header>
+
+<!-- SCREEN 0: CATALOG -->
+<div class="screen active" id="catalogScreen">
+  <div class="catalog-wrap fade-in">
+    <div class="catalog-header">
+      <div style="margin-bottom:4px"><img src="Logo.png" alt="Тямущий" style="width:200px;height:200px;object-fit:contain"></div>
+      <h2>Оберіть тест</h2>
+      <p>Фільтруйте за предметом та класом, або завантажте власний файл .xlsx</p>
+    </div>
+
+
+    <div class="catalog-filters">
+      <div class="filter-block">
+        <label>📚 Предмет</label>
+        <select id="filterSubject" onchange="updateClassFilter(); filterTests()">
+          <option value="">— Усі предмети —</option>
+          <optgroup label="Мови та літератури">
+            <option value="Українська мова">📖 Українська мова</option>
+            <option value="Українська література">📗 Українська література</option>
+            <option value="Зарубіжна література">📘 Зарубіжна література</option>
+            <option value="Іноземна мова">🇬🇧 Іноземна мова</option>
+          </optgroup>
+          <optgroup label="Математика">
+            <option value="Математика">📐 Математика</option>
+            <option value="Алгебра">🔢 Алгебра</option>
+            <option value="Геометрія">📏 Геометрія</option>
+          </optgroup>
+          <optgroup label="Природничі науки">
+            <option value="Пізнаємо природу / Довкілля">🌱 Пізнаємо природу / Довкілля</option>
+            <option value="Біологія">🌿 Біологія</option>
+            <option value="Фізика">⚡ Фізика</option>
+            <option value="Хімія">⚗️ Хімія</option>
+            <option value="Географія">🌍 Географія</option>
+            <option value="Астрономія">🔭 Астрономія</option>
+            <option value="Природничі науки">🔬 Природничі науки</option>
+          </optgroup>
+          <optgroup label="Суспільствознавство">
+            <option value="Вступ до історії України та громадянської освіти">🏛️ Вступ до історії</option>
+            <option value="Історія України">📜 Історія України</option>
+            <option value="Всесвітня історія">🌐 Всесвітня історія</option>
+            <option value="Правознавство">⚖️ Правознавство</option>
+            <option value="Громадянська освіта">🤝 Громадянська освіта</option>
+          </optgroup>
+          <optgroup label="Технології та інформатика">
+            <option value="Інформатика">💻 Інформатика</option>
+            <option value="Технології">🔧 Технології</option>
+            <option value="Робототехніка">🤖 Робототехніка</option>
+            <option value="STEAM">🧪 STEAM</option>
+          </optgroup>
+          <optgroup label="Інші предмети">
+            <option value="Мистецтво">🎨 Мистецтво</option>
+            <option value="Здоров'я, безпека та добробут">❤️ Здоров'я та добробут</option>
+            <option value="Підприємництво і фінансова грамотність">💰 Підприємництво</option>
+            <option value="Захист України">🛡️ Захист України</option>
+            <option value="Фізична культура">🏃 Фізична культура</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="filter-block" id="filterClassBlock" style="display:none">
+        <label>🎓 Клас</label>
+        <select id="filterClass" onchange="updateModuleFilter(); filterTests()">
+          <option value="">— Усі класи —</option>
+          <option value="5">5 клас</option>
+          <option value="6">6 клас</option>
+          <option value="7">7 клас</option>
+          <option value="8">8 клас</option>
+          <option value="9">9 клас</option>
+          <option value="10">10 клас</option>
+          <option value="11">11 клас</option>
+          <option value="12">12 клас</option>
+        </select>
+      </div>
+      <div class="filter-block" id="filterModuleBlock" style="display:none">
+        <label>🧩 Модуль</label>
+        <select id="filterModule" onchange="filterTests()">
+          <option value="">— Усі модулі —</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="testsSection" style="display:none" class="tests-section">
+      <div class="tests-section-label">📝 Доступні тести</div>
+      <div id="testRadioList" class="test-radio-list"></div>
+    </div>
+
+    <div class="catalog-bottom" id="catalogBottom" style="display:none">
+      <div class="selected-test-info" id="selectedTestInfo">Тест не обрано</div>
+      <button class="btn btn-primary" id="btnUseTest" disabled onclick="useSelectedTest()">Розпочати тест →</button>
+    </div>
+
+    <div class="code-launch" id="codeLaunchBlock" style="margin:14px 0;padding:14px;border:1.5px dashed var(--gold,#C8A84B);border-radius:10px;background:#fffdf5">
+      <label style="display:block;font-weight:600;margin-bottom:6px">🔑 Запуск за кодом тесту</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input type="text" id="codeInput" placeholder="напр. zlit_5_shakal" style="flex:1;min-width:180px;padding:8px 10px;border:1px solid #ccc;border-radius:8px;font-size:15px" onkeydown="if(event.key===&#39;Enter&#39;)launchByCode(this.value)">
+        <button class="btn btn-primary" onclick="launchByCode(document.getElementById(&#39;codeInput&#39;).value)">ОК</button>
+      </div>
+      <div class="error-msg" id="codeError" style="margin-top:6px"></div>
+    </div>
+    <div class="catalog-or">або завантажте власний файл</div>
+    <div class="upload-mini" id="uploadMiniZone">
+      <label for="fileInputMini">📂 Перетягніть <strong>.xlsx / .xls</strong> або <strong>оберіть файл</strong></label>
+      <input type="file" id="fileInputMini" accept=".xlsx,.xls">
+      <div class="file-info" id="fileInfoMini"></div>
+      <div class="error-msg" id="uploadErrorMini"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 1: IDENTITY -->
+<div class="screen" id="identityScreen">
+  <div class="identity-card fade-in">
+    <h2>🎓 Ідентифікація учня</h2>
+    <div class="chosen-test-banner" id="chosenTestBanner">Тест: —</div>
+    <div class="field-group"><label>Ім'я</label><input type="text" id="fieldName" placeholder="Олександр" maxlength="50"></div>
+    <div class="field-group"><label>Прізвище</label><input type="text" id="fieldSurname" placeholder="Петренко" maxlength="50"></div>
+    <div class="field-group"><label>Клас</label><input type="text" id="fieldClass" placeholder="наприклад: 8-Б" maxlength="10"></div>
+    <div class="score-formula-box">
+      <b>Система оцінювання (max 11 балів):</b><br>
+      • Одна відповідь — повний бал за питання<br>
+      • Кілька відповідей — частковий залік пропорційно обраним правильним<br>
+      • Бали масштабуються до 11 незалежно від кількості питань<br>
+      <b style="color:var(--ink)">⏱ Цей тест:</b> <span id="timingInfo"></span>
+    </div>
+    <div id="identityError" class="error-msg"></div>
+    <button class="btn btn-gold btn-full" onclick="startQuiz()">Розпочати тест ▶</button>
+    <button class="btn btn-full" style="margin-top:8px;background:#f5f2ea;color:var(--ink);box-shadow:none;border-color:#ccc" onclick="goBackToCatalog()">← Назад</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: QUIZ -->
+<div class="screen" id="quizScreen">
+  <div style="width:100%">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar" style="width:0%"></div></div>
+    <div class="timer-row">
+      <div class="q-counter" id="qCounter">Питання 1 / 10</div>
+      
+    </div>
+    <div class="question-box" id="questionBox" oncontextmenu="return false" ondragstart="return false" oncopy="return false">
+      <span class="question-type-tag" id="qTypeTag">Одна відповідь</span>
+      <div class="question-text" id="questionText">...</div>
+    </div>
+    <div class="answers-box">
+      <div class="answers-label" id="answersLabel">Оберіть відповідь</div>
+      <div class="answers-grid" id="answersGrid"></div>
+      <div class="hint-text" id="hintText"></div>
+    </div>
+    <div class="next-row">
+      <button class="btn btn-gold" id="btnNext" style="display:none" onclick="nextQuestion()">Наступне питання →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: RESULTS -->
+<div class="screen" id="resultsScreen">
+  <!-- УЧЕНЬ: бачить тільки оцінку -->
+  <div class="results-card fade-in" id="studentResultCard">
+    <div class="results-trophy" id="resultsTrophy">🏆</div>
+    <div class="results-name" id="resultsName"></div>
+    <div class="score-display">
+      <div class="score-big" id="scoreVal">0</div>
+      <div class="score-max">/ 11</div>
+    </div>
+    <div class="score-label" id="scoreLabel">з 11 можливих балів</div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="scoreBarFill" style="width:0%"></div></div>
+    <div class="results-summary" id="resultsSummary"></div>
+    <div id="emailStatus" style="display:none;margin-bottom:12px;padding:10px 16px;border-radius:10px;font-size:.82rem;font-weight:600;text-align:center"></div>
+    <div class="results-actions">
+      <button class="btn btn-primary" onclick="printTeacherForm()">🖨 Роздрукувати для вчителя</button>
+      <button class="btn btn-gold" onclick="retakeQuiz()">🔄 Пройти знову</button>
+    </div>
+  </div>
+
+  <!-- ВЧИТЕЛЬ: прихована printable-форма -->
+  <div id="teacherPrintForm" style="display:none">
+    <style>
+      #teacherPrintForm {
+        font-family:'Arial',sans-serif;font-size:12px;color:#111;max-width:720px;margin:0 auto;padding:16px;
+      }
+      .tpf-header {
+        display:flex;align-items:center;justify-content:space-between;
+        border-bottom:2.5px solid #0D0D14;padding-bottom:6px;margin-bottom:10px;
+      }
+      .tpf-title { font-size:15px;font-weight:800;letter-spacing:.5px;color:#0D0D14; }
+      .tpf-subtitle { font-size:10px;color:#888; }
+      .tpf-meta {
+        display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;
+        margin-bottom:10px;
+      }
+      .tpf-meta-cell {
+        border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa;
+      }
+      .tpf-meta-cell .lbl { font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px; }
+      .tpf-meta-cell .val { font-size:12px;font-weight:700;margin-top:2px; }
+      .tpf-score-row {
+        display:flex;align-items:center;gap:12px;
+        background:#0D0D14;color:#fff;border-radius:6px;padding:8px 14px;margin-bottom:10px;
+      }
+      .tpf-score-big { font-size:28px;font-weight:900;color:#C8A84B;line-height:1; }
+      .tpf-score-info { font-size:11px;line-height:1.5; }
+      .tpf-stats {
+        display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px;
+      }
+      .tpf-stat { border:1px solid #ddd;border-radius:4px;text-align:center;padding:5px 4px; }
+      .tpf-stat .sv { font-size:16px;font-weight:800; }
+      .tpf-stat .sl { font-size:9px;color:#666;margin-top:1px; }
+      .tpf-table { width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:10px; }
+      .tpf-table th {
+        background:#0D0D14;color:#C8A84B;text-align:left;
+        padding:5px 7px;font-size:9.5px;text-transform:uppercase;letter-spacing:.3px;
+      }
+      .tpf-table td { padding:4px 7px;border-bottom:1px solid #eee;vertical-align:top; }
+      .tpf-table tr:nth-child(even) td { background:#f9f9f7; }
+      .tpf-ok { color:#2a7a4a;font-weight:700; }
+      .tpf-bad { color:#c0392b;font-weight:700; }
+      .tpf-part { color:#b8860b;font-weight:700; }
+      .tpf-skip { color:#aaa; }
+      .tpf-footer {
+        display:flex;justify-content:space-between;align-items:center;
+        border-top:1px solid #ccc;padding-top:6px;font-size:9px;color:#aaa;
+      }
+      .tpf-sign { border-top:1px solid #555;width:150px;text-align:center;padding-top:3px;font-size:9px;color:#555; }
+    </style>
+
+    <div class="tpf-header">
+      <div>
+        <div class="tpf-title">🎓 ТЯМУЩИЙ — Результати тестування</div>
+        <div class="tpf-subtitle">Форма для вчителя · Архівний екземпляр</div>
+      </div>
+      <div style="font-size:10px;color:#999;text-align:right" id="tpf-date"></div>
+    </div>
+
+    <div class="tpf-meta">
+      <div class="tpf-meta-cell"><div class="lbl">Прізвище та ім'я</div><div class="val" id="tpf-name"></div></div>
+      <div class="tpf-meta-cell"><div class="lbl">Клас</div><div class="val" id="tpf-class"></div></div>
+      <div class="tpf-meta-cell"><div class="lbl">Предмет</div><div class="val" id="tpf-subject"></div></div>
+      <div class="tpf-meta-cell"><div class="lbl">Тема тесту</div><div class="val" id="tpf-topic"></div></div>
+    </div>
+
+    <div class="tpf-score-row">
+      <div class="tpf-score-big" id="tpf-score"></div>
+      <div class="tpf-score-info">
+        <div style="font-weight:700;font-size:13px">балів з 11 можливих</div>
+        <div id="tpf-pct" style="color:#C8A84B"></div>
+      </div>
+      <div style="margin-left:auto;font-size:10px;opacity:.7" id="tpf-questions-count"></div>
+    </div>
+
+    <div class="tpf-stats">
+      <div class="tpf-stat"><div class="sv tpf-ok" id="tpf-s-ok"></div><div class="sl">✓ Правильно</div></div>
+      <div class="tpf-stat"><div class="sv tpf-part" id="tpf-s-part"></div><div class="sl">◑ Частково</div></div>
+      <div class="tpf-stat"><div class="sv tpf-bad" id="tpf-s-bad"></div><div class="sl">✗ Неправильно</div></div>
+      <div class="tpf-stat"><div class="sv tpf-skip" id="tpf-s-skip"></div><div class="sl">⏩ Пропущено</div></div>
+    </div>
+
+    <table class="tpf-table">
+      <thead>
+        <tr>
+          <th style="width:24px">#</th>
+          <th>Питання</th>
+          <th style="width:90px">Відповідь учня</th>
+          <th style="width:80px">Правильно</th>
+          <th style="width:60px">Результат</th>
+          <th style="width:44px">Бали</th>
+          <th style="width:60px">Маркер</th>
+        </tr>
+      </thead>
+      <tbody id="tpf-tbody"></tbody>
+    </table>
+
+    <div id="tpf-suspicious-note" style="display:none;margin-bottom:8px;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:5px 8px;font-size:9px;color:#856404">
+      <strong>⚠️ Увага:</strong> <span id="tpf-suspicious-text"></span>
+    </div>
+    <div id="tpf-recommended" style="display:none;margin-bottom:8px;font-size:9px;color:#555;padding:4px 8px;background:#f5f5f5;border-radius:4px">
+      <span id="tpf-recommended-text"></span>
+    </div>
+    <div style="margin-bottom:8px;font-size:8.5px;color:#888">
+      🟢 — відповідь без підозрілої паузи (норма) &nbsp;&nbsp;
+      🔴 — підозріла пауза (можливе звернення до сторонніх джерел) &nbsp;&nbsp;
+      — — питання пропущено
+    </div>
+    <div id="tpf-keylog-note" style="display:none;margin-bottom:8px;background:#fdf0ef;border:1px solid #f0b8b2;border-radius:4px;padding:5px 8px;font-size:9px;color:#c0392b">
+      <strong>⌨️ Підозрілі дії з клавіатурою:</strong> <span id="tpf-keylog-text"></span>
+    </div>
+    <div id="tpf-window-note" style="display:none;margin-bottom:8px;background:#fdf0ef;border:1px solid #f0b8b2;border-radius:4px;padding:5px 8px;font-size:9px;color:#c0392b">
+      <strong>🔀 Залишав вікно тесту:</strong> <span id="tpf-window-text"></span>
+    </div>
+    <div class="tpf-footer">
+      <div>Тямущий v5.0 · <span id="tpf-footer-date"></span></div>
+      <div class="tpf-sign">Підпис вчителя</div>
+    </div>
+
+    <div class="no-print" style="margin-top:20px;text-align:center">
+      <button class="btn btn-primary" onclick="window.print()">🖨 Друк</button>
+      <button class="btn" style="margin-left:8px;background:#f5f2ea" onclick="document.getElementById('teacherPrintForm').style.display='none';document.getElementById('studentResultCard').style.display='block'">← Назад</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="timeUpOverlay">
+  <div class="modal">
+    <h3>⏰ Час вийшов!</h3>
+    <p>Час на це питання вичерпано. Автоматичний перехід до наступного...</p>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ══════════════════════════════════════════════════════════════════════════
+// ⚙️  НАЛАШТУВАННЯ — змінюйте ці значення для базового налаштування системи
+// ══════════════════════════════════════════════════════════════════════════
+
+// Максимальна оцінка за тест (шкала НУШ).
+// ⚙️ Щоб змінити — відредагуйте число нижче. Наприклад: 12 або 100.
+// Всі бали масштабуються автоматично незалежно від кількості питань.
+const MAX_SCORE = 11;
+
+// Іконки предметів у каталозі тестів.
+// ⚙️ Щоб додати новий предмет з іконкою — додайте рядок: 'Назва предмету': '🔣'
+// Якщо предмет є у xlsx але відсутній тут — відображається іконка 📄
+const SUBJECT_ICONS = {
+  'Українська мова':'📖','Українська література':'📗','Зарубіжна література':'📘','Іноземна мова':'🇬🇧',
+  'Математика':'📐','Алгебра':'🔢','Геометрія':'📏',
+  'Пізнаємо природу / Довкілля':'🌱','Біологія':'🌿','Фізика':'⚡','Хімія':'⚗️',
+  'Географія':'🌍','Астрономія':'🔭','Природничі науки':'🔬',
+  'Вступ до історії України та громадянської освіти':'🏛️','Історія України':'📜',
+  'Всесвітня історія':'🌐','Правознавство':'⚖️','Громадянська освіта':'🤝',
+  'Інформатика':'💻','Технології':'🔧','Робототехніка':'🤖','STEAM':'🧪',
+  'Мистецтво':'🎨',"Здоров'я, безпека та добробут":'❤️',
+  'Підприємництво і фінансова грамотність':'💰','Захист України':'🛡️','Фізична культура':'🏃'
+};
+
+// ══════════════════════════════════════════════════════════════════════════
+// 🔒 СТАН ЗАСТОСУНКУ — не редагуйте без розуміння логіки
+// Ці змінні зберігають поточний стан сесії в пам'яті браузера.
+// Скидаються при перезавантаженні сторінки.
+// ══════════════════════════════════════════════════════════════════════════
+let manifestTests   = [];   // масив об'єктів завантажених з TESTS/manifest.json
+let filteredPool    = [];   // підмножина manifestTests після застосування фільтрів
+let selectedTest    = null; // об'єкт обраного тесту з каталогу (або null)
+let allQuestions    = [];   // всі питання завантаженого xlsx-файлу
+let shuffledQuestions = []; // вибрані та перемішані питання для поточного сеансу
+let currentIdx = 0;         // індекс поточного питання (0..shuffledQuestions.length-1)
+let timerInterval = null;   // ID інтервалу setInterval (для stopTimer)
+let timerLeft = 45;         // секунди що залишились на поточне питання
+let answered = false;       // чи вже відповів учень на поточне питання
+let selectedAnswers = [];   // масив обраних літер ['А','В'] для multiple
+let results = [];           // масив об'єктів результатів: { text, type, selected, correct, partialRatio, skipped }
+let suspiciousCount = 0;    // кількість підозрілих пауз
+let keyLog = {};            // лічильник підозрілих клавіш { 'PrintScreen': 2, ... }
+let windowLeaveCount = 0;   // скільки разів учень залишав вікно тесту
+let windowAwayMs = 0;       // сумарний час поза вікном (мс)
+let _awayStart = 0;         // мітка початку поточного залишення
+function keyLogSummary() {
+  const entries = Object.entries(keyLog);
+  if (!entries.length) return '';
+  return entries.map(([k, v]) => k + (v > 1 ? ' × ' + v : '')).join(', ');
+}
+function windowLeaveSummary() {
+  if (!windowLeaveCount) return '';
+  return windowLeaveCount + ' раз(ів), сумарно ~' + Math.round(windowAwayMs / 1000) + ' с';
+}
+let inactivityTimer = null; // таймер бездіяльності
+let questionStartTime = 0;  // час початку питання
+let lastActivityTime  = 0;  // час останньої активності
+let currentPauseSecs  = 0;  // поточна пауза в секундах
+let questionSuspicious = false; // чи є підозріла пауза на поточному питанні
+let inactivitySecs = 22;    // поріг підозрілої бездіяльності (залежить від класу)
+let perQuestionSecs = 45;   // час на одне питання (залежить від класу)
+// ── Диференційований таймер за класом тесту ───────────────────────
+// 5–7 кл → 45с/22с · 8–9 кл → 30с/16с · 10–11 кл → 25с/13с (12 кл — як 11, перспектива)
+function gradeBand(grade) {
+  const g = parseInt(grade, 10) || 0;
+  if (g >= 10) return { perQuestion: 25, inactivity: 13 };
+  if (g >= 8)  return { perQuestion: 30, inactivity: 16 };
+  return { perQuestion: 45, inactivity: 22 };
+}
+function applyTimingForClass(grade) {
+  const b = gradeBand(grade);
+  perQuestionSecs = b.perQuestion;
+  inactivitySecs  = b.inactivity;
+}
+function updateTimingInfo() {
+  const el = document.getElementById('timingInfo');
+  if (!el) return;
+  const count = parseInt(currentTestMeta['Питань'], 10) || 0;
+  if (!count) { el.textContent = perQuestionSecs + ' с на питання'; return; }
+  const total = perQuestionSecs * count;
+  const mins = Math.floor(total / 60), secs = total % 60;
+  el.textContent = count + ' питань · ~' + mins + ' хв' + (secs ? ' ' + secs + ' с' : '') + ' · ' + perQuestionSecs + ' с на питання';
+}
+
+// ── Детектор бездіяльності ────────────────────────────────────────
+function startInactivityDetector() {
+  questionStartTime  = Date.now();
+  lastActivityTime   = Date.now();
+  questionSuspicious = false;
+  clearInterval(inactivityTimer);
+  inactivityTimer = setInterval(() => {
+    if (answered) return;
+    const pause = (Date.now() - lastActivityTime) / 1000;
+    if (pause >= inactivitySecs && !questionSuspicious) {
+      questionSuspicious = true;
+      suspiciousCount++;
+    }
+  }, 1000);
+}
+
+function resetActivity() {
+  lastActivityTime = Date.now();
+}
+
+function stopInactivityDetector() {
+  clearInterval(inactivityTimer);
+  currentPauseSecs = Math.round((Date.now() - questionStartTime) / 1000);
+}
+let studentInfo = {};       // { name, surname, cls, date } — дані учня з форми ідентифікації
+let currentTestTitle = '';  // відображувана назва тесту (з аркуша Мета)
+let currentTestMeta  = {};  // всі метадані з аркуша Мета: { Тема, Предмет, Клас, Питань }
+
+// ── ІНІЦІАЛІЗАЦІЯ ─────────────────────────────────────
+// Запускається одразу після завантаження DOM.
+// loadManifest() — завантажує каталог тестів
+// setupUploadZone() — налаштовує drag-and-drop завантаження xlsx
+window.addEventListener('DOMContentLoaded', () => {
+  loadManifest();
+  setupUploadZone();
+});
+
+// ── ЗАВАНТАЖЕННЯ КАТАЛОГУ ─────────────────────────────
+// Читає TESTS/manifest.json і заповнює масив manifestTests[].
+// ⚙️ Щоб розмістити на Wix: замініть 'TESTS/manifest.json?_=...'
+//    на повну URL-адресу файлу з Wix Media Manager:
+//    const r = await fetch('https://static.wixstatic.com/ugd/XXXXX_manifest.json');
+async function loadManifest() {
+  try {
+    const r = await fetch('TESTS/manifest.json?_=' + Date.now());
+    if (!r.ok) throw new Error('manifest.json not found');
+    manifestTests = await r.json();
+    console.log(`Manifest loaded: ${manifestTests.length} tests`);
+    // v5.1: пряме посилання — автозапуск тесту за ?code=...
+    const _codeParam = new URLSearchParams(location.search).get('code');
+    if (_codeParam) { launchByCode(_codeParam); }
+    filterTests(); // одразу показати всі тести в каталозі
+  } catch(e) {
+    console.warn('Could not load manifest.json:', e.message);
+    // Якщо manifest не знайдено — каталог порожній,
+    // але учень може завантажити xlsx вручну через drag-and-drop
+    manifestTests = [];
+  }
+}
+
+// ── ПЕРЕМИКАННЯ ЕКРАНІВ ───────────────────────────────
+// Ховає всі .screen і показує той що потрібен.
+// Екрани: 'catalogScreen' | 'identityScreen' | 'quizScreen' | 'resultsScreen'
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── ВІДПОВІДНІСТЬ ПРЕДМЕТ → ДОЗВОЛЕНІ КЛАСИ ──────────
+// Використовується для динамічного фільтру класів у каталозі.
+// ⚙️ Щоб додати новий предмет — додайте рядок:
+//    'Назва предмету': [список класів через кому],
+// ⚙️ Щоб змінити доступні класи для існуючого предмету —
+//    відредагуйте масив чисел у відповідному рядку.
+const SUBJECT_GRADES = {
+  'Українська мова':                                [5,6,7,8,9,10,11,12],
+  'Українська література':                          [5,6,7,8,9,10,11,12],
+  'Зарубіжна література':                           [5,6,7,8,9,10,11,12],
+  'Іноземна мова':                                  [5,6,7,8,9,10,11,12],
+  'Математика':                                     [5,6],
+  'Алгебра':                                        [7,8,9,10,11,12],
+  'Геометрія':                                      [7,8,9,10,11,12],
+  'Пізнаємо природу / Довкілля':                    [5,6],
+  'Біологія':                                       [7,8,9,10,11,12],
+  'Фізика':                                         [7,8,9,10,11,12],
+  'Хімія':                                          [7,8,9,10,11,12],
+  'Географія':                                      [7,8,9,10,11,12],
+  'Астрономія':                                     [10,11,12],
+  'Природничі науки':                               [10,11,12],
+  'Вступ до історії України та громадянської освіти':[5,6],
+  'Історія України':                                [7,8,9,10,11,12],
+  'Всесвітня історія':                              [7,8,9,10,11,12],
+  'Правознавство':                                  [9,10,11,12],
+  'Громадянська освіта':                            [10,11,12],
+  'Інформатика':                                    [5,6,7,8,9,10,11,12],
+  'Технології':                                     [5,6,7,8,9,10,11,12],
+  'Мистецтво':                                      [5,6,7,8,9,10,11,12],
+  "Здоров'я, безпека та добробут":                  [5,6,7,8,9],
+  'Робототехніка':                                  [5,6],
+  'Підприємництво і фінансова грамотність':         [8,9],
+  'Захист України':                                 [10,11,12],
+  'Фізична культура':                               [5,6,7,8,9,10,11,12],
+  'STEAM':                                          [5,6,7,8,9],
+};
+
+// ── ДИНАМІЧНИЙ ФІЛЬТР КЛАСІВ ──────────────────────────
+// Перебудовує список класів залежно від обраного предмету.
+// Викликається автоматично при зміні filterSubject (onchange).
+// Якщо попередньо обраний клас не входить у новий предмет — скидається.
+function updateClassFilter() {
+  const subj    = document.getElementById('filterSubject').value;
+  const classBlock = document.getElementById('filterClassBlock');
+  const sel     = document.getElementById('filterClass');
+
+  // скинути фільтр модуля при зміні предмету
+  const modBlock = document.getElementById('filterModuleBlock');
+  const modSel   = document.getElementById('filterModule');
+  modBlock.style.display = 'none';
+  modSel.value = '';
+
+  if (!subj) {
+    classBlock.style.display = 'none';
+    document.getElementById('testsSection').style.display = 'none';
+    document.getElementById('catalogBottom').style.display = 'none';
+    return;
+  }
+
+  classBlock.style.display = 'block';
+  sel.value = '';
+
+  const allowed = SUBJECT_GRADES[subj] || [5,6,7,8,9,10,11,12];
+  Array.from(sel.options).forEach(o => {
+    const g = parseInt(o.value);
+    if (!g) return;
+    o.style.display = allowed.includes(g) ? '' : 'none';
+  });
+
+  document.getElementById('testsSection').style.display = 'none';
+  document.getElementById('catalogBottom').style.display = 'none';
+}
+
+
+// ── ДИНАМІЧНИЙ ФІЛЬТР МОДУЛІВ ──────────────────────────
+// Показує фільтр модуля лише коли в обраних предметі+класі є модулі.
+// Список модулів будується автоматично з manifest.
+function updateModuleFilter() {
+  const subj  = document.getElementById('filterSubject').value;
+  const grade = parseInt(document.getElementById('filterClass').value) || 0;
+  const block = document.getElementById('filterModuleBlock');
+  const sel   = document.getElementById('filterModule');
+
+  sel.value = '';
+  if (!subj || !grade) { block.style.display = 'none'; return; }
+
+  const mods = [...new Set(
+    manifestTests
+      .filter(t => t.subject === subj && t.grade === grade && Number.isInteger(t.module))
+      .map(t => t.module)
+  )].sort((a,b) => a-b);
+
+  if (!mods.length) { block.style.display = 'none'; return; }
+
+  sel.innerHTML = '<option value="">— Усі модулі —</option>'
+    + mods.map(m => `<option value="${m}">Модуль ${m}</option>`).join('');
+  block.style.display = 'block';
+}
+
+function filterTests() {
+  const subj  = document.getElementById('filterSubject').value;
+  const grade = parseInt(document.getElementById('filterClass').value) || 0;
+
+  if (!grade) {
+    document.getElementById('testsSection').style.display = 'none';
+    document.getElementById('catalogBottom').style.display = 'none';
+    return;
+  }
+  let pool = [...manifestTests];
+  if (subj)  pool = pool.filter(t => t.subject === subj);
+  if (grade) pool = pool.filter(t => t.grade  === grade);
+
+  const moduleVal = document.getElementById('filterModule').value;
+  if (moduleVal) pool = pool.filter(t => t.module === parseInt(moduleVal));
+
+  filteredPool = pool;
+  selectedTest = null;
+  document.getElementById('selectedTestInfo').textContent = 'Тест не обрано';
+  document.getElementById('btnUseTest').disabled = true;
+
+  const section = document.getElementById('testsSection');
+  const list    = document.getElementById('testRadioList');
+  const bottom  = document.getElementById('catalogBottom');
+
+  if (!pool.length) {
+    section.style.display = 'block';
+    list.innerHTML = '<div class="no-tests-msg"><span class="no-icon">🔍</span>Тестів не знайдено для обраних фільтрів.</div>';
+    bottom.style.display = 'none';
+    return;
+  }
+
+  list.innerHTML = pool.map((t, i) => {
+    const icon = SUBJECT_ICONS[t.subject] || '📄';
+    return `<label class="test-radio-item" onclick="selectTestItem(${i},this)">
+      <div class="test-radio-dot"></div>
+      <div class="test-radio-body">
+        <div class="test-radio-title">${icon} ${t.title}</div>
+        <div class="test-radio-meta">${t.subject} · ${t.grade} клас</div>
+      </div>
+      <span class="test-radio-tag">${t.grade} кл.</span>
+    </label>`;
+  }).join('');
+
+  section.style.display = 'block';
+  bottom.style.display  = 'flex';
+}
+
+function selectTestItem(idx, el) {
+  document.querySelectorAll('.test-radio-item').forEach(x => x.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTest = filteredPool[idx];
+  const icon = SUBJECT_ICONS[selectedTest.subject] || '📄';
+  document.getElementById('selectedTestInfo').innerHTML =
+    `Обрано: <strong>${icon} ${selectedTest.title}</strong> · ${selectedTest.grade} клас`;
+  document.getElementById('btnUseTest').disabled = false;
+}
+
+// ── LOAD TEST FILE ────────────────────────────────────
+// Reads meta (subject/grade/title) FROM THE FILE ITSELF — manifest is only used for listing.
+function parseXlsxBuffer(buf) {
+  const wb = XLSX.read(buf, { type: 'array' });
+
+  // Read meta from Мета sheet
+  let fileMeta = {};
+  if (wb.SheetNames.includes('Мета')) {
+    const mws = wb.Sheets['Мета'];
+    XLSX.utils.sheet_to_json(mws, { header:1, defval:'' }).forEach(row => {
+      if (row[0] && row[1]) fileMeta[String(row[0])] = row[1];
+    });
+  }
+
+  // Read questions from first non-Мета sheet
+  const qSheet = wb.SheetNames.find(n => n !== 'Мета') || wb.SheetNames[0];
+  const rows = XLSX.utils.sheet_to_json(wb.Sheets[qSheet], { defval: '' });
+  if (!rows.length) throw new Error('Файл не містить питань');
+
+  const questions = rows.map((r, i) => ({
+    id:      r['ID'] || r['id'] || (i+1),
+    group:   String(r['Група'] || r['Group'] || '').trim(),
+    type:    String(r['Тип']  || r['Type']    || 'single').toLowerCase().trim(),
+    text:    String(r['Питання'] || r['Question'] || ''),
+    a:       String(r['Варіант_А'] || r['A'] || r['А'] || ''),
+    b:       String(r['Варіант_Б'] || r['B'] || r['Б'] || ''),
+    c:       String(r['Варіант_В'] || r['C'] || r['В'] || ''),
+    d:       String(r['Варіант_Г'] || r['D'] || r['Г'] || ''),
+    correct: String(r['Правильна_відповідь'] || r['Correct'] || '').toUpperCase().replace(/\s/g,''),
+    points:  parseFloat(r['Бали'] || r['Points'] || 1) || 1,
+  })).filter(q => q.text.trim());
+
+  if (!questions.length) throw new Error('Не знайдено жодного питання');
+  return { meta: fileMeta, questions };
+}
+
+// ── Запуск тесту за кодом / прямим посиланням (v5.1) ───────────────
+// Шукає тест у manifestTests за полем code (якщо задане) або за id (запасний).
+function launchByCode(raw) {
+  const code = (raw || '').trim();
+  const errEl = document.getElementById('codeError');
+  if (errEl) errEl.textContent = '';
+  if (!code) { if (errEl) errEl.textContent = 'Введіть код тесту.'; return; }
+  const norm = code.toUpperCase();
+  const found = manifestTests.find(t =>
+    (t.code && String(t.code).toUpperCase() === norm) || String(t.id).toUpperCase() === norm
+  );
+  if (!found) { if (errEl) errEl.textContent = 'Тест за кодом «' + code + '» не знайдено.'; return; }
+  selectedTest = found;
+  useSelectedTest();
+}
+
+async function useSelectedTest() {
+  if (!selectedTest) return;
+  const btn = document.getElementById('btnUseTest');
+  btn.disabled = true; btn.textContent = '⏳ Завантаження...';
+  try {
+    const url = 'TESTS/' + encodeURIComponent(selectedTest.file) + '?_=' + Date.now();
+    const r   = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}: ${url}`);
+    const buf  = await r.arrayBuffer();
+    const { meta, questions } = parseXlsxBuffer(new Uint8Array(buf));
+
+    // Title comes from the FILE's Мета sheet, not from manifest
+    const title   = String(meta['Тема']    || selectedTest.title);
+    const subject = String(meta['Предмет'] || selectedTest.subject);
+    const grade   = parseInt(meta['Клас']  || selectedTest.grade) || 0;
+
+    allQuestions = questions;
+    currentTestMeta = meta;
+    applyTimingForClass(grade);
+    updateTimingInfo();
+    currentTestTitle = `${SUBJECT_ICONS[subject] || ''} ${title}`;
+    document.getElementById('headerMeta').textContent = currentTestTitle;
+    document.getElementById('chosenTestBanner').textContent =
+      `📝 ${title} · ${subject} · ${grade} клас`;
+    showScreen('identityScreen');
+  } catch(e) {
+    alert('Не вдалось завантажити тест:\n' + e.message +
+      '\n\nВідкрийте файл через локальний веб-сервер (VS Code Live Server, WAMP, або python -m http.server).');
+  }
+  btn.disabled = false; btn.textContent = 'Розпочати тест →';
+}
+
+// ── UPLOAD ZONE (manual file) ─────────────────────────
+function setupUploadZone() {
+  const zone = document.getElementById('uploadMiniZone');
+  const inp  = document.getElementById('fileInputMini');
+  zone.addEventListener('click', () => inp.click());
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.style.borderColor = 'var(--gold)'; });
+  zone.addEventListener('dragleave', () => { zone.style.borderColor = ''; });
+  zone.addEventListener('drop', e => { e.preventDefault(); zone.style.borderColor = ''; if (e.dataTransfer.files[0]) handleFileMini(e.dataTransfer.files[0]); });
+  inp.addEventListener('change', () => { if (inp.files[0]) handleFileMini(inp.files[0]); });
+}
+
+function handleFileMini(file) {
+  const err = document.getElementById('uploadErrorMini');
+  const inf = document.getElementById('fileInfoMini');
+  err.textContent = ''; inf.textContent = '';
+  if (!file.name.match(/\.(xlsx|xls)$/i)) { err.textContent = 'Потрібен файл .xlsx або .xls'; return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const { meta, questions } = parseXlsxBuffer(new Uint8Array(e.target.result));
+      allQuestions = questions;
+      // Always read title/subject/grade FROM FILE
+      const title   = String(meta['Тема']    || file.name.replace(/\.(xlsx|xls)$/i,''));
+      const subject = String(meta['Предмет'] || '');
+      const grade   = parseInt(meta['Клас']  || 0) || '';
+      currentTestTitle = title;
+      document.getElementById('headerMeta').textContent = title;
+      document.getElementById('chosenTestBanner').textContent =
+        `📂 ${title}${subject ? ' · ' + subject : ''}${grade ? ' · ' + grade + ' клас' : ''}`;
+      inf.textContent = `✅ Завантажено: ${questions.length} питань`;
+      setTimeout(() => showScreen('identityScreen'), 600);
+    } catch(ex) { err.textContent = 'Помилка: ' + ex.message; }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── IDENTITY / START ──────────────────────────────────
+function goBackToCatalog() {
+  allQuestions = []; selectedTest = null;
+  document.getElementById('identityError').textContent = '';
+  showScreen('catalogScreen');
+}
+
+function startQuiz() {
+  const name    = document.getElementById('fieldName').value.trim();
+  const surname = document.getElementById('fieldSurname').value.trim();
+  const cls     = document.getElementById('fieldClass').value;
+  const err     = document.getElementById('identityError');
+  if (!name || !surname || !cls) { err.textContent = 'Будь ласка, заповніть усі поля'; return; }
+  if (!allQuestions.length)      { err.textContent = 'Тест не завантажено'; return; }
+  err.textContent = '';
+  studentInfo = { name, surname, cls, date: new Date().toLocaleString('uk-UA') };
+  document.getElementById('headerMeta').innerHTML = `${surname} ${name} · ${cls}`;
+  shuffleAndStart();
+}
+
+// ── ПЕРЕМІШУВАННЯ (Fisher-Yates) ──────────────────────
+// Повертає новий перемішаний масив (оригінал не змінює).
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+// ── ВИБІРКА ПИТАНЬ (антифрод: групи + ліміт) ─────────
+// Логіка:
+//   1. Питання з однаковим полем "Група" об'єднуються в групи.
+//   2. З кожної групи обирається рівно ОДНЕ питання випадково.
+//      → учень що проходить тест двічі побачить інше формулювання того ж питання.
+//   3. Питання без групи ("Група" порожня) додаються як є.
+//   4. Всі питання перемішуються і обрізаються до ліміту (поле "Питань" з Мета).
+// ⚙️ Ліміт за замовчуванням: 15. Змінюється полем "Питань" в аркуші Мета xlsx.
+function selectQuestions(all) {
+  // Read limit from meta (default 15)
+  const limit = parseInt(currentTestMeta && currentTestMeta['Питань']) || 15;
+
+  // Separate grouped and ungrouped
+  const grouped = {};
+  const ungrouped = [];
+  all.forEach(q => {
+    if (q.group) {
+      if (!grouped[q.group]) grouped[q.group] = [];
+      grouped[q.group].push(q);
+    } else {
+      ungrouped.push(q);
+    }
+  });
+
+  // From each group pick ONE random question
+  const fromGroups = Object.values(grouped).map(arr => arr[Math.floor(Math.random()*arr.length)]);
+
+  // Pool = one-per-group + ungrouped, shuffled
+  const pool = shuffle([...fromGroups, ...ungrouped]);
+
+  // Return up to limit questions
+  return pool.slice(0, limit);
+}
+
+// ── ЗАПУСК ТЕСТУ ──────────────────────────────────────
+// Формує shuffledQuestions[]:
+//   - обирає питання через selectQuestions() (групи + ліміт)
+//   - для кожного питання перемішує варіанти відповідей А/Б/В/Г
+//   - переприв'язує правильну відповідь до нових позицій варіантів
+//     (зберігає поле _correct з новими літерами)
+// ⚠️ Перемішування варіантів — другий рівень антифроду:
+//    навіть якщо учень запам'ятав "відповідь Б" — на другому проході
+//    варіант Б вже буде іншим текстом.
+function shuffleAndStart() {
+  const selected = selectQuestions(allQuestions);
+  shuffledQuestions = selected.map(q => {
+    if (q.type === 'truefalse')
+      return { ...q, _opts: [{ key:'А', val:q.a },{ key:'Б', val:q.b }].filter(o=>o.val) };
+    const opts = [
+      { key:'А', val:q.a, orig:'А' },{ key:'Б', val:q.b, orig:'Б' },
+      { key:'В', val:q.c, orig:'В' },{ key:'Г', val:q.d, orig:'Г' },
+    ].filter(o=>o.val);
+    const sh = shuffle(opts).map((o,i)=>({...o, key:['А','Б','В','Г'][i]}));
+    const corrOrig = q.correct.split(',').map(x=>x.trim());
+    const remapped = sh.filter(o=>corrOrig.includes(o.orig)).map(o=>o.key).join(',');
+    return { ...q, _opts:sh, _correct:remapped };
+  });
+  currentIdx = 0; results = []; suspiciousCount = 0; keyLog = {}; windowLeaveCount = 0; windowAwayMs = 0; _awayStart = 0;
+  showScreen('quizScreen');
+  const qs = document.getElementById('quizScreen');
+  qs.onmousemove   = resetActivity;
+  qs.ontouchstart  = resetActivity;
+  qs.onclick       = resetActivity;
+  qs.onscroll      = resetActivity;
+  document.onkeydown = resetActivity;
+  renderQuestion();
+}
+
+// ── ВІДОБРАЖЕННЯ ПИТАННЯ ──────────────────────────────
+// Рендерить поточне питання (за індексом currentIdx).
+// Скидає стан відповіді, оновлює прогрес-бар, запускає таймер.
+function renderQuestion() {
+  const q = shuffledQuestions[currentIdx];
+  answered = false; selectedAnswers = [];
+  const total = shuffledQuestions.length;
+  document.getElementById('progressBar').style.width = (currentIdx/total*100)+'%';
+  document.getElementById('qCounter').textContent = `Питання ${currentIdx+1} / ${total}`;
+  const labels = { single:'Одна відповідь', multiple:'Кілька відповідей', truefalse:'Правда / Хибно' };
+  document.getElementById('qTypeTag').textContent = labels[q.type] || 'Відповідь';
+  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('answersLabel').textContent = q.type==='multiple' ? 'Оберіть усі правильні відповіді' : 'Оберіть відповідь';
+  const grid = document.getElementById('answersGrid');
+  grid.innerHTML = '';
+  const opts = q._opts || [{ key:'А', val:q.a },{ key:'Б', val:q.b },{ key:'В', val:q.c },{ key:'Г', val:q.d }].filter(o=>o.val);
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn'; btn.dataset.key = opt.key;
+    btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
+    btn.onclick = () => selectAnswer(btn, q);
+    grid.appendChild(btn);
+  });
+  document.getElementById('hintText').textContent = '';
+  document.getElementById('hintText').className = 'hint-text';
+  document.getElementById('btnNext').style.display = 'none';
+  startTimer();
+  startInactivityDetector();
+}
+
+// ── ВИБІР ВІДПОВІДІ ───────────────────────────────────
+// Для типу 'single' і 'truefalse': одразу викликає revealAnswer().
+// Для типу 'multiple': додає/знімає вибір, показує кнопку "Далі"
+//   тільки після того як обрано хоча б один варіант.
+function selectAnswer(btn, q) {
+  if (answered) return;
+  if (q.type === 'multiple') {
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected')) selectedAnswers.push(btn.dataset.key);
+    else selectedAnswers = selectedAnswers.filter(k=>k!==btn.dataset.key);
+    document.getElementById('btnNext').style.display = selectedAnswers.length > 0 ? 'inline-flex' : 'none';
+  } else {
+    selectedAnswers = [btn.dataset.key];
+    revealAnswer(q);
+  }
+}
+
+// ── ПЕРЕВІРКА ВІДПОВІДІ ───────────────────────────────
+// Порівнює обрані відповіді з правильними, обчислює partialRatio,
+// підсвічує кнопки (зелений/червоний/жовтий), показує підказку.
+// Зберігає результат у масив results[].
+//
+// partialRatio для типу 'multiple':
+//   = (правильно обраних / всього правильних) − (помилково обраних / всього варіантів)
+//   Обмежується [0..1]. Штраф запобігає стратегії "обрати все підряд".
+function revealAnswer(q) {
+  answered = true; stopTimer();
+  const correctStr  = (q._correct||q.correct).toUpperCase().replace(/\s/g,'');
+  const correctKeys = correctStr.split(',').map(x=>x.trim()).filter(Boolean);
+  const selected    = [...selectedAnswers];
+
+  // ── SCORING ──────────────────────────────────────────
+  // Max = 11 balів.  pointPerQ = 11 / N  (N = total questions)
+  // Одна відповідь: binary (1 або 0)
+  // Кілька відповідей:
+  //   partialRatio = (correctlyPicked / totalCorrect) - (wronglyPicked / totalOptions)
+  //   clamp [0, 1]
+  let partialRatio = 0;
+  if (q.type === 'multiple') {
+    const totalCorrect   = correctKeys.length;
+    const correctlyPicked = selected.filter(k=>correctKeys.includes(k)).length;
+    const wronglyPicked   = selected.filter(k=>!correctKeys.includes(k)).length;
+    const totalOptions    = (q._opts||[]).length;
+    partialRatio = Math.max(0, (correctlyPicked/totalCorrect) - (wronglyPicked/totalOptions));
+  } else {
+    const ss = [...selected].sort().join(',');
+    const cs = [...correctKeys].sort().join(',');
+    partialRatio = ss === cs ? 1 : 0;
+  }
+
+  // style buttons
+  document.querySelectorAll('.answer-btn').forEach(btn => {
+    btn.classList.add('disabled-no-select');
+    const k = btn.dataset.key;
+    if (correctKeys.includes(k)) btn.classList.add('correct');
+    else if (selected.includes(k)) btn.classList.add('wrong');
+    if (partialRatio > 0 && partialRatio < 1 && selected.includes(k) && correctKeys.includes(k)) {
+      btn.classList.remove('correct'); btn.classList.add('partial');
+    }
+  });
+
+  const hint = document.getElementById('hintText');
+  const corrLabel = correctKeys.map(k => {
+    const o = (shuffledQuestions[currentIdx]._opts||[]).find(x=>x.key===k);
+    return o ? `${k}: ${o.val}` : k;
+  }).join(', ');
+
+  if (partialRatio === 1) {
+    hint.textContent = '✓ Правильно!'; hint.className = 'hint-text correct-msg';
+  } else if (partialRatio > 0) {
+    hint.textContent = `◑ Частково правильно (${Math.round(partialRatio*100)}%). Повна відповідь: ${corrLabel}`;
+    hint.className = 'hint-text partial-msg';
+  } else {
+    hint.textContent = `✗ Неправильно. Правильна відповідь: ${corrLabel}`;
+    hint.className = 'hint-text wrong-msg';
+  }
+
+  stopInactivityDetector();
+  const answerTime = Math.round((Date.now() - questionStartTime) / 1000);
+  results.push({ text:q.text, type:q.type, selected, correct:correctKeys, partialRatio, skipped:false, suspicious:questionSuspicious, answerTime });
+  document.getElementById('btnNext').style.display = 'inline-flex';
+}
+
+// ── ТАЙМЕР ────────────────────────────────────────────
+// ⚙️ Щоб змінити час на питання: відредагуйте timerLeft = 45
+//    (число в секундах) у функції startTimer нижче.
+// Порогові значення кольорів: ≤20с → жовтий, ≤10с → червоний з пульсацією.
+// ⚙️ Щоб змінити пороги — знайдіть у функції updateTimerUI:
+//    if (timerLeft <= 10) → і if (timerLeft <= 20) →
+function startTimer() {
+  document.getElementById('timerBadge').style.display = 'flex';
+  timerLeft = perQuestionSecs; updateTimerUI();
+  timerInterval = setInterval(() => { timerLeft--; updateTimerUI(); if (timerLeft<=0) { stopTimer(); autoSkip(); } }, 1000);
+}
+function stopTimer() { clearInterval(timerInterval); timerInterval = null; }
+function updateTimerUI() {
+  document.getElementById('timerNum').textContent = timerLeft;
+  const b = document.getElementById('timerBadge');
+  b.className = 'timer-badge';
+  if (timerLeft<=10) b.classList.add('danger'); else if (timerLeft<=20) b.classList.add('warn');
+}
+// ── АВТОПРОПУСК (таймер вийшов) ───────────────────────
+// Якщо учень не відповів за 45 секунд — питання пропускається.
+// Записує результат з partialRatio:0 та skipped:true.
+// Показує модальне вікно "Час вийшов!" на 1.8 секунди.
+function autoSkip() {
+  if (answered) return;
+  const q = shuffledQuestions[currentIdx];
+  const correctKeys = (q._correct||q.correct).toUpperCase().split(',').map(x=>x.trim());
+  stopInactivityDetector();
+  results.push({ text:q.text, type:q.type, selected:[], correct:correctKeys, partialRatio:0, skipped:true, suspicious:false, answerTime:0 });
+  answered = true;
+  const ov = document.getElementById('timeUpOverlay');
+  ov.classList.add('visible');
+  setTimeout(() => { ov.classList.remove('visible'); nextQuestion(); }, 1800);
+}
+
+// ── НАСТУПНЕ ПИТАННЯ ──────────────────────────────────
+// Якщо для multiple ще не натиснули "Підтвердити" — підтверджує відповідь.
+// Якщо питання закінчились — переходить до showResults().
+function nextQuestion() {
+  if (!answered && selectedAnswers.length>0) { revealAnswer(shuffledQuestions[currentIdx]); return; }
+  currentIdx++;
+  if (currentIdx >= shuffledQuestions.length) { stopInactivityDetector(); showResults(); return; }
+  else {
+    renderQuestion();
+    const qb = document.getElementById('questionBox');
+    qb.classList.remove('fade-in'); void qb.offsetWidth; qb.classList.add('fade-in');
+  }
+}
+
+// ── РЕЗУЛЬТАТИ (екран учня) ───────────────────────────
+// Підраховує фінальний бал: Σ(partialRatio × ppq), заокруглює, обмежує [0, MAX_SCORE].
+// Учень бачить ЛИШЕ: трофей, оцінку, зведену статистику.
+// Правильні відповіді приховані навмисно — вони видні лише у формі вчителя.
+// ⚙️ Щоб показати правильні відповіді учню — видаліть коментар
+//    "Student sees only summary stats" і додайте розбір питань.
+function showResults() {
+  stopTimer();
+  document.getElementById('timerBadge').style.display = 'none';
+  showScreen('resultsScreen');
+  const n = shuffledQuestions.length;
+  const ppq = MAX_SCORE / n;
+  let raw = 0;
+  results.forEach(r => { raw += r.partialRatio * ppq; });
+  const scaled = Math.min(MAX_SCORE, Math.round(raw));
+  const correct = results.filter(r=>r.partialRatio===1).length;
+  const partial = results.filter(r=>r.partialRatio>0&&r.partialRatio<1).length;
+  const wrong   = results.filter(r=>r.partialRatio===0&&!r.skipped).length;
+  const skipped = results.filter(r=>r.skipped).length;
+
+  document.getElementById('resultsName').textContent = `${studentInfo.surname} ${studentInfo.name} · ${studentInfo.cls}`;
+  document.getElementById('scoreVal').textContent = scaled;
+  document.getElementById('scoreLabel').textContent = `з ${MAX_SCORE} можливих балів`;
+  setTimeout(() => { document.getElementById('scoreBarFill').style.width = (scaled/MAX_SCORE*100)+'%'; }, 100);
+
+  const tr = document.getElementById('resultsTrophy');
+  tr.textContent = scaled>=10 ? '🏆' : scaled>=7 ? '🥈' : scaled>=4 ? '🥉' : '📚';
+
+  // Student sees only summary stats, no correct answers
+  document.getElementById('resultsSummary').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 0">
+      <div style="text-align:center;padding:16px;background:#f0faf4;border-radius:10px;border:1.5px solid #b2dfc7">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--sage)">${correct}</div>
+        <div style="font-size:.78rem;color:#555;margin-top:4px">✓ Правильно</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#fff8e6;border-radius:10px;border:1.5px solid #f0d080">
+        <div style="font-size:1.8rem;font-weight:800;color:#8a6a00">${partial}</div>
+        <div style="font-size:.78rem;color:#555;margin-top:4px">◑ Частково</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#fdf0ef;border-radius:10px;border:1.5px solid #f0b8b2">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--crimson)">${wrong}</div>
+        <div style="font-size:.78rem;color:#555;margin-top:4px">✗ Неправильно</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f5f5f5;border-radius:10px;border:1.5px solid #ddd">
+        <div style="font-size:1.8rem;font-weight:800;color:#aaa">${skipped}</div>
+        <div style="font-size:.78rem;color:#555;margin-top:4px">⏩ Пропущено</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;text-align:center;font-size:.82rem;color:#999;font-style:italic">
+      Детальний розбір надсилається вчителю
+    </div>`;
+
+  window._lastScore = scaled; window._ppq = ppq;
+
+  // Відправляємо результати на email вчителя автоматично
+  sendResultsByEmail(scaled, ppq, correct, partial, wrong, skipped);
+
+  // Відправляємо результати на Google Sheets + Drive
+  sendResultsToSheets(scaled, ppq, correct, wrong, skipped);
+}
+
+// ── ВІДПРАВКА НА GOOGLE SHEETS + DRIVE ───────────────
+async function sendResultsToSheets(scaled, ppq, correct, wrong, skipped) {
+  const APPS_URL = 'https://script.google.com/macros/s/AKfycbwxbxI4nDi0WjRizqWDapGhOWVPV4Itbwstoy-tgHEs59dp-hqWRChOSO_DWk7lhqx6hw/exec';
+  try {
+    const recScore = results.reduce((sum, r) => {
+      if (r.skipped) return sum;
+      return sum + (r.partialRatio * ppq * (r.suspicious ? 0.25 : 1));
+    }, 0);
+    const recScaled = Math.min(11, Math.round(recScore / results.length * (11 / ppq)));
+    const percent = Math.round(scaled / 11 * 100);
+    const data = {
+      name:             (studentInfo.surname + ' ' + studentInfo.name).trim(),
+      cls:              studentInfo.cls,
+      subject:          (selectedTest ? selectedTest.subject : ''),
+      topic:            (selectedTest ? selectedTest.title : ''),
+      code:             (selectedTest ? (selectedTest.code || selectedTest.id || '') : ''),
+      score:            scaled,
+      percent:          percent,
+      correct:          correct,
+      wrong:            wrong,
+      suspiciousCount:  suspiciousCount,
+      recommendedScore: recScaled,
+      questionsCount:   results.length,
+      inactivityLimit:  inactivitySecs,
+      keyLog:           keyLog,
+      windowLeaveCount: windowLeaveCount,
+      windowAwayMs:     windowAwayMs,
+      protocolHtml:     buildProtocolHtml(),
+      results:          results.map(r => ({
+        text:        r.text,
+        selected:    r.selected ? r.selected.join(',') : '—',
+        correct:     r.correct ? r.correct.join(',') : '—',
+        partialRatio: r.partialRatio,
+        points:      +(r.partialRatio * ppq).toFixed(1),
+        answerTime:  r.answerTime || 0,
+        suspicious:  r.suspicious || false,
+        skipped:     r.skipped || false,
+      }))
+    };
+    await fetch(APPS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    console.log('✅ Дані надіслано на Google Sheets');
+  } catch(e) {
+    console.warn('⚠️ Помилка надсилання на Sheets:', e);
+  }
+}
+
+// ── ВІДПРАВКА РЕЗУЛЬТАТІВ НА EMAIL ────────────────────
+// Генерує HTML-лист у форматі друкованої форми вчителя і відправляє через EmailJS.
+// ⚙️ Service ID, Template ID і Public Key налаштовуються у блоці в <head>.
+// Шаблон у EmailJS має містити лише одну змінну: {{{html_body}}} (потрійні дужки = no-escape).
+// Учень бачить індикатор: ⏳ відправка → ✅ надіслано / ⚠️ помилка.
+// Помилка відправки НЕ блокує роботу — результати все одно відображаються.
+async function sendResultsByEmail(scaled, ppq, correct, partial, wrong, skipped) {
+  const statusEl = document.getElementById('emailStatus');
+
+  // Якщо ключі не налаштовані — тихо пропускаємо
+  if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' || EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID') {
+    console.warn('EmailJS: SERVICE_ID або TEMPLATE_ID не налаштовані');
+    return;
+  }
+
+  // Показуємо індикатор відправки
+  statusEl.style.display = 'block';
+  statusEl.style.background = 'rgba(44,110,158,.08)';
+  statusEl.style.border = '1.5px solid rgba(44,110,158,.3)';
+  statusEl.style.color = '#1a4f7a';
+  statusEl.textContent = '📨 Надсилаємо результати вчителю...';
+
+  const n       = shuffledQuestions.length;
+  const subject = selectedTest ? selectedTest.subject : (currentTestMeta['Предмет'] || '—');
+  const topic   = selectedTest ? selectedTest.title   : currentTestTitle;
+  const pct     = Math.round(scaled / MAX_SCORE * 100);
+  const dateStr = new Date().toLocaleString('uk-UA');
+  const name    = `${studentInfo.surname} ${studentInfo.name}`;
+
+  // Рядки таблиці відповідей — точна копія printTeacherForm
+  const tableRows = results.map((r, i) => {
+    const sel = r.skipped ? '—' : (r.selected.join(', ') || '—');
+    const cor = r.correct.join(', ');
+    const pts = (r.partialRatio * ppq).toFixed(1);
+    let resCls, resLabel;
+    if (r.skipped)               { resCls='color:#aaa';              resLabel='⏩ пропуск'; }
+    else if (r.partialRatio===1) { resCls='color:#2a7a4a;font-weight:700'; resLabel='✓'; }
+    else if (r.partialRatio>0)   { resCls='color:#b8860b;font-weight:700'; resLabel=`◑ ${Math.round(r.partialRatio*100)}%`; }
+    else                         { resCls='color:#c0392b;font-weight:700'; resLabel='✗'; }
+    const q = r.text.length > 90 ? r.text.slice(0,88)+'…' : r.text;
+    const bg = i % 2 === 1 ? 'background:#f9f9f7' : '';
+    return `<tr style="${bg}">
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;color:#aaa;font-size:9px">${i+1}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;vertical-align:top">${q}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;font-weight:600">${sel}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;color:#2a7a4a">${cor}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;${resCls}">${resLabel}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;text-align:center;font-weight:700">${pts}</td>
+      <td style="padding:4px 7px;border-bottom:1px solid #eee;text-align:center;font-size:11px">
+        ${r.skipped ? '—' : (r.suspicious ? '🔴' : '🟢')} ${r.skipped ? '' : (r.answerTime + 'с')}
+      </td>
+    </tr>`;
+  }).join('');
+
+  // HTML-лист — повна копія друкованої форми вчителя
+  const html_body = buildProtocolHtml();
+
+  const emailSubject = `Тямущий: ${name} \u00b7 ${subject} \u00b7 ${scaled} з ${MAX_SCORE} б. (${pct}%)`;
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:      TEACHER_EMAIL,
+      email_subject: emailSubject,
+      html_body:     html_body,
+    });
+
+    statusEl.style.background = 'rgba(58,125,94,.08)';
+    statusEl.style.border = '1.5px solid rgba(58,125,94,.35)';
+    statusEl.style.color = '#2a6044';
+    statusEl.textContent = '✅ Результати надіслано вчителю';
+
+  } catch(err) {
+    console.error('EmailJS error:', err);
+    statusEl.style.background = 'rgba(192,57,43,.07)';
+    statusEl.style.border = '1.5px solid rgba(192,57,43,.3)';
+    statusEl.style.color = '#922b21';
+    statusEl.textContent = '⚠️ Не вдалось надіслати email — роздрукуйте форму вчителя вручну';
+  }
+}
+
+// ── ЄДИНЕ ДЖЕРЕЛО ПРОТОКОЛУ ───────────────────────────
+// buildProtocolInner() — внутрішній HTML протоколу (та сама верстка для форми, email і PDF).
+// buildProtocolHtml()  — повний документ (обгортка) для email та для конвертації у PDF.
+function buildProtocolInner() {
+  const scaled = window._lastScore || 0;
+  const ppq    = window._ppq || 0;
+  const n      = (typeof shuffledQuestions !== 'undefined' && shuffledQuestions) ? shuffledQuestions.length : results.length;
+  const name   = (studentInfo.surname + ' ' + studentInfo.name).trim();
+  const cls    = studentInfo.cls;
+  const subject= selectedTest ? selectedTest.subject : '—';
+  const topic  = selectedTest ? selectedTest.title : (typeof currentTestTitle !== 'undefined' ? currentTestTitle : '—');
+  const correct= results.filter(r=>r.partialRatio===1).length;
+  const partial= results.filter(r=>r.partialRatio>0 && r.partialRatio<1).length;
+  const wrong  = results.filter(r=>r.partialRatio===0 && !r.skipped).length;
+  const skipped= results.filter(r=>r.skipped).length;
+  const pct    = Math.round(scaled / MAX_SCORE * 100);
+  const dateStr= new Date().toLocaleString('uk-UA');
+  const inact  = inactivitySecs;
+  const recScore = results.reduce((sum,r)=>{ if(r.skipped) return sum; const pts=r.partialRatio*ppq; return sum + (r.suspicious?pts*0.25:pts); },0);
+  const recScaleScore = Math.max(0, Math.round(recScore / results.length * (11/ppq)));
+  const realSuspicious = results.filter(r=>r.suspicious && !r.skipped).length;
+  const klSummary = keyLogSummary();
+  const wlSummary = windowLeaveSummary();
+  const TH = 'background:#0D0D14;color:#C8A84B;text-align:left;padding:5px 7px;font-size:9.5px;text-transform:uppercase;letter-spacing:.3px';
+  const TD = 'padding:4px 7px;border-bottom:1px solid #eee';
+  const rows = results.map((r,i)=>{
+    const sel = r.skipped ? '—' : (r.selected.join(', ') || '—');
+    const cor = r.correct.join(', ');
+    const pts = (r.partialRatio*ppq).toFixed(1);
+    let resCss,resLabel;
+    if(r.skipped){resCss='color:#aaa';resLabel='⏩ пропуск';}
+    else if(r.partialRatio===1){resCss='color:#2a7a4a;font-weight:700';resLabel='✓';}
+    else if(r.partialRatio>0){resCss='color:#b8860b;font-weight:700';resLabel='◑ '+Math.round(r.partialRatio*100)+'%';}
+    else {resCss='color:#c0392b;font-weight:700';resLabel='✗';}
+    const q = r.text.length>70 ? r.text.slice(0,68)+'…' : r.text;
+    const bg = i%2===1 ? 'background:#f9f9f7' : '';
+    return `<tr style="${bg}"><td style="${TD};color:#aaa;font-size:9px">${i+1}</td><td style="${TD};vertical-align:top">${q}</td><td style="${TD};font-weight:600">${sel}</td><td style="${TD};color:#2a7a4a">${cor}</td><td style="${TD};${resCss}">${resLabel}</td><td style="${TD};text-align:center;font-weight:700">${pts}</td><td style="${TD};text-align:center;font-size:11px">${r.skipped?'—':(r.suspicious?'🔴':'🟢')} ${r.skipped?'':(r.answerTime+'с')}</td></tr>`;
+  }).join('');
+  return `<div style="max-width:720px;margin:0 auto;background:#fff;padding:20px;border-radius:8px">
+  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2.5px solid #0D0D14;padding-bottom:8px;margin-bottom:12px">
+    <div><div style="font-size:15px;font-weight:800;letter-spacing:.5px;color:#0D0D14">🎓 ТЯМУЩИЙ — Результати тестування</div>
+    <div style="font-size:10px;color:#888">Форма для вчителя · Архівний екземпляр</div></div>
+    <div style="font-size:10px;color:#999;text-align:right">${dateStr}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Прізвище та ім&apos;я</div><div style="font-size:12px;font-weight:700;margin-top:2px">${name}</div></div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Клас</div><div style="font-size:12px;font-weight:700;margin-top:2px">${cls}</div></div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Предмет</div><div style="font-size:12px;font-weight:700;margin-top:2px">${subject}</div></div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Тема тесту</div><div style="font-size:12px;font-weight:700;margin-top:2px">${topic}</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;background:#0D0D14;color:#fff;border-radius:6px;padding:10px 16px;margin-bottom:12px">
+    <div style="font-size:32px;font-weight:900;color:#C8A84B;line-height:1">${scaled}</div>
+    <div style="font-size:11px;line-height:1.6"><div style="font-weight:700;font-size:13px">балів з ${MAX_SCORE} можливих</div><div style="color:#C8A84B">${pct}%</div></div>
+    <div style="margin-left:auto;font-size:10px;opacity:.7">Питань: ${n}</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px">
+    <div style="border:1px solid #ddd;border-radius:4px;text-align:center;padding:6px 4px"><div style="font-size:18px;font-weight:800;color:#2a7a4a">${correct}</div><div style="font-size:9px;color:#666;margin-top:2px">✓ Правильно</div></div>
+    <div style="border:1px solid #ddd;border-radius:4px;text-align:center;padding:6px 4px"><div style="font-size:18px;font-weight:800;color:#b8860b">${partial}</div><div style="font-size:9px;color:#666;margin-top:2px">◑ Частково</div></div>
+    <div style="border:1px solid #ddd;border-radius:4px;text-align:center;padding:6px 4px"><div style="font-size:18px;font-weight:800;color:#c0392b">${wrong}</div><div style="font-size:9px;color:#666;margin-top:2px">✗ Неправильно</div></div>
+    <div style="border:1px solid #ddd;border-radius:4px;text-align:center;padding:6px 4px"><div style="font-size:18px;font-weight:800;color:#aaa">${skipped}</div><div style="font-size:9px;color:#666;margin-top:2px">⏩ Пропущено</div></div>
+  </div>
+  <table style="width:100%;border-collapse:collapse;font-size:10.5px;margin-bottom:12px"><thead><tr>
+    <th style="${TH};width:24px">#</th><th style="${TH}">Питання</th><th style="${TH};width:90px">Відповідь учня</th><th style="${TH};width:80px">Правильно</th><th style="${TH};width:60px">Результат</th><th style="${TH};width:44px">Бали</th><th style="${TH};width:60px">Маркер</th>
+  </tr></thead><tbody>${rows}</tbody></table>
+  ${realSuspicious > 0 ? `<div style="margin:8px 0;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:5px 8px;font-size:9px;color:#856404"><strong>⚠️ Увага:</strong> Зафіксовано ${realSuspicious} підозрілих пауз (бездіяльність &gt;${inact} сек).</div>
+  <div style="margin:8px 0;background:#f5f5f5;border-radius:4px;padding:5px 8px;font-size:9px;color:#555">Рекомендована оцінка з урахуванням пауз: ${recScaleScore} балів з 11 (за питання де зафіксована пауза &gt;${inact} сек — бал знижено на 75%).</div>` : ''}
+  <div style="margin:6px 0;font-size:8px;color:#888">🟢 — відповідь без підозрілої паузи (норма) &nbsp;&nbsp; 🔴 — підозріла пауза (можливе звернення до сторонніх джерел) &nbsp;&nbsp; — — питання пропущено</div>
+  ${klSummary ? `<div style="background:#fdf0ef;border:1px solid #f0b8b2;border-radius:4px;padding:5px 8px;margin-bottom:8px;font-size:9px;color:#c0392b"><strong>⌨️ Підозрілі дії з клавіатурою:</strong> ${klSummary}</div>` : ''}
+  ${wlSummary ? `<div style="background:#fdf0ef;border:1px solid #f0b8b2;border-radius:4px;padding:5px 8px;margin-bottom:8px;font-size:9px;color:#c0392b"><strong>🔀 Залишав вікно тесту:</strong> ${wlSummary}</div>` : ''}
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #ccc;padding-top:8px;font-size:9px;color:#aaa">
+    <div>Тямущий v5.0 · ${dateStr}</div>
+    <div style="border-top:1px solid #555;width:150px;text-align:center;padding-top:3px;font-size:9px;color:#555">Підпис вчителя</div>
+  </div>
+</div>`;
+}
+function buildProtocolHtml() {
+  return `<!DOCTYPE html>
+<!-- © 2026 ITS_Tiamushchy -->
+<html lang="uk"><head><meta charset="UTF-8"><title>Тямущий — протокол тестування</title>
+<style>@page{size:A4;margin:12mm}</style></head>
+<body style="margin:0;padding:16px;background:#fff;font-family:Arial,sans-serif;font-size:12px;color:#111">
+${buildProtocolInner()}
+</body></html>`;
+}
+
+// ── ФОРМА ДЛЯ ВЧИТЕЛЯ (друк) ─────────────────────────
+// Заповнює приховану printable-форму (#teacherPrintForm) даними сесії:
+// метадані учня, оцінка, статистика, таблиця з усіма питаннями і відповідями.
+// Ховає картку учня, показує форму, автоматично відкриває діалог друку.
+// При @media print — всі зайві елементи ховаються, залишається лише форма.
+function printTeacherForm() {
+  document.getElementById('teacherPrintForm').innerHTML = buildProtocolInner() +
+    `<div class="no-print" style="margin-top:20px;text-align:center">
+      <button class="btn btn-primary" onclick="window.print()">🖨 Друк</button>
+      <button class="btn" style="margin-left:8px;background:#f5f2ea" onclick="document.getElementById('teacherPrintForm').style.display='none';document.getElementById('studentResultCard').style.display='block'">← Назад</button>
+    </div>`;
+  document.getElementById('studentResultCard').style.display = 'none';
+  document.getElementById('teacherPrintForm').style.display  = 'block';
+  setTimeout(() => window.print(), 300);
+}
+
+// ── RETAKE ────────────────────────────────────────────
+function retakeQuiz() {
+  document.getElementById('timerBadge').style.display = 'none';
+  selectedTest = null; allQuestions = [];
+  document.getElementById('fieldName').value = '';
+  document.getElementById('fieldSurname').value = '';
+  document.getElementById('fieldClass').value = '';
+  document.getElementById('fileInfoMini').textContent = '';
+  document.getElementById('uploadErrorMini').textContent = '';
+  document.getElementById('studentResultCard').style.display = 'block';
+  document.getElementById('teacherPrintForm').style.display  = 'none';
+  document.getElementById('filterSubject').value = '';
+  document.getElementById('filterClass').value = '';
+  updateClassFilter();
+  document.getElementById('testsSection').style.display = 'none';
+  document.getElementById('catalogBottom').style.display = 'none';
+  document.getElementById('selectedTestInfo').textContent = 'Тест не обрано';
+  document.getElementById('btnUseTest').disabled = true;
+  document.getElementById('headerMeta').textContent = 'Інтелектуальна тестова система';
+  showScreen('catalogScreen');
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('quizScreen').classList.contains('active'))
+    if ((e.ctrlKey||e.metaKey) && ['c','x','u','s','a'].includes(e.key.toLowerCase())) e.preventDefault();
+});
+</script>
+</body>
+</html>

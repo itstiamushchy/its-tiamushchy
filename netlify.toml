@@ -1,0 +1,26 @@
+# Netlify конфігурація для проекту Розумник
+# Цей файл вказує Netlify як обслуговувати статичні файли
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Дозволяємо завантаження xlsx та json файлів
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET"
+
+[[headers]]
+  for = "*.xlsx"
+  [headers.values]
+    Content-Type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.json"
+  [headers.values]
+    Content-Type = "application/json"
+    Access-Control-Allow-Origin = "*"
+
+# Всі запити повертають до кореня (SPA-режим не потрібен — статика)
