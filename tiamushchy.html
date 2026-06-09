@@ -440,7 +440,8 @@
     <div class="chosen-test-banner" id="chosenTestBanner">Тест: —</div>
     <div class="field-group"><label>Ім'я</label><input type="text" id="fieldName" placeholder="Олександр" maxlength="50"></div>
     <div class="field-group"><label>Прізвище</label><input type="text" id="fieldSurname" placeholder="Петренко" maxlength="50"></div>
-    <div class="field-group"><label>Клас</label><input type="text" id="fieldClass" placeholder="наприклад: 8-Б" maxlength="10"></div>
+    <div class="field-group"><label>Навчальний заклад</label><input type="text" id="fieldSchool" placeholder="наприклад: Ліцей 2" maxlength="80"></div>
+    <div class="field-group"><label>Клас</label><input type="text" id="fieldClass" placeholder="наприклад: 11-А" maxlength="10"></div>
     <div class="score-formula-box">
       <b>Система оцінювання (max 11 балів):</b><br>
       • Одна відповідь — повний бал за питання<br>
@@ -1072,13 +1073,14 @@ function goBackToCatalog() {
 function startQuiz() {
   const name    = document.getElementById('fieldName').value.trim();
   const surname = document.getElementById('fieldSurname').value.trim();
-  const cls     = document.getElementById('fieldClass').value;
+  const school  = document.getElementById('fieldSchool').value.trim();
+  const cls     = document.getElementById('fieldClass').value.trim();
   const err     = document.getElementById('identityError');
-  if (!name || !surname || !cls) { err.textContent = 'Будь ласка, заповніть усі поля'; return; }
+  if (!name || !surname || !school || !cls) { err.textContent = 'Будь ласка, заповніть усі поля'; return; }
   if (!allQuestions.length)      { err.textContent = 'Тест не завантажено'; return; }
   err.textContent = '';
-  studentInfo = { name, surname, cls, date: new Date().toLocaleString('uk-UA') };
-  document.getElementById('headerMeta').innerHTML = `${surname} ${name} · ${cls}`;
+  studentInfo = { name, surname, school, cls, date: new Date().toLocaleString('uk-UA') };
+  document.getElementById('headerMeta').innerHTML = `${surname} ${name} · ${school} · ${cls}`;
   shuffleAndStart();
 }
 
@@ -1392,7 +1394,9 @@ async function sendResultsToSheets(scaled, ppq, correct, wrong, skipped) {
     const percent = Math.round(scaled / 11 * 100);
     const data = {
       name:             (studentInfo.surname + ' ' + studentInfo.name).trim(),
+      institution:      studentInfo.school || '',
       cls:              studentInfo.cls,
+      grade:            (selectedTest ? selectedTest.grade : ''),
       subject:          (selectedTest ? selectedTest.subject : ''),
       topic:            (selectedTest ? selectedTest.title : ''),
       code:             (selectedTest ? (selectedTest.code || selectedTest.id || '') : ''),
@@ -1528,6 +1532,7 @@ function buildProtocolInner() {
   const n      = (typeof shuffledQuestions !== 'undefined' && shuffledQuestions) ? shuffledQuestions.length : results.length;
   const name   = (studentInfo.surname + ' ' + studentInfo.name).trim();
   const cls    = studentInfo.cls;
+  const school = studentInfo.school || '—';
   const subject= selectedTest ? selectedTest.subject : '—';
   const topic  = selectedTest ? selectedTest.title : (typeof currentTestTitle !== 'undefined' ? currentTestTitle : '—');
   const correct= results.filter(r=>r.partialRatio===1).length;
@@ -1563,7 +1568,8 @@ function buildProtocolInner() {
     <div style="font-size:10px;color:#888">Форма для вчителя · Архівний екземпляр</div></div>
     <div style="font-size:10px;color:#999;text-align:right">${dateStr}</div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-bottom:12px">
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Навчальний заклад</div><div style="font-size:12px;font-weight:700;margin-top:2px">${school}</div></div>
     <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Прізвище та ім&apos;я</div><div style="font-size:12px;font-weight:700;margin-top:2px">${name}</div></div>
     <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Клас</div><div style="font-size:12px;font-weight:700;margin-top:2px">${cls}</div></div>
     <div style="border:1px solid #ccc;border-radius:4px;padding:5px 8px;background:#fafafa"><div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:.4px">Предмет</div><div style="font-size:12px;font-weight:700;margin-top:2px">${subject}</div></div>
