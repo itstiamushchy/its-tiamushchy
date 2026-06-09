@@ -23,10 +23,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   // ⚙️ НАЛАШТУВАННЯ EMAIL — замініть значення нижче своїми ключами з emailjs.com
-  const EMAILJS_PUBLIC_KEY  = 'tTv4GSua9pf3zBcgw';   // Account → API Keys → Public Key
-  const EMAILJS_SERVICE_ID  = 'service_ovegp2t';        // Email Services → Service ID
-  const EMAILJS_TEMPLATE_ID = 'template_nlwwlhp';      // Email Templates → Template ID
-  const TEACHER_EMAIL       = 'libzosh3@gmail.com';    // Пошта вчителя (можна кілька через кому)
+  // НОВИЙ сервіс ITS_Tiamushchy (основний)
+  const EMAILJS_PUBLIC_KEY  = '7A5FdeqVWEuy0ie9r';        // Account → API Keys → Public Key
+  const EMAILJS_SERVICE_ID  = 'service_2ky4vkh';          // Email Services → Service ID
+  const EMAILJS_TEMPLATE_ID = 'template_aedlrtc';         // Email Templates → Template ID
+  const TEACHER_EMAIL       = 'itstiamushchy@gmail.com';  // Пошта вчителя (можна кілька через кому)
+  // СТАРИЙ сервіс — тимчасово, до v5.5
+  const OLD_PUBLIC_KEY    = 'tTv4GSua9pf3zBcgw';
+  const OLD_SERVICE_ID    = 'service_ovegp2t';
+  const OLD_TEMPLATE_ID   = 'template_nlwwlhp';
+  const OLD_TEACHER_EMAIL = 'libzosh3@gmail.com';
   emailjs.init(EMAILJS_PUBLIC_KEY);
 
   // ── Фіксація підозрілих клавіш під час тесту ──────────────────
@@ -1489,7 +1495,15 @@ async function sendResultsByEmail(scaled, ppq, correct, partial, wrong, skipped)
       to_email:      TEACHER_EMAIL,
       email_subject: emailSubject,
       html_body:     html_body,
-    });
+    }, { publicKey: EMAILJS_PUBLIC_KEY });
+    // СТАРИЙ сервіс — тимчасово, до v5.5 (не блокує основний, якщо не спрацює)
+    try {
+      await emailjs.send(OLD_SERVICE_ID, OLD_TEMPLATE_ID, {
+        to_email:      OLD_TEACHER_EMAIL,
+        email_subject: emailSubject,
+        html_body:     html_body,
+      }, { publicKey: OLD_PUBLIC_KEY });
+    } catch (eOld) { console.warn('Старий поштовий сервіс пропущено:', eOld); }
 
     statusEl.style.background = 'rgba(58,125,94,.08)';
     statusEl.style.border = '1.5px solid rgba(58,125,94,.35)';
