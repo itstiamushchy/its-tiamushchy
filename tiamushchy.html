@@ -1069,7 +1069,7 @@ function launchByCode(raw) {
 async // v5.2: глобальний ID поточного тесту (для пошуку зображень)
 let currentTestId = null;
 
-function useSelectedTest() {
+async function useSelectedTest() {
   currentTestId = (selectedTest && selectedTest.id) ? selectedTest.id : null;
   if (!selectedTest) return;
   const btn = document.getElementById('btnUseTest');
