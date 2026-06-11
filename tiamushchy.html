@@ -245,7 +245,19 @@
   .answers-box{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:20px 24px;
     margin-bottom:20px;box-shadow:4px 4px 0 var(--shadow)}
   .answers-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:14px}
+  /* ── v5.2: зображення в тестах (мобільний пріоритет) ─────────────── */
+  .q-image{display:block;width:100%;max-height:42vh;object-fit:contain;
+    border-radius:10px;margin-bottom:12px;background:#f5f2ea}
+  .opt-image{display:block;width:100%;max-height:22vh;object-fit:contain;
+    border-radius:6px;margin-bottom:6px}
   .answers-grid{display:grid;gap:6px}
+  /* Режим зображень у варіантах — сітка 2×2 */
+  .answers-grid.img-mode{grid-template-columns:1fr 1fr;gap:8px}
+  .answers-grid.img-mode .answer-btn{flex-direction:column;align-items:center;
+    justify-content:flex-start;text-align:center;padding:10px 8px;min-height:130px;gap:4px}
+  .answers-grid.img-mode .answer-btn:hover:not(.disabled-no-select){transform:none}
+  .answers-grid.img-mode .answer-btn .letter{margin-bottom:2px}
+  .answers-grid.img-mode .opt-label{font-size:.82rem;line-height:1.3;text-align:center}
   .answer-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #e0ddd4;border-radius:12px;
     background:#fafaf8;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:500;
     transition:all .15s;-webkit-user-select:none;user-select:none}
@@ -315,7 +327,15 @@
   @media(max-width:600px){
     .catalog-filters{flex-direction:column}.catalog-bottom{flex-direction:column;align-items:stretch}
     .identity-card,.results-card{padding:28px 20px}.score-big{font-size:3.5rem}
-    header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}}
+    header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}
+    .q-image{max-height:34vh}.opt-image{max-height:18vh}
+    .answers-grid.img-mode .answer-btn{min-height:120px;padding:8px 6px}
+    .answers-grid.img-mode .opt-label{font-size:.74rem}}
+  /* Горизонтальна орієнтація телефону — зображення компактніші */
+  @media(max-height:500px) and (orientation:landscape){
+    .q-image{max-height:40vh;margin-bottom:8px}
+    .opt-image{max-height:30vh}
+    .answers-grid.img-mode .answer-btn{min-height:90px}}
 </style>
 </head>
 <body>
@@ -493,6 +513,9 @@
     </div>
     <div class="question-box" id="questionBox" oncontextmenu="return false" ondragstart="return false" oncopy="return false">
       <span class="question-type-tag" id="qTypeTag">Одна відповідь</span>
+      <div id="questionImgWrap" style="display:none">
+        <img id="questionImg" class="q-image" alt="" onerror="this.parentNode.style.display='none'">
+      </div>
       <div class="question-text" id="questionText">...</div>
     </div>
     <div class="answers-box">
@@ -773,6 +796,7 @@ function stopInactivityDetector() {
 let studentInfo = {};       // { name, surname, cls, date } — дані учня з форми ідентифікації
 let currentTestTitle = '';  // відображувана назва тесту (з аркуша Мета)
 let currentTestMeta  = {};  // всі метадані з аркуша Мета: { Тема, Предмет, Клас, Питань }
+let currentTestId    = null; // v5.2: id поточного тесту (для пошуку зображень TESTS/images/<id>/)
 
 // ── ІНІЦІАЛІЗАЦІЯ ─────────────────────────────────────
 // Запускається одразу після завантаження DOM.
@@ -1001,6 +1025,7 @@ function parseXlsxBuffer(buf) {
     d:       String(r['Варіант_Г'] || r['D'] || r['Г'] || ''),
     correct: String(r['Правильна_відповідь'] || r['Correct'] || '').toUpperCase().replace(/\s/g,''),
     points:  parseFloat(r['Бали'] || r['Points'] || 1) || 1,
+    _rowNum: i + 1,
   })).filter(q => q.text.trim());
 
   if (!questions.length) throw new Error('Не знайдено жодного питання');
@@ -1041,6 +1066,7 @@ async function useSelectedTest() {
 
     allQuestions = questions;
     currentTestMeta = meta;
+    currentTestId = (selectedTest && selectedTest.id) ? selectedTest.id : null; // v5.2
     applyTimingForClass(grade);
     updateTimingInfo();
     currentTestTitle = `${SUBJECT_ICONS[subject] || ''} ${title}`;
@@ -1076,6 +1102,7 @@ function handleFileMini(file) {
     try {
       const { meta, questions } = parseXlsxBuffer(new Uint8Array(e.target.result));
       allQuestions = questions;
+      currentTestId = null; // v5.2: власний файл — зображень з сервера немає
       // Always read title/subject/grade FROM FILE
       const title   = String(meta['Тема']    || file.name.replace(/\.(xlsx|xls)$/i,''));
       const subject = String(meta['Предмет'] || '');
@@ -1201,16 +1228,73 @@ function renderQuestion() {
   document.getElementById('qTypeTag').textContent = labels[q.type] || 'Відповідь';
   document.getElementById('questionText').textContent = q.text;
   document.getElementById('answersLabel').textContent = q.type==='multiple' ? 'Оберіть усі правильні відповіді' : 'Оберіть відповідь';
+
+  // ── v5.2: ЗОБРАЖЕННЯ ДО ПИТАННЯ ────────────────────────────────────
+  // Конвенція: TESTS/images/<id>/qNN.webp (fallback → .png)
+  // NN = _rowNum (номер рядка xlsx). Зображення вантажиться У ФОНІ —
+  // таймер НЕ чекає на нього (стартує одразу нижче), тому затримок немає.
+  // Якщо файлу немає (onerror) — блок просто лишається прихованим.
+  const imgWrap = document.getElementById('questionImgWrap');
+  const imgEl   = document.getElementById('questionImg');
+  imgWrap.style.display = 'none';
+  imgEl.onload = null; imgEl.onerror = null; imgEl.src = '';
+
+  if (currentTestId && q._rowNum) {
+    const nn   = String(q._rowNum).padStart(2,'0');
+    const base = `TESTS/images/${currentTestId}/q${nn}`;
+    imgEl.onload  = () => { imgWrap.style.display = 'block'; };
+    imgEl.onerror = () => {
+      if (imgEl.src.endsWith('.webp')) { imgEl.src = base + '.png'; }
+      else { imgWrap.style.display = 'none'; }
+    };
+    imgEl.src = base + '.webp';
+    // Preload зображення наступного питання (плавний перехід)
+    if (currentIdx + 1 < total) {
+      const nextQ = shuffledQuestions[currentIdx + 1];
+      if (nextQ && nextQ._rowNum) {
+        const pn = new Image();
+        pn.src = `TESTS/images/${currentTestId}/q${String(nextQ._rowNum).padStart(2,'0')}.webp`;
+      }
+    }
+  }
+
+  // ── ВАРІАНТИ ВІДПОВІДЕЙ ─────────────────────────────────────────────
   const grid = document.getElementById('answersGrid');
   grid.innerHTML = '';
+  grid.classList.remove('img-mode');
   const opts = q._opts || [{ key:'А', val:q.a },{ key:'Б', val:q.b },{ key:'В', val:q.c },{ key:'Г', val:q.d }].filter(o=>o.val);
+  const LAT = { 'А':'a','Б':'b','В':'v','Г':'g' };
+
   opts.forEach(opt => {
     const btn = document.createElement('button');
     btn.className = 'answer-btn'; btn.dataset.key = opt.key;
-    btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
+
+    if (currentTestId && q._rowNum) {
+      // Спроба завантажити зображення варіанту (qNN_a/b/v/g)
+      const nn   = String(q._rowNum).padStart(2,'0');
+      const lat  = LAT[opt.key] || opt.key.toLowerCase();
+      const ob   = `TESTS/images/${currentTestId}/q${nn}_${lat}`;
+      btn.innerHTML = `<span class="letter">${opt.key}</span>`;
+      const oi = document.createElement('img');
+      oi.className = 'opt-image';
+      oi.onload  = () => { grid.classList.add('img-mode'); };
+      oi.onerror = () => {
+        if (oi.src.endsWith('.webp')) { oi.src = ob + '.png'; }
+        else { oi.remove(); }
+      };
+      oi.src = ob + '.webp';
+      btn.appendChild(oi);
+      const lbl = document.createElement('span');
+      lbl.className = 'opt-label'; lbl.textContent = opt.val;
+      btn.appendChild(lbl);
+    } else {
+      btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
+    }
+
     btn.onclick = () => selectAnswer(btn, q);
     grid.appendChild(btn);
   });
+
   document.getElementById('hintText').textContent = '';
   document.getElementById('hintText').className = 'hint-text';
   document.getElementById('btnNext').style.display = 'none';
