@@ -416,12 +416,40 @@
     </div>
 
     <div class="code-launch" id="codeLaunchBlock" style="margin:14px 0;padding:14px;border:1.5px dashed var(--gold,#C8A84B);border-radius:10px;background:#fffdf5">
-      <label style="display:block;font-weight:600;margin-bottom:6px">🔑 Запуск за кодом тесту</label>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <input type="text" id="codeInput" placeholder="напр. zlit_5_shakal" style="flex:1;min-width:180px;padding:8px 10px;border:1px solid #ccc;border-radius:8px;font-size:15px" onkeydown="if(event.key===&#39;Enter&#39;)launchByCode(this.value)">
-        <button class="btn btn-primary" onclick="launchByCode(document.getElementById(&#39;codeInput&#39;).value)">ОК</button>
+      <label style="display:block;font-weight:600;margin-bottom:10px">🔑 Запуск за кодом тесту</label>
+
+      <!-- Короткий код (ZL5SH, ZU10M101 тощо) -->
+      <div style="margin-bottom:8px">
+        <div style="font-size:12px;color:#888;margin-bottom:4px">Короткий код</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="text" id="codeInputShort"
+            placeholder="напр. ZL5SH або ZU10M101"
+            style="flex:1;min-width:140px;padding:8px 10px;border:1.5px solid var(--gold,#C8A84B);border-radius:8px;font-size:15px;background:#fffdf5;font-weight:600;letter-spacing:1px"
+            onkeydown="if(event.key===&#39;Enter&#39;)launchByCode(this.value)">
+          <button class="btn btn-primary" onclick="launchByCode(document.getElementById(&#39;codeInputShort&#39;).value)">ОК</button>
+        </div>
       </div>
-      <div class="error-msg" id="codeError" style="margin-top:6px"></div>
+
+      <!-- Розділювач -->
+      <div style="display:flex;align-items:center;gap:8px;margin:10px 0;color:#aaa;font-size:12px">
+        <div style="flex:1;height:1px;background:#e0e0e0"></div>
+        <span>або повний ID</span>
+        <div style="flex:1;height:1px;background:#e0e0e0"></div>
+      </div>
+
+      <!-- Повний ID (zlit_5_shakal тощо) -->
+      <div>
+        <div style="font-size:12px;color:#888;margin-bottom:4px">Повний ID тесту</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="text" id="codeInput"
+            placeholder="напр. zlit_5_shakal"
+            style="flex:1;min-width:160px;padding:8px 10px;border:1px solid #ccc;border-radius:8px;font-size:13px;color:#555"
+            onkeydown="if(event.key===&#39;Enter&#39;)launchByCode(this.value)">
+          <button class="btn btn-secondary" onclick="launchByCode(document.getElementById(&#39;codeInput&#39;).value)" style="background:#f0f0f0;color:#333;border:1px solid #ccc">ОК</button>
+        </div>
+      </div>
+
+      <div class="error-msg" id="codeError" style="margin-top:8px"></div>
     </div>
     <div class="catalog-or">або завантажте власний файл</div>
     <div class="upload-mini" id="uploadMiniZone">
