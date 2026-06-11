@@ -245,38 +245,7 @@
   .answers-box{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:20px 24px;
     margin-bottom:20px;box-shadow:4px 4px 0 var(--shadow)}
   .answers-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:14px}
-  /* ── v5.2: ЗОБРАЖЕННЯ В ТЕСТАХ ─────────────────────────────────────
-     Принцип «ім'я = адреса»: TESTS/images/<id>/qNN.webp або qNN.png
-     Варіанти: qNN_a.webp / qNN_b.webp / qNN_v.webp / qNN_g.webp
-     Автор тесту лише кладе правильно названі файли — система знаходить сама.
-     Ліміт: файл ≤ 100 КБ (будь-який розмір у пікселях).              */
-
-  /* Зображення до питання */
-  .q-image{display:block;width:100%;max-height:260px;object-fit:contain;
-    border-radius:10px;margin-bottom:14px;background:#f5f2ea}
-  /* Зображення у варіанті відповіді */
-  .opt-image{display:block;width:100%;max-height:120px;object-fit:contain;
-    border-radius:6px;margin-bottom:6px}
-
-  /* Сітка варіантів — стандартний вертикальний список (текстовий режим) */
   .answers-grid{display:grid;gap:6px}
-
-  /* Режим зображень у варіантах — автоматично при .img-mode */
-  .answers-grid.img-mode{grid-template-columns:1fr 1fr;gap:8px}
-  .answers-grid.img-mode .answer-btn{
-    flex-direction:column;align-items:center;justify-content:flex-start;
-    padding:10px 8px;min-height:140px;text-align:center;gap:0}
-  .answers-grid.img-mode .answer-btn .letter{margin-bottom:6px}
-  .answers-grid.img-mode .answer-btn .opt-label{
-    font-size:.78rem;line-height:1.3;margin-top:4px;text-align:center}
-
-  /* Мобільні — горизонтальна орієнтація */
-  @media(max-height:500px) and (orientation:landscape){
-    .q-image{max-height:110px}
-    .opt-image{max-height:65px}
-    .answers-grid.img-mode .answer-btn{min-height:100px}
-    #quizScreen{padding:8px 14px}
-    .answers-box{padding:10px 14px;margin-bottom:10px}}
   .answer-btn{display:flex;align-items:center;gap:10px;padding:10px 14px;border:2px solid #e0ddd4;border-radius:12px;
     background:#fafaf8;cursor:pointer;text-align:left;font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:500;
     transition:all .15s;-webkit-user-select:none;user-select:none}
@@ -346,13 +315,7 @@
   @media(max-width:600px){
     .catalog-filters{flex-direction:column}.catalog-bottom{flex-direction:column;align-items:stretch}
     .identity-card,.results-card{padding:28px 20px}.score-big{font-size:3.5rem}
-    header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}
-    /* v5.2 mobile: обмеження зображень */
-    .q-image{max-height:180px}
-    .answers-grid.img-mode{grid-template-columns:1fr 1fr;gap:6px}
-    .answers-grid.img-mode .answer-btn{min-height:120px;padding:8px 6px}
-    .opt-image{max-height:85px}
-    .answers-grid.img-mode .opt-label{font-size:.72rem}}
+    header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}}
 </style>
 </head>
 <body>
@@ -530,10 +493,6 @@
     </div>
     <div class="question-box" id="questionBox" oncontextmenu="return false" ondragstart="return false" oncopy="return false">
       <span class="question-type-tag" id="qTypeTag">Одна відповідь</span>
-      <!-- v5.2: зображення до питання (порожнє якщо немає) -->
-      <div id="questionImgWrap" style="display:none">
-        <img id="questionImg" class="q-image" alt="" onerror="this.parentNode.style.display='none'">
-      </div>
       <div class="question-text" id="questionText">...</div>
     </div>
     <div class="answers-box">
@@ -1042,8 +1001,6 @@ function parseXlsxBuffer(buf) {
     d:       String(r['Варіант_Г'] || r['D'] || r['Г'] || ''),
     correct: String(r['Правильна_відповідь'] || r['Correct'] || '').toUpperCase().replace(/\s/g,''),
     points:  parseFloat(r['Бали'] || r['Points'] || 1) || 1,
-    // v5.2: порядковий номер рядка (для пошуку зображень qNN.webp/png)
-    _rowNum: i + 1,
   })).filter(q => q.text.trim());
 
   if (!questions.length) throw new Error('Не знайдено жодного питання');
@@ -1066,11 +1023,7 @@ function launchByCode(raw) {
   useSelectedTest();
 }
 
-async // v5.2: глобальний ID поточного тесту (для пошуку зображень)
-let currentTestId = null;
-
 async function useSelectedTest() {
-  currentTestId = (selectedTest && selectedTest.id) ? selectedTest.id : null;
   if (!selectedTest) return;
   const btn = document.getElementById('btnUseTest');
   btn.disabled = true; btn.textContent = '⏳ Завантаження...';
@@ -1248,119 +1201,21 @@ function renderQuestion() {
   document.getElementById('qTypeTag').textContent = labels[q.type] || 'Відповідь';
   document.getElementById('questionText').textContent = q.text;
   document.getElementById('answersLabel').textContent = q.type==='multiple' ? 'Оберіть усі правильні відповіді' : 'Оберіть відповідь';
-
-  // ── v5.2: зображення до питання ────────────────────────────────────
-  // Конвенція: TESTS/images/<id>/qNN.webp (fallback → qNN.png)
-  // NN = двозначний номер рядка питання (01, 02 … 15)
-  // Якщо файлу немає — wrap прихований (onerror), таймер стартує одразу
-  const imgWrap = document.getElementById('questionImgWrap');
-  const imgEl   = document.getElementById('questionImg');
-  imgWrap.style.display = 'none';
-  imgEl.src = '';
-
-  let timerStarted = false;
-  function _startTimers() {
-    if (timerStarted) return;
-    timerStarted = true;
-    startTimer();
-    startInactivityDetector();
-  }
-
-  if (currentTestId && q._rowNum) {
-    const nn    = String(q._rowNum).padStart(2,'0');
-    const base  = `TESTS/images/${currentTestId}/q${nn}`;
-    imgEl.onload  = () => { imgWrap.style.display='block'; _startTimers(); };
-    imgEl.onerror = () => {
-      // fallback: .webp → .png
-      if (imgEl.src.endsWith('.webp')) {
-        imgEl.src = base + '.png';
-      } else {
-        imgWrap.style.display = 'none';
-        _startTimers();
-      }
-    };
-    imgEl.src = base + '.webp';
-    // Якщо зображення не завантажилось за 2 сек — стартуємо таймер
-    setTimeout(_startTimers, 2000);
-  } else {
-    _startTimers();
-  }
-
-  // Preload зображення НАСТУПНОГО питання
-  if (currentTestId && currentIdx + 1 < total) {
-    const nextQ = shuffledQuestions[currentIdx + 1];
-    if (nextQ && nextQ._rowNum) {
-      const nextNn   = String(nextQ._rowNum).padStart(2,'0');
-      const preload  = new Image();
-      preload.src    = `TESTS/images/${currentTestId}/q${nextNn}.webp`;
-    }
-  }
-
-  // ── Варіанти відповідей ─────────────────────────────────────────────
   const grid = document.getElementById('answersGrid');
   grid.innerHTML = '';
   const opts = q._opts || [{ key:'А', val:q.a },{ key:'Б', val:q.b },{ key:'В', val:q.c },{ key:'Г', val:q.d }].filter(o=>o.val);
-
-  // Перевіряємо чи є зображення у варіантах
-  let hasOptImgs = false;
-  if (currentTestId && q._rowNum) {
-    const nn = String(q._rowNum).padStart(2,'0');
-    // Перевіряємо першу літеру першого варіанту (швидкий синхронний тест)
-    // Реальна перевірка — через onerror/onload при рендері
-    hasOptImgs = q._hasOptImgs || false; // заповнюється після першого показу
-  }
-
-  // Сітка: img-mode якщо є зображення у варіантах
-  grid.classList.toggle('img-mode', hasOptImgs);
-
   opts.forEach(opt => {
-    const keyMap = { 'А':'a','Б':'b','В':'v','Г':'g' };
     const btn = document.createElement('button');
-    btn.className = 'answer-btn';
-    btn.dataset.key = opt.key;
-
-    if (currentTestId && q._rowNum) {
-      const nn      = String(q._rowNum).padStart(2,'0');
-      const optKey  = keyMap[opt.key] || opt.key.toLowerCase();
-      const optBase = `TESTS/images/${currentTestId}/q${nn}_${optKey}`;
-
-      // Намагаємось завантажити зображення варіанту
-      const optImg = document.createElement('img');
-      optImg.className = 'opt-image';
-      optImg.alt = opt.val;
-
-      optImg.onload = () => {
-        // Зображення є — вмикаємо img-mode
-        grid.classList.add('img-mode');
-        q._hasOptImgs = true;
-      };
-      optImg.onerror = () => {
-        // .webp → fallback .png
-        if (optImg.src.endsWith('.webp')) {
-          optImg.src = optBase + '.png';
-        } else {
-          optImg.style.display = 'none'; // зображення немає — прибрати
-        }
-      };
-      optImg.src = optBase + '.webp';
-
-      btn.innerHTML = `<span class="letter">${opt.key}</span>`;
-      btn.appendChild(optImg);
-      const lbl = document.createElement('span');
-      lbl.className = 'opt-label';
-      lbl.textContent = opt.val;
-      btn.appendChild(lbl);
-    } else {
-      btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
-    }
-
+    btn.className = 'answer-btn'; btn.dataset.key = opt.key;
+    btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
     btn.onclick = () => selectAnswer(btn, q);
     grid.appendChild(btn);
   });
-
   document.getElementById('hintText').textContent = '';
   document.getElementById('hintText').className = 'hint-text';
   document.getElementById('btnNext').style.display = 'none';
+  startTimer();
+  startInactivityDetector();
 }
 
 // ── ВИБІР ВІДПОВІДІ ───────────────────────────────────
