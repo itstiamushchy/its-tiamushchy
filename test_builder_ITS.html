@@ -38,22 +38,75 @@
   .note{color:var(--muted);font-size:12.5px;margin-top:6px}
   .pill{display:inline-block;background:#efeadb;border-radius:20px;padding:2px 10px;font-size:12px;color:#6a6555}
   code{font-family:ui-monospace,Menlo,monospace;background:#efeadb;padding:1px 5px;border-radius:4px;font-size:12px}
+
+  /* ── Блок Режиму ─────────────────────────────────────────────────── */
+  .mode-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .mode-btn{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;min-width:110px;padding:10px 14px;border-radius:10px;cursor:pointer;
+    border:2px solid var(--line);background:#fff;color:var(--ink);
+    font:inherit;font-weight:600;font-size:13px;transition:all .15s;
+    text-align:center;user-select:none;
+  }
+  .mode-btn:hover{border-color:var(--gold);background:#fffdf5}
+  .mode-btn.active{border-color:var(--gold);background:var(--ink);color:var(--gold)}
+  .mode-btn.active .mode-icon{filter:none}
+  .mode-icon{font-size:22px;line-height:1}
+  .mode-label{font-size:12px;font-weight:700;margin-top:1px}
+  .mode-sub{font-size:10px;color:var(--muted);font-weight:400;margin-top:-1px}
+  .mode-btn.active .mode-sub{color:#aaa}
+  .mode-note{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+  .mode-status{
+    display:inline-block;background:var(--ink);color:var(--gold);
+    border-radius:5px;padding:1px 8px;font-size:11px;font-weight:700;
+    margin-right:6px;vertical-align:middle
+  }
+
+  /* ── Upload дропзони (конструктор) ─────────────────────────────── */
+  .upload-dropzone{
+    display:flex;align-items:center;gap:10px;
+    border:2px dashed var(--line);border-radius:10px;padding:8px 14px;
+    background:#fff;cursor:pointer;transition:all .15s;
+    min-height:44px;user-select:none;
+  }
+  .upload-dropzone:hover{border-color:var(--gold);background:#fffdf5}
+  .upload-dropzone.filled{border-color:var(--ok);background:#f1f8f3;border-style:solid}
+  .dz-icon{font-size:18px;flex-shrink:0}
+  .dz-label{font-size:13px;font-weight:600;color:var(--ink)}
 </style>
 </head>
 <body>
 <div class="topbar"><span class="logo">🎓 <b>ТЯМУЩИЙ</b></span><span class="tag">Конструктор тестів · локально, без сервера</span></div>
 <div class="wrap">
 
-  <div class="card">
-    <h2>Режим</h2>
-    <div class="row">
-      <button class="sec" onclick="newTest()">🆕 Новий тест</button>
-      <label style="margin:0">Відкрити тест (.xlsx):</label>
-      <input type="file" id="openX" accept=".xlsx,.xls" style="width:auto" onchange="openTestFile()">
-      <label style="margin:0">Зображення теста (тека):</label>
-      <input type="file" id="openImgs" accept="image/*" multiple webkitdirectory directory style="width:auto" onchange="openImages()">
+  <div class="card" style="padding:14px 18px">
+    <div class="mode-bar">
+      <!-- Кнопка: новий тест -->
+      <button class="mode-btn active" id="btnNewMode" onclick="newTest()">
+        <span class="mode-icon">🆕</span>
+        <span class="mode-label">Новий тест</span>
+      </button>
+
+      <!-- Відкрити xlsx -->
+      <label class="mode-btn" id="btnOpenMode" title="Відкрити наявний .xlsx для редагування">
+        <span class="mode-icon">📂</span>
+        <span class="mode-label">Відкрити тест</span>
+        <span class="mode-sub" id="lbl-openX">.xlsx</span>
+        <input type="file" id="openX" accept=".xlsx,.xls" style="display:none" onchange="openTestFile();lblUpdate('lbl-openX',this,false)">
+      </label>
+
+      <!-- Відкрити зображення -->
+      <label class="mode-btn" id="btnOpenImgs" title="Відкрити теку зображень (після відкриття тесту)">
+        <span class="mode-icon">🖼</span>
+        <span class="mode-label">Зображення</span>
+        <span class="mode-sub" id="lbl-openImgs">тека</span>
+        <input type="file" id="openImgs" accept="image/*" multiple webkitdirectory directory style="display:none" onchange="openImages();lblUpdate('lbl-openImgs',this,true)">
+      </label>
     </div>
-    <p class="note" id="modeNote">Режим: створення нового тесту. Для редагування — відкрийте наявний .xlsx (і за потреби теку зображень).</p>
+    <p class="mode-note" id="modeNote">
+      <span class="mode-status" id="modeStatus">🆕 Новий тест</span>
+      Для редагування — натисніть «Відкрити тест» і оберіть .xlsx файл. За потреби — окремо відкрийте теку зображень.
+    </p>
   </div>
 
   <div class="card">
@@ -370,7 +423,9 @@ function newTest(){ mode='new';
   document.getElementById('m_count').value=15; document.getElementById('m_author').value='Тямущий v5.0';
   curSet=[]; fillSubjects(); document.getElementById('m_subject').value=''; fillClasses(null);
   questions=[blankQ()]; renderQs(); validate();
-  document.getElementById('modeNote').textContent='Режим: створення нового тесту.';
+  document.getElementById('modeNote').innerHTML='<span class="mode-status" id="modeStatus">🆕 Новий тест</span> Для редагування — натисніть «Відкрити тест» і оберіть .xlsx файл.';
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btnNewMode').classList.add('active');
   document.getElementById('manNote').textContent='';
   document.getElementById('openX').value=''; document.getElementById('openImgs').value=''; }
 async function openTestFile(){
@@ -394,7 +449,9 @@ async function openTestFile(){
   document.getElementById('m_theme').value=meta.theme; document.getElementById('m_count').value=meta.count; document.getElementById('m_author').value=meta.author;
   document.getElementById('m_id').value=meta.id; document.getElementById('m_code').value='';
   mode='edit';
-  document.getElementById('modeNote').innerHTML='Режим: <b>редагування</b> «'+meta.id+'». За потреби відкрийте теку зображень. Збереження — тим самим іменем (заміна на сервері).';
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btnOpenMode').classList.add('active');
+  document.getElementById('modeNote').innerHTML='<span class="mode-status">📂 Редагування</span> «'+meta.id+'» «'+meta.id+'». За потреби відкрийте теку зображень. Збереження — тим самим іменем (заміна на сервері).';
   renderQs(); validate(); }
 function openImages(){
   if(!questions.length){ alert('Спершу відкрийте тест (.xlsx).'); return; }
@@ -406,6 +463,21 @@ function openImages(){
     if(m[2]) questions[idx].imgOpts[inv[m[2].toLowerCase()]]=obj; else questions[idx].imgQ=obj; loaded++; });
   renderQs(); validate();
   document.getElementById('modeNote').innerHTML += ' · завантажено зображень: '+loaded; }
+
+
+function lblUpdate(lblId, inp, isDir){
+  const el = document.getElementById(lblId);
+  const zone = el ? el.closest('.upload-dropzone') : null;
+  const count = inp.files ? inp.files.length : 0;
+  if(!count){ return; }
+  if(isDir){
+    const imgCount = [...inp.files].filter(f=>/\.(png|jpe?g|webp)$/i.test(f.name)).length;
+    el.textContent = imgCount + ' зображень завантажено';
+  } else {
+    el.textContent = count === 1 ? inp.files[0].name.slice(0,28) : count + ' файлів';
+  }
+  if(zone) zone.classList.add('filled');
+}
 
 // старт
 fillSubjects(); addQ(); validate();

@@ -44,28 +44,99 @@
   details{margin:12px 0} summary{cursor:pointer;font-weight:600}
   code{font-family:ui-monospace,Menlo,monospace;background:#efeadb;padding:1px 5px;border-radius:4px;font-size:12px}
   @media print{.topbar,.controls,.ctrl,button,input{display:none!important}.card{break-inside:avoid}}
+
+  /* ── Upload блок ─────────────────────────────────────────────────── */
+  .upload-section{margin-bottom:14px}
+  .upload-title{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .upload-num{display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:50%;background:var(--ink);
+    color:var(--gold);font-size:12px;font-weight:800;flex-shrink:0}
+  .upload-title>span:nth-child(2){font-weight:700;font-size:14px}
+  .upload-hint{font-size:11.5px;color:var(--muted)}
+  .upload-dropzone{
+    display:flex;align-items:center;gap:10px;
+    border:2px dashed var(--line);border-radius:10px;padding:10px 16px;
+    background:#fff;cursor:pointer;transition:all .15s;
+    min-height:48px;user-select:none;
+  }
+  .upload-dropzone:hover{border-color:var(--gold);background:#fffdf5}
+  .upload-dropzone.filled{border-color:var(--ok);background:#f1f8f3;border-style:solid}
+  .upload-dropzone.sm{flex:1;min-width:150px;flex-direction:column;
+    align-items:center;justify-content:center;padding:12px 10px;text-align:center;gap:4px}
+  .dz-icon{font-size:20px;flex-shrink:0}
+  .dz-label{font-size:13px;font-weight:600;color:var(--ink)}
+  .dz-sub{font-size:10.5px;color:var(--muted)}
+  .upload-row{display:flex;gap:10px;flex-wrap:wrap}
+  .upload-divider{display:flex;align-items:center;gap:10px;margin:12px 0;color:var(--muted);font-size:12px}
+  .upload-divider::before,.upload-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+  .action-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .action-secondary{display:flex;gap:8px}
+  .safe-note{font-size:11.5px;color:var(--muted);margin-left:auto}
 </style>
 </head>
 <body>
 <div class="topbar"><span class="logo">🎓 <b>ТЯМУЩИЙ</b></span><span class="tag">Валідатор бази тестів · локально, без сервера</span></div>
 <div class="wrap">
 
-  <div class="card controls">
-    <label class="f">Варіант 1 — завантажити всю теку <code>TESTS/</code> (з manifest.json і зображеннями):</label>
-    <input type="file" id="dir" webkitdirectory directory multiple>
-    <label class="f" style="margin-top:8px">Варіант 2 — окремо:</label>
-    <div class="row">
-      <div><span class="note">manifest.json</span><input type="file" id="mf" accept=".json"></div>
-      <div><span class="note">тести .xlsx (багато)</span><input type="file" id="xf" accept=".xlsx,.xls" multiple></div>
-      <div><span class="note">зображення (необов'язково)</span><input type="file" id="imf" accept="image/*" multiple></div>
+  <div class="card controls" style="padding:18px">
+    <!-- Спосіб 1: цілу теку TESTS/ -->
+    <div class="upload-section">
+      <div class="upload-title">
+        <span class="upload-num">1</span>
+        <span>Завантажити теку <code>TESTS/</code></span>
+        <span class="upload-hint">manifest.json + xlsx-файли + зображення — все одразу</span>
+      </div>
+      <label class="upload-dropzone" id="zone-dir">
+        <span class="dz-icon">📁</span>
+        <span class="dz-label" id="lbl-dir">Обрати теку TESTS/</span>
+        <input type="file" id="dir" webkitdirectory directory multiple style="display:none"
+               onchange="lblUpdate('lbl-dir', this, true)">
+      </label>
     </div>
-    <div class="row" style="margin-top:10px">
-      <button id="run" onclick="run()">Перевірити</button>
-      <button class="sec" onclick="exportCSV()" id="bcsv" disabled>Звіт CSV</button>
-      <button class="sec" onclick="exportJSON()" id="bjson" disabled>Звіт JSON</button>
-      <button class="sec" onclick="window.print()" id="bprint" disabled>Друк</button>
+
+    <div class="upload-divider"><span>або окремо</span></div>
+
+    <!-- Спосіб 2: файли окремо -->
+    <div class="upload-section">
+      <div class="upload-title">
+        <span class="upload-num">2</span>
+        <span>Файли окремо</span>
+        <span class="upload-hint">оберіть кожен тип файлів вручну</span>
+      </div>
+      <div class="upload-row">
+        <label class="upload-dropzone sm" id="zone-mf">
+          <span class="dz-icon">📋</span>
+          <span class="dz-label" id="lbl-mf">manifest.json</span>
+          <input type="file" id="mf" accept=".json" style="display:none"
+                 onchange="lblUpdate('lbl-mf', this, false)">
+        </label>
+        <label class="upload-dropzone sm" id="zone-xf">
+          <span class="dz-icon">📊</span>
+          <span class="dz-label" id="lbl-xf">Тести .xlsx</span>
+          <input type="file" id="xf" accept=".xlsx,.xls" multiple style="display:none"
+                 onchange="lblUpdate('lbl-xf', this, false)">
+        </label>
+        <label class="upload-dropzone sm" id="zone-imf">
+          <span class="dz-icon">🖼</span>
+          <span class="dz-label" id="lbl-imf">Зображення</span>
+          <span class="dz-sub">необов'язково</span>
+          <input type="file" id="imf" accept="image/*" multiple style="display:none"
+                 onchange="lblUpdate('lbl-imf', this, false)">
+        </label>
+      </div>
     </div>
-    <p class="note">Нічого не надсилається — усе перевіряється у вашому браузері.</p>
+
+    <!-- Кнопки дій -->
+    <div class="action-row">
+      <button id="run" onclick="run()">▶ Перевірити</button>
+      <div class="action-secondary">
+        <button class="sec" onclick="exportCSV()" id="bcsv" disabled>↓ CSV</button>
+        <button class="sec" onclick="exportJSON()" id="bjson" disabled>↓ JSON</button>
+        <button class="sec" onclick="window.print()" id="bprint" disabled>🖨 Друк</button>
+      </div>
+      <span class="safe-note">🔒 Нічого не надсилається — усе у вашому браузері</span>
+    </div>
   </div>
 
   <div id="out"></div>
@@ -303,5 +374,20 @@ function exportCSV(){
 function exportJSON(){ download('valid_report.json','application/json',JSON.stringify({stats:STATS,results:RESULTS},null,2)); }
 function download(name,type,data){ const b=new Blob([data],{type}); const a=document.createElement('a');
   a.href=URL.createObjectURL(b); a.download=name; a.click(); URL.revokeObjectURL(a.href); }
+
+function lblUpdate(lblId, inp, isDir){
+  const el = document.getElementById(lblId);
+  const zone = el ? el.closest('.upload-dropzone') : null;
+  const count = inp.files ? inp.files.length : 0;
+  if(!count){ return; }
+  if(isDir){
+    const xlsxCount = [...inp.files].filter(f=>/\.xlsx$/i.test(f.name)).length;
+    el.textContent = xlsxCount + ' xlsx + manifest знайдено';
+  } else {
+    el.textContent = count === 1 ? inp.files[0].name : count + ' файлів';
+  }
+  if(zone) zone.classList.add('filled');
+}
+
 </script>
 </div></body></html>
