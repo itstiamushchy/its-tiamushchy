@@ -5,7 +5,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "«Фарбований шакал» (індійська народна казка)",
-    "module": null
+    "module": null,
+    "code": "ZL5SH"
   },
   {
     "file": "zlit_5_issumbosi.xlsx",
@@ -13,7 +14,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "«Іссумбосі, або Хлопчик-Мізинчик» (японська)",
-    "module": null
+    "module": null,
+    "code": "ZL5IS"
   },
   {
     "file": "zlit_5_penzlyk.xlsx",
@@ -21,7 +23,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "«Пензлик Маляна» (китайська народна казка)",
-    "module": null
+    "module": null,
+    "code": "ZL5PE"
   },
   {
     "file": "zlit_5_sindbad.xlsx",
@@ -29,7 +32,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "«Сіндбад-Мореплавець» (арабська народна казка)",
-    "module": null
+    "module": null,
+    "code": "ZL5SI"
   },
   {
     "file": "zlit_5_pani_metelytsia.xlsx",
@@ -37,7 +41,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Брати Грімм «Пані Метелиця»",
-    "module": null
+    "module": null,
+    "code": "ZL5ME"
   },
   {
     "file": "zlit_5_bremenske.xlsx",
@@ -45,7 +50,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Брати Грімм «Бременські музиканти»",
-    "module": null
+    "module": null,
+    "code": "ZL5BR"
   },
   {
     "file": "zlit_5_snihova_koroleva.xlsx",
@@ -53,7 +59,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Г. К. Андерсен «Снігова королева»",
-    "module": null
+    "module": null,
+    "code": "ZL5KO"
   },
   {
     "file": "zlit_5_solovei.xlsx",
@@ -61,7 +68,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Г. К. Андерсен «Соловей»",
-    "module": null
+    "module": null,
+    "code": "ZL5SO"
   },
   {
     "file": "zlit_5_khlopchyk_zirka.xlsx",
@@ -69,7 +77,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Оскар Вайльд «Хлопчик-Зірка»",
-    "module": null
+    "module": null,
+    "code": "ZL5ZI"
   },
   {
     "file": "zlit_5_poeziia_kits_hete.xlsx",
@@ -77,7 +86,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Кітс «Про коника та цвіркуна». Гете «Нічна пісня подорожнього»",
-    "module": null
+    "module": null,
+    "code": "ZL5PO"
   },
   {
     "file": "zlit_5_tom_soier.xlsx",
@@ -85,7 +95,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Марк Твен «Пригоди Тома Соєра»",
-    "module": null
+    "module": null,
+    "code": "ZL5TO"
   },
   {
     "file": "zlit_5_pollianna.xlsx",
@@ -93,7 +104,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Елеанор Портер «Полліанна»",
-    "module": null
+    "module": null,
+    "code": "ZL5POL"
   },
   {
     "file": "zlit_5_alisa.xlsx",
@@ -101,7 +113,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Льюїс Керролл «Аліса в Країні Див»",
-    "module": null
+    "module": null,
+    "code": "ZL5AL"
   },
   {
     "file": "zlit_5_kapelukh.xlsx",
@@ -109,7 +122,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Туве Янссон «Капелюх Чарівника»",
-    "module": null
+    "module": null,
+    "code": "ZL5KA"
   },
   {
     "file": "zlit_5_charlie.xlsx",
@@ -117,7 +131,8 @@
     "subject": "Зарубіжна література",
     "grade": 5,
     "title": "Роальд Дал «Чарлі і шоколадна фабрика»",
-    "module": null
+    "module": null,
+    "code": "ZL5CH"
   },
   {
     "file": "zlit_6_baiky.xlsx",
@@ -125,7 +140,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Байки: Езоп («Лисиця і виноград», «Вовк і Ягня»). Лафонтен («Зачумлені звірі»)",
-    "module": null
+    "module": null,
+    "code": "ZL6BA"
   },
   {
     "file": "zlit_6_mify.xlsx",
@@ -133,7 +149,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Міти Стародавньої Греції: Прометей, Геракл, Дедал і Ікар",
-    "module": null
+    "module": null,
+    "code": "ZL6MI"
   },
   {
     "file": "zlit_6_dikens.xlsx",
@@ -141,7 +158,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Чарльз Діккенс «Різдвяна пісня в прозі»",
-    "module": null
+    "module": null,
+    "code": "ZL6DI"
   },
   {
     "file": "zlit_6_hohol.xlsx",
@@ -149,7 +167,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Микола Гоголь «Ніч перед Різдвом»",
-    "module": null
+    "module": null,
+    "code": "ZL6HO"
   },
   {
     "file": "zlit_6_london.xlsx",
@@ -157,7 +176,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Джек Лондон «Жага до життя»",
-    "module": null
+    "module": null,
+    "code": "ZL6LO"
   },
   {
     "file": "zlit_6_vern.xlsx",
@@ -165,7 +185,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Жуль Верн «П'ятнадцятирічний капітан»",
-    "module": null
+    "module": null,
+    "code": "ZL6VE"
   },
   {
     "file": "zlit_6_stivenson.xlsx",
@@ -173,7 +194,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Стівенсон «Острів скарбів». «Вересовий трунок»",
-    "module": null
+    "module": null,
+    "code": "ZL6ST"
   },
   {
     "file": "zlit_6_malenkyi_prynts.xlsx",
@@ -181,7 +203,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "Антуан де Сент-Екзюпері «Маленький принц»",
-    "module": null
+    "module": null,
+    "code": "ZL6PR"
   },
   {
     "file": "zlit_6_o_henri.xlsx",
@@ -189,7 +212,8 @@
     "subject": "Зарубіжна література",
     "grade": 6,
     "title": "О. Генрі «Вождь червоношкірих». «Дари волхвів»",
-    "module": null
+    "module": null,
+    "code": "ZL6O_"
   },
   {
     "file": "zlit_7_mify.xlsx",
@@ -197,7 +221,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Давньогрецькі mythи (поглиблений курс)",
-    "module": null
+    "module": null,
+    "code": "ZL7MI"
   },
   {
     "file": "zlit_7_robin_hud.xlsx",
@@ -205,7 +230,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Балади про Робіна Гуда",
-    "module": null
+    "module": null,
+    "code": "ZL7RO"
   },
   {
     "file": "zlit_7_shiller_mitskevych.xlsx",
@@ -213,7 +239,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Шиллер «Рукавичка». Міцкевич «Альпухара», «Світязь»",
-    "module": null
+    "module": null,
+    "code": "ZL7SH"
   },
   {
     "file": "zlit_7_aivenko.xlsx",
@@ -221,7 +248,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Вальтер Скотт «Айвенго»",
-    "module": null
+    "module": null,
+    "code": "ZL7AI"
   },
   {
     "file": "zlit_7_halchynskyi_kamiu.xlsx",
@@ -229,7 +257,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Галчинський «Пісня про солдатів з Вестерплятте». Камю «Перо»",
-    "module": null
+    "module": null,
+    "code": "ZL7HA"
   },
   {
     "file": "zlit_7_bykov.xlsx",
@@ -237,7 +266,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Василь Биков «Альпійська балада»",
-    "module": null
+    "module": null,
+    "code": "ZL7BY"
   },
   {
     "file": "zlit_7_oldridzh.xlsx",
@@ -245,7 +275,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Джеймс Олдрідж «Останній дюйм»",
-    "module": null
+    "module": null,
+    "code": "ZL7OL"
   },
   {
     "file": "zlit_7_kiplinh.xlsx",
@@ -253,7 +284,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Кіплінг «Балада про Схід і Захід». «Якщо…»",
-    "module": null
+    "module": null,
+    "code": "ZL7KI"
   },
   {
     "file": "zlit_7_hrin.xlsx",
@@ -261,7 +293,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Олександр Грін «Пурпурові вітрила»",
-    "module": null
+    "module": null,
+    "code": "ZL7HR"
   },
   {
     "file": "zlit_7_kholms.xlsx",
@@ -269,7 +302,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Конан Дойл «Пістра стрічка». «Спілка рудих»",
-    "module": null
+    "module": null,
+    "code": "ZL7KH"
   },
   {
     "file": "zlit_7_haul.xlsx",
@@ -277,7 +311,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Діана Вінн Джонс «Мандрівний замок Хаула»",
-    "module": null
+    "module": null,
+    "code": "ZL7HAU"
   },
   {
     "file": "zlit_7_chornylne.xlsx",
@@ -285,7 +320,8 @@
     "subject": "Зарубіжна література",
     "grade": 7,
     "title": "Корнелія Функе «Чорнильне серце»",
-    "module": null
+    "module": null,
+    "code": "ZL7CH"
   },
   {
     "file": "zakhyst_11_m1_radiozviazok.xlsx",
@@ -293,7 +329,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. Основи радіозв'язку. Види та способи налагодження",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M101"
   },
   {
     "file": "zakhyst_11_m1_bezpeka_zviazku.xlsx",
@@ -301,7 +338,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. Безпека зв'язку: телефон, Wi-Fi, Starlink",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M102"
   },
   {
     "file": "zakhyst_11_m1_reb.xlsx",
@@ -309,7 +347,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. Радіоелектронна боротьба: РЕР та РЕБ",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M103"
   },
   {
     "file": "zakhyst_11_m1_bpla_vidy.xlsx",
@@ -317,7 +356,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. БПЛА: види, призначення, конструкція",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M104"
   },
   {
     "file": "zakhyst_11_m1_pilotuvannia.xlsx",
@@ -325,7 +365,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. Основи пілотування FPV та БПЛА",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M105"
   },
   {
     "file": "zakhyst_11_m1_pravyla_polotu.xlsx",
@@ -333,7 +374,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 1. Правила польоту та безпека БПЛА",
-    "module": 1
+    "module": 1,
+    "code": "ZU11M106"
   },
   {
     "file": "zakhyst_11_m2_zbroia.xlsx",
@@ -341,7 +383,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Класифікація та будова вогнепальної зброї",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M201"
   },
   {
     "file": "zakhyst_11_m2_strilecka.xlsx",
@@ -349,7 +392,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Стрілецька справа",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M202"
   },
   {
     "file": "zakhyst_11_m2_peredacha_info.xlsx",
@@ -357,7 +401,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Передача інформації в умовах бойових дій",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M203"
   },
   {
     "file": "zakhyst_11_m2_radio_pole.xlsx",
@@ -365,7 +410,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Радіозв'язок на полі бою. Правила ведення",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M204"
   },
   {
     "file": "zakhyst_11_m2_peremishchennia.xlsx",
@@ -373,7 +419,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Техніка переміщення у складі бойової групи",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M205"
   },
   {
     "file": "zakhyst_11_m2_zahorodzhennia.xlsx",
@@ -381,7 +428,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 2. Подолання інженерних загороджень",
-    "module": 2
+    "module": 2,
+    "code": "ZU11M206"
   },
   {
     "file": "zakhyst_11_infviyna_tsili.xlsx",
@@ -389,7 +437,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Цілі та завдання інформаційної війни",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M301"
   },
   {
     "file": "zakhyst_11_infviyna_uchasnyki.xlsx",
@@ -397,7 +446,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Учасники інформаційної війни",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M302"
   },
   {
     "file": "zakhyst_11_infviyna_metody.xlsx",
@@ -405,7 +455,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Методи інформаційної війни",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M303"
   },
   {
     "file": "zakhyst_11_krytychne_myslennya.xlsx",
@@ -413,7 +464,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Критичне мислення в інформаційній війні",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M304"
   },
   {
     "file": "zakhyst_11_media_infviyna.xlsx",
@@ -421,7 +473,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Роль медіа в інформаційній війні",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M305"
   },
   {
     "file": "zakhyst_11_shtuchnyi_intelekt.xlsx",
@@ -429,7 +482,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Штучний інтелект в інформаційній війні",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M306"
   },
   {
     "file": "zakhyst_11_kiberbezpeka.xlsx",
@@ -437,7 +491,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Кібербезпека в умовах інформаційної війни",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M307"
   },
   {
     "file": "zakhyst_11_osint_tsili.xlsx",
@@ -445,7 +500,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. OSINT — цілі та завдання",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M308"
   },
   {
     "file": "zakhyst_11_osint_instrumenty.xlsx",
@@ -453,7 +509,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. OSINT — інструменти та методи",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M309"
   },
   {
     "file": "zakhyst_11_veryfikatsiya.xlsx",
@@ -461,7 +518,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Верифікація джерел. Візуальний аналіз",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M310"
   },
   {
     "file": "zakhyst_11_viiskovi_profesii.xlsx",
@@ -469,7 +527,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 3. Військові професії у цифровій сфері",
-    "module": 3
+    "module": 3,
+    "code": "ZU11M311"
   },
   {
     "file": "zlit_8_svyashcheni_knyhy.xlsx",
@@ -477,7 +536,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Священні книги людства: Веди, Біблія, Коран",
-    "module": null
+    "module": null,
+    "code": "ZL8SV"
   },
   {
     "file": "zlit_8_iliada.xlsx",
@@ -485,7 +545,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Гомер «Іліада»",
-    "module": null
+    "module": null,
+    "code": "ZL8IL"
   },
   {
     "file": "zlit_8_antychna_liryka.xlsx",
@@ -493,7 +554,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Антична лірика: Тіртей, Сапфо, Горацій, Овідій «Метаморфози»",
-    "module": null
+    "module": null,
+    "code": "ZL8LI"
   },
   {
     "file": "zlit_8_prometei.xlsx",
@@ -501,7 +563,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Есхіл «Прометей закутий»",
-    "module": null
+    "module": null,
+    "code": "ZL8PR"
   },
   {
     "file": "zlit_8_eneida.xlsx",
@@ -509,7 +572,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Вергілій «Енеїда»",
-    "module": null
+    "module": null,
+    "code": "ZL8EN"
   },
   {
     "file": "zlit_8_serednovichchya.xlsx",
@@ -517,7 +581,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Середньовіччя: «Пісня про Роланда», Лі Бо, Ду Фу, Омар Хаям",
-    "module": null
+    "module": null,
+    "code": "ZL8SE"
   },
   {
     "file": "zlit_8_petrarka.xlsx",
@@ -525,7 +590,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Франческо Петрарка (сонети)",
-    "module": null
+    "module": null,
+    "code": "ZL8PE"
   },
   {
     "file": "zlit_8_romeo_i_dzhuletta.xlsx",
@@ -533,7 +599,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Вільям Шекспір «Ромео і Джульєтта»",
-    "module": null
+    "module": null,
+    "code": "ZL8RO"
   },
   {
     "file": "zlit_8_don_kikhot.xlsx",
@@ -541,7 +608,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Сервантес «Дон Кіхот»",
-    "module": null
+    "module": null,
+    "code": "ZL8DO"
   },
   {
     "file": "zlit_8_barokko_klasycyzm.xlsx",
@@ -549,7 +617,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Бароко та Класицизм: Гонгора, Донн, Мольєр «Міщанин-шляхтич»",
-    "module": null
+    "module": null,
+    "code": "ZL8BA"
   },
   {
     "file": "zlit_8_mandry_gullivera.xlsx",
@@ -557,7 +626,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Джонатан Свіфт «Мандри Гуллівера»",
-    "module": null
+    "module": null,
+    "code": "ZL8GU"
   },
   {
     "file": "zlit_8_shiller_do_radosti.xlsx",
@@ -565,7 +635,8 @@
     "subject": "Зарубіжна література",
     "grade": 8,
     "title": "Шиллер «До радості»",
-    "module": null
+    "module": null,
+    "code": "ZL8SH"
   },
   {
     "file": "zlit_9_gete.xlsx",
@@ -573,7 +644,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Гете «Травнева пісня», «Прометей»",
-    "module": null
+    "module": null,
+    "code": "ZL9GE"
   },
   {
     "file": "zlit_9_heine.xlsx",
@@ -581,7 +653,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Гейне «Книга пісень»",
-    "module": null
+    "module": null,
+    "code": "ZL9HE"
   },
   {
     "file": "zlit_9_bajron.xlsx",
@@ -589,7 +662,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Байрон «Мазепа», поезії",
-    "module": null
+    "module": null,
+    "code": "ZL9BA"
   },
   {
     "file": "zlit_9_balzak.xlsx",
@@ -597,7 +671,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Бальзак «Гобсек»",
-    "module": null
+    "module": null,
+    "code": "ZL9BAL"
   },
   {
     "file": "zlit_9_gogol_revisor.xlsx",
@@ -605,7 +680,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Гоголь «Ревізор»",
-    "module": null
+    "module": null,
+    "code": "ZL9GO"
   },
   {
     "file": "zlit_9_gogol_shynel.xlsx",
@@ -613,7 +689,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Гоголь «Шинель»",
-    "module": null
+    "module": null,
+    "code": "ZL9GOG"
   },
   {
     "file": "zlit_9_ibsen.xlsx",
@@ -621,7 +698,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Ібсен «Ляльковий дім»",
-    "module": null
+    "module": null,
+    "code": "ZL9IB"
   },
   {
     "file": "zlit_9_sho.xlsx",
@@ -629,7 +707,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Шоу «Пігмаліон»",
-    "module": null
+    "module": null,
+    "code": "ZL9SH"
   },
   {
     "file": "zlit_9_bulgakov.xlsx",
@@ -637,7 +716,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Булгаков «Собаче серце»",
-    "module": null
+    "module": null,
+    "code": "ZL9BU"
   },
   {
     "file": "zlit_9_bredberi_451.xlsx",
@@ -645,7 +725,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Бредбері «451 градус за Фаренгейтом»",
-    "module": null
+    "module": null,
+    "code": "ZL9BR"
   },
   {
     "file": "zlit_9_bredberi_usmishka.xlsx",
@@ -653,7 +734,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Бредбері «Усмішка»",
-    "module": null
+    "module": null,
+    "code": "ZL9BRE"
   },
   {
     "file": "zlit_9_harper_li.xlsx",
@@ -661,7 +743,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Гарпер Лі «Убити пересмішника»",
-    "module": null
+    "module": null,
+    "code": "ZL9HA"
   },
   {
     "file": "zlit_9_sihal.xlsx",
@@ -669,7 +752,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Сігал «Історія одного кохання»",
-    "module": null
+    "module": null,
+    "code": "ZL9SI"
   },
   {
     "file": "zlit_9_tolkien.xlsx",
@@ -677,7 +761,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Толкін «Гобіт, або Туди і звідти»",
-    "module": null
+    "module": null,
+    "code": "ZL9TO"
   },
   {
     "file": "zlit_9_metison.xlsx",
@@ -685,7 +770,8 @@
     "subject": "Зарубіжна література",
     "grade": 9,
     "title": "Метісон «Натисніть на кнопку»",
-    "module": null
+    "module": null,
+    "code": "ZL9ME"
   },
   {
     "file": "zlit_10_odisseya.xlsx",
@@ -693,7 +779,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Гомер «Одіссея»",
-    "module": null
+    "module": null,
+    "code": "ZL10OD"
   },
   {
     "file": "zlit_10_dante.xlsx",
@@ -701,7 +788,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Данте «Божественна комедія» (Пекло)",
-    "module": null
+    "module": null,
+    "code": "ZL10DA"
   },
   {
     "file": "zlit_10_gamlet.xlsx",
@@ -709,7 +797,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Шекспір «Гамлет»",
-    "module": null
+    "module": null,
+    "code": "ZL10GA"
   },
   {
     "file": "zlit_10_hofman.xlsx",
@@ -717,7 +806,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Гофман «Крихітка Цахес»",
-    "module": null
+    "module": null,
+    "code": "ZL10HO"
   },
   {
     "file": "zlit_10_vitmen.xlsx",
@@ -725,7 +815,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Вітмен «Листя трави»",
-    "module": null
+    "module": null,
+    "code": "ZL10VI"
   },
   {
     "file": "zlit_10_bodler.xlsx",
@@ -733,7 +824,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Бодлер «Квіти зла»",
-    "module": null
+    "module": null,
+    "code": "ZL10BO"
   },
   {
     "file": "zlit_10_syvolizm.xlsx",
@@ -741,7 +833,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Символізм: Верлен, Рембо",
-    "module": null
+    "module": null,
+    "code": "ZL10SY"
   },
   {
     "file": "zlit_10_vajld_dorian.xlsx",
@@ -749,7 +842,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Вайльд «Портрет Доріана Грея»",
-    "module": null
+    "module": null,
+    "code": "ZL10VA"
   },
   {
     "file": "zlit_10_stendal.xlsx",
@@ -757,7 +851,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Стендаль «Червоне і чорне»",
-    "module": null
+    "module": null,
+    "code": "ZL10ST"
   },
   {
     "file": "zlit_10_flober.xlsx",
@@ -765,7 +860,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Флобер «Пані Боварі»",
-    "module": null
+    "module": null,
+    "code": "ZL10FL"
   },
   {
     "file": "zlit_10_meterlink.xlsx",
@@ -773,7 +869,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Метерлінк «Синій птах»",
-    "module": null
+    "module": null,
+    "code": "ZL10ME"
   },
   {
     "file": "zlit_10_koeljo.xlsx",
@@ -781,7 +878,8 @@
     "subject": "Зарубіжна література",
     "grade": 10,
     "title": "Коельйо «Алхімік»",
-    "module": null
+    "module": null,
+    "code": "ZL10KO"
   },
   {
     "file": "zlit_11_kafka.xlsx",
@@ -789,7 +887,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Кафка «Перевтілення»",
-    "module": null
+    "module": null,
+    "code": "ZL11KA"
   },
   {
     "file": "zlit_11_orvel.xlsx",
@@ -797,7 +896,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Орвелл «Колгосп тварин» / «1984»",
-    "module": null
+    "module": null,
+    "code": "ZL11OR"
   },
   {
     "file": "zlit_11_hemingvej.xlsx",
@@ -805,7 +905,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Гемінґвей «Старий і море»",
-    "module": null
+    "module": null,
+    "code": "ZL11HE"
   },
   {
     "file": "zlit_11_markes.xlsx",
@@ -813,7 +914,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Маркес «Стариган із крилами»",
-    "module": null
+    "module": null,
+    "code": "ZL11MA"
   },
   {
     "file": "zlit_11_bulgakov_master.xlsx",
@@ -821,7 +923,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Булгаков «Майстер і Маргарита»",
-    "module": null
+    "module": null,
+    "code": "ZL11BU"
   },
   {
     "file": "zlit_11_poeziya.xlsx",
@@ -829,7 +932,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Світова поезія XX ст. (Аполлінер, Рільке, Лорка)",
-    "module": null
+    "module": null,
+    "code": "ZL11PO"
   },
   {
     "file": "zlit_11_zyuskind.xlsx",
@@ -837,7 +941,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Зюскінд «Парфумер»",
-    "module": null
+    "module": null,
+    "code": "ZL11ZY"
   },
   {
     "file": "zlit_11_pavych.xlsx",
@@ -845,7 +950,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Павич «Хозарський словник»",
-    "module": null
+    "module": null,
+    "code": "ZL11PA"
   },
   {
     "file": "zlit_11_brekht.xlsx",
@@ -853,7 +959,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Брехт «Життя Галілея»",
-    "module": null
+    "module": null,
+    "code": "ZL11BR"
   },
   {
     "file": "zlit_11_dzhojs_kamu.xlsx",
@@ -861,7 +968,8 @@
     "subject": "Зарубіжна література",
     "grade": 11,
     "title": "Джойс «Джакомо Джойс» / Камю «Чума»",
-    "module": null
+    "module": null,
+    "code": "ZL11DZ"
   },
   {
     "file": "zakhyst_11_m4_tccc_protokoly.xlsx",
@@ -869,7 +977,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Ознайомлення з протоколами ТССС",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M401"
   },
   {
     "file": "zakhyst_11_m4_aptechka.xlsx",
@@ -877,7 +986,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Склад аптечки для першої медичної допомоги",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M402"
   },
   {
     "file": "zakhyst_11_m4_try_fazy.xlsx",
@@ -885,7 +995,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Правила поводження при трьох фазах ТССС",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M403"
   },
   {
     "file": "zakhyst_11_m4_peresuvannia_poranenoho.xlsx",
@@ -893,7 +1004,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Переміщення пораненого із зони прямої загрози",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M404"
   },
   {
     "file": "zakhyst_11_m4_march.xlsx",
@@ -901,7 +1013,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Надання допомоги в тактичних умовах. Алгоритм MARCH",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M405"
   },
   {
     "file": "zakhyst_11_m4_krovotecha_oznaky.xlsx",
@@ -909,7 +1022,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Ознаки критичної кровотечі. Способи зупинки",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M406"
   },
   {
     "file": "zakhyst_11_m4_turniket_robota.xlsx",
@@ -917,7 +1031,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Ознайомлення з роботою турнікетів",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M407"
   },
   {
     "file": "zakhyst_11_m4_turniket_nakladannia.xlsx",
@@ -925,7 +1040,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Правила накладання турнікетів",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M408"
   },
   {
     "file": "zakhyst_11_m4_tamponuvannia.xlsx",
@@ -933,7 +1049,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Правила тампонування поранення",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M409"
   },
   {
     "file": "zakhyst_11_m4_dykhalni_shliakhy.xlsx",
@@ -941,7 +1058,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Контроль прохідності дихальних шляхів",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M410"
   },
   {
     "file": "zakhyst_11_m4_ohliad_postrazhdaloho.xlsx",
@@ -949,7 +1067,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Огляд постраждалого. Стан свідомості. Гіпотермія",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M411"
   },
   {
     "file": "zakhyst_11_m4_boiovi_medyky.xlsx",
@@ -957,7 +1076,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 4. Військові професії. Бойові медики",
-    "module": 4
+    "module": 4,
+    "code": "ZU11M412"
   },
   {
     "file": "zakhyst_11_m5_nadzv_sytuatsii.xlsx",
@@ -965,7 +1085,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Надзвичайні ситуації. Класифікація. Воєнний стан",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M501"
   },
   {
     "file": "zakhyst_11_m5_nablyzhenia_boiovykh_dii.xlsx",
@@ -973,7 +1094,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Поведінка в умовах наближення бойових дій",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M502"
   },
   {
     "file": "zakhyst_11_m5_evakuatsiia.xlsx",
@@ -981,7 +1103,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Евакуація цивільного населення",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M503"
   },
   {
     "file": "zakhyst_11_m5_obstril.xlsx",
@@ -989,7 +1112,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Порядок дій під час обстрілу та авіаційного нальоту",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M504"
   },
   {
     "file": "zakhyst_11_m5_vybuhonebezpeka.xlsx",
@@ -997,7 +1121,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Попередження ризиків від вибухонебезпечних предметів",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M505"
   },
   {
     "file": "zakhyst_11_m5_zbroia_masovoho_urazhenia.xlsx",
@@ -1005,7 +1130,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Властивості ядерної, хімічної, біологічної зброї",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M506"
   },
   {
     "file": "zakhyst_11_m5_zakhysni_vlastyvosti.xlsx",
@@ -1013,7 +1139,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Захисні властивості споруд, техніки та місцевості",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M507"
   },
   {
     "file": "zakhyst_11_m5_terakt.xlsx",
@@ -1021,7 +1148,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Терористичні акти. Порядок дій",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M508"
   },
   {
     "file": "zakhyst_11_m5_psykholohichna_stiikist.xlsx",
@@ -1029,7 +1157,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Психологічна стійкість та саморегуляція",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M509"
   },
   {
     "file": "zakhyst_11_m5_samodopomoha.xlsx",
@@ -1037,7 +1166,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Само- та взаємодопомога при паніці, ступорі, агресії",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M510"
   },
   {
     "file": "zakhyst_11_m5_vyzhyvannia.xlsx",
@@ -1045,7 +1175,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Основи та принципи виживання в екстремальних умовах",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M511"
   },
   {
     "file": "zakhyst_11_m5_tryvozhny_naplichnyk.xlsx",
@@ -1053,7 +1184,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Тривожний наплічник. Одяг та засоби для екстремальних умов",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M512"
   },
   {
     "file": "zakhyst_11_m5_ukryttia.xlsx",
@@ -1061,7 +1193,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 5. Вибір місця та обладнання укриттів. Вогонь, вода, харчування",
-    "module": 5
+    "module": 5,
+    "code": "ZU11M513"
   },
   {
     "file": "zakhyst_11_m6_zakhyst_yak_vybir.xlsx",
@@ -1069,7 +1202,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Захист України як усвідомлений вибір",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M601"
   },
   {
     "file": "zakhyst_11_m6_tsinnosti.xlsx",
@@ -1077,7 +1211,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Воля. Гідність. Самобутність. Свобода",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M602"
   },
   {
     "file": "zakhyst_11_m6_hromadianske_suspilstvo.xlsx",
@@ -1085,7 +1220,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Роль громадянського суспільства в обороноздатності",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M603"
   },
   {
     "file": "zakhyst_11_m6_volonterstvo.xlsx",
@@ -1093,7 +1229,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Громадський активізм. Волонтерський рух",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M604"
   },
   {
     "file": "zakhyst_11_m6_talant_v_oboroni.xlsx",
@@ -1101,7 +1238,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Способи реалізувати свій талант в обороні України",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M605"
   },
   {
     "file": "zakhyst_11_m6_veterany.xlsx",
@@ -1109,7 +1247,8 @@
     "subject": "Захист України",
     "grade": 11,
     "title": "Модуль 6. Адаптація суспільства до потреб ветеранів",
-    "module": 6
+    "module": 6,
+    "code": "ZU11M606"
   },
   {
     "file": "zakhyst_10_m1_hromad_obovyazky.xlsx",
@@ -1117,7 +1256,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 1. Взаємодія громадян і держави. Конституційні та військові обов'язки",
-    "module": 1
+    "module": 1,
+    "code": "ZU10M101"
   },
   {
     "file": "zakhyst_10_m1_mgp.xlsx",
@@ -1125,7 +1265,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 1. Основні положення міжнародного гуманітарного права",
-    "module": 1
+    "module": 1,
+    "code": "ZU10M102"
   },
   {
     "file": "zakhyst_10_m1_nato.xlsx",
@@ -1133,7 +1274,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 1. Роль НАТО. Стратегічні партнери України. Коаліція демократичних держав",
-    "module": 1
+    "module": 1,
+    "code": "ZU10M103"
   },
   {
     "file": "zakhyst_10_m1_veterany.xlsx",
@@ -1141,7 +1283,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 1. Адаптація суспільства до потреб ветеранів і військовослужбовців",
-    "module": 1
+    "module": 1,
+    "code": "ZU10M104"
   },
   {
     "file": "zakhyst_10_m1_volonterstvo.xlsx",
@@ -1149,7 +1292,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 1. Волонтерський рух як складова підвищення спроможності Сил оборони",
-    "module": 1
+    "module": 1,
+    "code": "ZU10M105"
   },
   {
     "file": "zakhyst_10_m2_liderstvo.xlsx",
@@ -1157,7 +1301,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 2. Військове лідерство. Невизначений контекст війни",
-    "module": 2
+    "module": 2,
+    "code": "ZU10M201"
   },
   {
     "file": "zakhyst_10_m2_prysaha.xlsx",
@@ -1165,7 +1310,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 2. Військова присяга народу України",
-    "module": 2
+    "module": 2,
+    "code": "ZU10M202"
   },
   {
     "file": "zakhyst_10_m2_struktura_zsu.xlsx",
@@ -1173,7 +1319,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 2. Склад, структура, завдання Сил оборони України",
-    "module": 2
+    "module": 2,
+    "code": "ZU10M203"
   },
   {
     "file": "zakhyst_10_m2_upravlinnia.xlsx",
@@ -1181,7 +1328,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 2. Підходи до військового управління та планування",
-    "module": 2
+    "module": 2,
+    "code": "ZU10M204"
   },
   {
     "file": "zakhyst_10_m2_zvannia.xlsx",
@@ -1189,7 +1337,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 2. Військові звання та знаки розрізнення родів і видів військ",
-    "module": 2
+    "module": 2,
+    "code": "ZU10M205"
   },
   {
     "file": "zakhyst_10_m2_zbroia.xlsx",
@@ -1197,7 +1346,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 3. Класифікація та будова вогнепальної зброї",
-    "module": 3
+    "module": 3,
+    "code": "ZU10M301"
   },
   {
     "file": "zakhyst_10_m2_strilecka.xlsx",
@@ -1205,7 +1355,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 3. Стрілецька справа",
-    "module": 3
+    "module": 3,
+    "code": "ZU10M302"
   },
   {
     "file": "zakhyst_10_m3_bezpeka_zbroia.xlsx",
@@ -1213,7 +1364,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 3. Заходи безпеки при поводженні зі зброєю. Способи носіння та зберігання",
-    "module": 3
+    "module": 3,
+    "code": "ZU10M303"
   },
   {
     "file": "zakhyst_10_m3_granaty.xlsx",
@@ -1221,7 +1373,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 3. Призначення, будова і класифікація гранат. Заходи безпеки",
-    "module": 3
+    "module": 3,
+    "code": "ZU10M304"
   },
   {
     "file": "zakhyst_10_m3_stress.xlsx",
@@ -1229,7 +1382,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 3. Бойовий стрес та психологія екстремальних ситуацій",
-    "module": 3
+    "module": 3,
+    "code": "ZU10M305"
   },
   {
     "file": "zakhyst_10_m2_peremishchennia.xlsx",
@@ -1237,7 +1391,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Техніка переміщення у складі бойової групи",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M401"
   },
   {
     "file": "zakhyst_10_m2_zahorodzhennia.xlsx",
@@ -1245,7 +1400,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Подолання інженерних загороджень. Смуга перешкод",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M402"
   },
   {
     "file": "zakhyst_10_m2_peredacha_info.xlsx",
@@ -1253,7 +1409,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Передача інформації в умовах бойових дій",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M403"
   },
   {
     "file": "zakhyst_10_m2_radio_pole.xlsx",
@@ -1261,7 +1418,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Радіозв'язок на полі бою. Правила ведення",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M404"
   },
   {
     "file": "zakhyst_10_m1_radiozviazok.xlsx",
@@ -1269,7 +1427,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Основи радіозв'язку. Види та способи налагодження",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M405"
   },
   {
     "file": "zakhyst_10_m4_taktyka.xlsx",
@@ -1277,7 +1436,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 4. Основи тактики та види бою. Маскування",
-    "module": 4
+    "module": 4,
+    "code": "ZU10M406"
   },
   {
     "file": "zakhyst_10_m5_fortyfikatsiia.xlsx",
@@ -1285,7 +1445,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 5. Інженерна фортифікація. Невибухові загородження",
-    "module": 5
+    "module": 5,
+    "code": "ZU10M501"
   },
   {
     "file": "zakhyst_10_m5_miny.xlsx",
@@ -1293,7 +1454,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 5. Міни та вибухові засоби. Дії на замінованій місцевості. Убезпечення",
-    "module": 5
+    "module": 5,
+    "code": "ZU10M502"
   },
   {
     "file": "zakhyst_10_m5_oriientuvannia.xlsx",
@@ -1301,7 +1463,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 5. Орієнтування на місцевості. Азимути. Карти. GPS",
-    "module": 5
+    "module": 5,
+    "code": "ZU10M503"
   },
   {
     "file": "zakhyst_10_m4_tccc_protokoly.xlsx",
@@ -1309,7 +1472,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Ознайомлення з протоколами ТССС. Склад аптечки",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M601"
   },
   {
     "file": "zakhyst_10_m4_aptechka.xlsx",
@@ -1317,7 +1481,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Склад аптечки для першої медичної допомоги",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M602"
   },
   {
     "file": "zakhyst_10_m4_try_fazy.xlsx",
@@ -1325,7 +1490,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Правила поводження при трьох фазах ТССС",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M603"
   },
   {
     "file": "zakhyst_10_m4_peresuvannia_poranenoho.xlsx",
@@ -1333,7 +1499,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Переміщення пораненого із зони прямої загрози",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M604"
   },
   {
     "file": "zakhyst_10_m4_march.xlsx",
@@ -1341,7 +1508,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Надання допомоги в тактичних умовах. Алгоритм MARCH",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M605"
   },
   {
     "file": "zakhyst_10_m4_krovotecha_oznaky.xlsx",
@@ -1349,7 +1517,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Ознаки критичної кровотечі. Способи зупинки",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M606"
   },
   {
     "file": "zakhyst_10_m4_turniket_robota.xlsx",
@@ -1357,7 +1526,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Ознайомлення з роботою турнікетів",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M607"
   },
   {
     "file": "zakhyst_10_m4_turniket_nakladannia.xlsx",
@@ -1365,7 +1535,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Правила накладання турнікетів",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M608"
   },
   {
     "file": "zakhyst_10_m4_tamponuvannia.xlsx",
@@ -1373,7 +1544,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Правила тампонування поранення",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M609"
   },
   {
     "file": "zakhyst_10_m4_dykhalni_shliakhy.xlsx",
@@ -1381,7 +1553,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Контроль прохідності дихальних шляхів",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M610"
   },
   {
     "file": "zakhyst_10_m4_ohliad_postrazhdaloho.xlsx",
@@ -1389,7 +1562,8 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Огляд постраждалого. Стан свідомості. Гіпотермія",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M611"
   },
   {
     "file": "zakhyst_10_m4_boiovi_medyky.xlsx",
@@ -1397,6 +1571,7 @@
     "subject": "Захист України",
     "grade": 10,
     "title": "Модуль 6. Військові професії. Бойові медики",
-    "module": 6
+    "module": 6,
+    "code": "ZU10M612"
   }
 ]
