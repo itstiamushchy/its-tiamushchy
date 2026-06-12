@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Літературна дуель — Скрудж</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap');
+
+  :root {
+    --ink:     #1a1208;
+    --parchment: #f5eedc;
+    --aged:    #e8dfc4;
+    --gold:    #9a6d1a;
+    --dark:    #2a1f0e;
+    --red:     #8b1a1a;
+    --green:   #1a5c2a;
+    --muted:   #7a6a50;
+    --shadow:  rgba(30,15,5,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #1a140a;
+    background-image: radial-gradient(ellipse at 50% 0%, #2e2010 0%, #0e0a04 70%);
+    min-height: 100vh;
+    font-family: 'Manrope', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 48px;
+    color: var(--ink);
+  }
+
+  /* ── TITLE PLATE ── */
+  .title-plate {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .title-plate h1 {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(22px, 4vw, 34px);
+    color: #d4a830;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(180,120,0,0.4);
+  }
+  .title-plate p {
+    color: #9a8060;
+    font-size: 12px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── MAIN CARD ── */
+  .card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--parchment);
+    border-radius: 4px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), inset 0 0 60px rgba(180,140,60,0.08);
+    border: 1px solid #c4a870;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* texture overlay */
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── STUDENT ENTRY ── */
+  #entryScreen {
+    padding: 32px 28px;
+    position: relative; z-index: 1;
+  }
+  .entry-icon {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .entry-title {
+    font-family: 'IM Fell English', serif;
+    font-size: 20px;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .entry-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .field-row.single { grid-template-columns: 1fr; }
+  label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  input, select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #c4a870;
+    border-radius: 3px;
+    background: #fffdf5;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus { border-color: var(--gold); }
+
+  .start-btn {
+    width: 100%;
+    padding: 13px;
+    margin-top: 20px;
+    background: var(--dark);
+    color: #d4a830;
+    border: none;
+    border-radius: 3px;
+    font-family: 'IM Fell English', serif;
+    font-size: 17px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+  }
+  .start-btn:hover { background: #1a1208; }
+
+  /* ── CHAT AREA ── */
+  #chatScreen { display: none; flex-direction: column; position: relative; z-index: 1; }
+
+  .chat-header {
+    background: var(--dark);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .scrooge-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #3a2810;
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .chat-header-text h2 {
+    font-family: 'IM Fell English', serif;
+    color: #d4a830;
+    font-size: 15px;
+  }
+  .chat-header-text p {
+    color: #9a8060;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+  .round-badge {
+    margin-left: auto;
+    background: rgba(212,168,48,0.15);
+    border: 1px solid var(--gold);
+    color: #d4a830;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .messages {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 300px;
+    max-height: 420px;
+    overflow-y: auto;
+  }
+
+  .bubble {
+    max-width: 88%;
+    padding: 12px 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.6;
+    position: relative;
+  }
+  .bubble.scrooge {
+    background: var(--dark);
+    color: #e8d8b8;
+    align-self: flex-start;
+    border-left: 3px solid var(--gold);
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+  }
+  .bubble.scrooge em {
+    color: #d4a830;
+    font-style: italic;
+  }
+  .bubble.student {
+    background: #fffdf5;
+    border: 1px solid #c4a870;
+    color: var(--ink);
+    align-self: flex-end;
+    font-size: 13px;
+  }
+  .bubble.student strong {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .typing-indicator {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 14px;
+    background: var(--dark);
+    border-left: 3px solid var(--gold);
+    border-radius: 3px;
+    align-self: flex-start;
+    max-width: 100px;
+  }
+  .typing-indicator.active { display: flex; }
+  .typing-indicator span {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: blink 1.2s infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%,80%,100% { opacity:0.2; } 40% { opacity:1; } }
+
+  /* ── OPTIONS ── */
+  .options-area {
+    padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .option-btn {
+    padding: 11px 14px;
+    background: #fffdf5;
+    border: 1px solid #c4a870;
+    border-radius: 3px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    color: var(--ink);
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .option-btn:hover { background: var(--aged); border-color: var(--gold); }
+  .option-btn strong {
+    font-weight: 700;
+    color: var(--gold);
+    margin-right: 6px;
+    font-size: 12px;
+  }
+  .option-btn:disabled {
+    opacity: 0.5; cursor: default;
+  }
+
+  /* ── REPORT ── */
+  #reportScreen {
+    display: none;
+    padding: 28px;
+    position: relative; z-index: 1;
+  }
+  .report-header {
+    font-family: 'IM Fell English', serif;
+    font-size: 19px;
+    color: var(--dark);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .report-header span { color: var(--gold); }
+  .gr-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 16px;
+    align-items: start;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ddd0b0;
+  }
+  .gr-score {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1;
+    padding-top: 2px;
+  }
+  .gr-score small { font-size: 14px; color: var(--muted); }
+  .gr-label { font-weight: 700; font-size: 13px; margin-bottom: 3px; color: var(--dark); }
+  .gr-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .trajectory {
+    background: var(--aged);
+    border: 1px solid #c4a870;
+    border-radius: 3px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    font-family: 'IM Fell English', serif;
+    color: var(--dark);
+  }
+  .trajectory span { color: var(--gold); font-weight: bold; }
+  .total-score {
+    background: var(--dark);
+    color: #d4a830;
+    border-radius: 3px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .total-score .big { font-size: 44px; font-weight: 800; line-height: 1; }
+  .total-score .label { font-family: 'IM Fell English', serif; font-size: 16px; }
+  .total-score .sub { font-size: 11px; color: #9a8060; margin-top: 3px; }
+  .print-btn {
+    width: 100%;
+    padding: 11px;
+    background: var(--dark);
+    color: #d4a830;
+    border: none;
+    border-radius: 3px;
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .print-btn:hover { background: #1a1208; }
+  .report-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-style: italic;
+    font-family: 'IM Fell English', serif;
+    font-size: 15px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { box-shadow: none; border: none; }
+    .print-btn { display: none; }
+    .title-plate { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="title-plate">
+  <h1>⚖ Літературна Дуель</h1>
+  <p>«Різдвяна пісня в прозі» · Чарльз Діккенс · НУШ 6 клас</p>
+</div>
+
+<div class="card">
+
+  <!-- ── ENTRY SCREEN ── -->
+  <div id="entryScreen">
+    <span class="entry-icon">🕯</span>
+    <h2 class="entry-title">Перш ніж увійти до контори…</h2>
+    <p class="entry-subtitle">Вкажи свої дані. Дискусія складатиметься з 4 раундів.<br>Результати буде автоматично збережено для вчителя.</p>
+    <div class="field-row">
+      <div>
+        <label>Прізвище</label>
+        <input type="text" id="fSurname" placeholder="Франко">
+      </div>
+      <div>
+        <label>Ім'я</label>
+        <input type="text" id="fName" placeholder="Іван">
+      </div>
+    </div>
+    <div class="field-row">
+      <div>
+        <label>Клас</label>
+        <input type="text" id="fClass" placeholder="6-А">
+      </div>
+      <div>
+        <label>Школа (коротко)</label>
+        <input type="text" id="fSchool" placeholder="ЗШ №1">
+      </div>
+    </div>
+    <button class="start-btn" onclick="startDuel()">📜 Розпочати дуель</button>
+  </div>
+
+  <!-- ── CHAT SCREEN ── -->
+  <div id="chatScreen">
+    <div class="chat-header">
+      <div class="scrooge-avatar">🎩</div>
+      <div class="chat-header-text">
+        <h2>Ебенезер Скрудж</h2>
+        <p>Лондон, грудень 1843 р.</p>
+      </div>
+      <div class="round-badge" id="roundBadge">Раунд 1 / 4</div>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="typing-indicator active" id="typing">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <div class="options-area" id="optionsArea"></div>
+  </div>
+
+  <!-- ── REPORT SCREEN ── -->
+  <div id="reportScreen">
+    <div class="report-loading" id="reportLoading">⚙ Скрудж підраховує твої бали…</div>
+    <div id="reportContent" style="display:none"></div>
+  </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  STATE
+// ─────────────────────────────────────────────
+let studentName = '';
+let round = 0;             // 0 = not started, 1-4 = active
+let choices = [];          // 'А','Б','В' per round
+let conversationHistory = [];
+let isWaiting = false;
+
+const SYSTEM_PROMPT = `ТЕХНІЧНИЙ ПАСПОРТ ШІ-АГЕНТА (SYSTEM PROMPT)
+# ROLE AND IDENTITY Ти — спеціалізований EdTech-агент, розроблений за принципами Behavioral Design для оцінювання учнів за вимогами Наказу МОН України №1093. Твоя роль у цьому квесті — Ебенезер Скрудж (до його переродження) із повісті Ч. Діккенса «Різдвяна пісня в прозі». Ти спілкуєшся з учнем 6-го класу НУШ. Твоя манера мовлення: холодна, прагматична, скептична, іронічна, але суворо в межах літературної норми. Ти не використовуєш сучасний підлітковий сленг, твій інструмент — суха вікторіанська логіка грошей та фактів. # CORE MISSION Провести з учнем інтелектуальну текстову дуель-дискусію (рівно 4 раунди), щоб перевірити його компетентності та виставити бали за трьома Групами Результатів (ГР) НУШ. Головна теза, яку ти захищаєш: «Скрудж не змінився щиро. Його "доброта" наприкінці — це лише егоїстичний страх перед смертю та пеклом. Люди не змінюються за одну ніч». # BEHAVIORAL DESIGN & GAME RULES (SHAR 1 & 3) 1. КОРОТКІСТЬ: Твоя репліка має містити максимум 3-4 речення. Діти не мають читати довгі тексти. 2. АРХІТЕКТУРА ВИБОРУ: Наприкінці кожної своєї репліки ТИ ОБОВ'ЯЗКОВО пропонуєш учню три варіанти відповіді: А, Б та В. Варіант А: Конформістський (учень погоджується з тобою, слабка позиція). Варіант Б: Текстовий аргумент (учень захищає щирість Скруджа, спираючись на сюжет). Варіант В: Компромісний або критичний (глибокий роздум, філософський погляд). 3. ЗАБОРОНА НА ПІДКАЗКИ ТА СХВАЛЕННЯ: Ніколи не кажи учню «Правильно!» або «Молодець!». 4. ЛІЧИЛЬНИК РАУНДІВ: Веди внутрішній облік. Дискусія триває рівно 4 раунди. # ASSESSMENT LOGIC (SHAR 4 - BACKGROUND ONLY) Внутрішньо фіксуй бали за трьома критеріями НУШ: ГР 1 (Аналіз тексту), ГР 2 (Якість сприйняття тексту), ГР 3 (Взаємодія/Стійкість). # GAME TRACE ALGORITHM Раунд 1: Спровокуй учня тезою про страх перед занедбаною могилою. Раунд 2: Апелюй до того, що люди не змінюються за одну ніч на 180 градусів. Раунд 3: Використай факт про анонімну індичку як маніпуляцію — «Він зробив це анонімно, щоб задобрити долю!». Раунд 4: Фінальна відповідь, після якої переходиш до аналітичного звіту.
+
+CRITICAL FORMATTING RULE: 
+- After your response text (3-4 sentences), output EXACTLY this block:
+---OPTIONS---
+А: [option text]
+Б: [option text]
+В: [option text]
+---END---
+
+After round 4 student response, output:
+---REPORT---
+TRAJECTORY: [e.g., Б -> В -> Б -> А]
+GR1_SCORE: [1-4]
+GR1_TEXT: [brief justification in Ukrainian]
+GR2_SCORE: [1-4]
+GR2_TEXT: [brief justification in Ukrainian]
+GR3_SCORE: [1-4]
+GR3_TEXT: [brief justification in Ukrainian]
+---END---`;
+
+// ─────────────────────────────────────────────
+//  START
+// ─────────────────────────────────────────────
+function startDuel() {
+  const surname = document.getElementById('fSurname').value.trim();
+  const name    = document.getElementById('fName').value.trim();
+  const cls     = document.getElementById('fClass').value.trim();
+
+  if (!surname || !name || !cls) {
+    alert('Будь ласка, заповни прізвище, ім\'я та клас.');
+    return;
+  }
+
+  studentName = `${surname} ${name}`;
+  document.getElementById('entryScreen').style.display = 'none';
+  document.getElementById('chatScreen').style.display  = 'flex';
+  document.getElementById('chatScreen').style.flexDirection = 'column';
+
+  // Kick off round 1 — send greeting trigger
+  conversationHistory = [];
+  round = 0;
+  callAgent(`Розпочни гру. Привітайся як Скрудж і задай провокаційне питання Раунду 1 з варіантами А, Б, В. Учня звати ${studentName}.`);
+}
+
+// ─────────────────────────────────────────────
+//  AGENT CALL
+// ─────────────────────────────────────────────
+async function callAgent(userMessage, isSystemTrigger = true) {
+  if (!isSystemTrigger) {
+    round++;
+    updateRoundBadge();
+  }
+
+  setOptions([]);
+  showTyping(true);
+
+  if (!isSystemTrigger) {
+    conversationHistory.push({ role: 'user', content: userMessage });
+  }
+
+  const messages = isSystemTrigger
+    ? [{ role: 'user', content: userMessage }]
+    : conversationHistory;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages
+      })
+    });
+
+    const data = await res.json();
+    const raw = data.content.map(b => b.text || '').join('');
+
+    showTyping(false);
+
+    // Check for final report
+    if (raw.includes('---REPORT---')) {
+      const reportPart = raw.split('---REPORT---')[1].split('---END---')[0];
+      // Show closing line
+      const closingLine = raw.split('---REPORT---')[0].trim();
+      if (closingLine) appendBubble('scrooge', closingLine);
+      setTimeout(() => showReport(reportPart), 1200);
+      return;
+    }
+
+    // Parse text + options
+    let text = raw, optA = '', optB = '', optC = '';
+    if (raw.includes('---OPTIONS---')) {
+      const parts = raw.split('---OPTIONS---');
+      text = parts[0].trim();
+      const optBlock = parts[1].split('---END---')[0];
+      const lines = optBlock.trim().split('\n');
+      lines.forEach(l => {
+        if (l.startsWith('А:')) optA = l.slice(2).trim();
+        if (l.startsWith('Б:')) optB = l.slice(2).trim();
+        if (l.startsWith('В:')) optC = l.slice(2).trim();
+      });
+    }
+
+    conversationHistory.push({ role: 'assistant', content: raw });
+
+    appendBubble('scrooge', text);
+
+    if (optA) {
+      setOptions([
+        { label: 'А', text: optA },
+        { label: 'Б', text: optB },
+        { label: 'В', text: optC }
+      ]);
+    }
+
+  } catch(e) {
+    showTyping(false);
+    appendBubble('scrooge', '⚠ Помилка зв\'язку з конторою. Спробуй ще раз.');
+    console.error(e);
+  }
+}
+
+// ─────────────────────────────────────────────
+//  OPTION SELECTED
+// ─────────────────────────────────────────────
+function selectOption(label, text) {
+  choices.push(label);
+  appendBubble('student', text, label);
+  const msg = `Раунд ${round}, учень обирає варіант ${label}: "${text}"`;
+  callAgent(msg, false);
+}
+
+// ─────────────────────────────────────────────
+//  REPORT
+// ─────────────────────────────────────────────
+function showReport(rawReport) {
+  document.getElementById('chatScreen').style.display = 'none';
+  const rs = document.getElementById('reportScreen');
+  rs.style.display = 'block';
+
+  // Parse
+  const get = (key) => {
+    const m = rawReport.match(new RegExp(key + ':\\s*(.+)'));
+    return m ? m[1].trim() : '';
+  };
+
+  const trajectory = get('TRAJECTORY') || choices.join(' → ');
+  const gr1s = parseInt(get('GR1_SCORE')) || 2;
+  const gr1t = get('GR1_TEXT') || '';
+  const gr2s = parseInt(get('GR2_SCORE')) || 2;
+  const gr2t = get('GR2_TEXT') || '';
+  const gr3s = parseInt(get('GR3_SCORE')) || 2;
+  const gr3t = get('GR3_TEXT') || '';
+  const total = gr1s + gr2s + gr3s;
+  const dateStr = new Date().toLocaleString('uk-UA');
+  const school = document.getElementById('fSchool').value.trim() || '—';
+  const cls    = document.getElementById('fClass').value.trim();
+
+  document.getElementById('reportLoading').style.display = 'none';
+  const rc = document.getElementById('reportContent');
+  rc.style.display = 'block';
+  rc.innerHTML = `
+    <div class="report-header">📜 Звіт <span>НУШ · Наказ №1093</span></div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;font-size:12px">
+      <div style="background:var(--aged);padding:8px 10px;border-radius:3px"><div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px">Учень</div><div style="font-weight:700">${studentName}</div></div>
+      <div style="background:var(--aged);padding:8px 10px;border-radius:3px"><div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px">Клас</div><div style="font-weight:700">${cls}</div></div>
+      <div style="background:var(--aged);padding:8px 10px;border-radius:3px"><div style="color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px">Школа</div><div style="font-weight:700">${school}</div></div>
+    </div>
+
+    <div class="trajectory">📍 Траєкторія рішень: <span>${trajectory}</span></div>
+
+    <div class="total-score">
+      <div class="big">${total}</div>
+      <div>
+        <div class="label">балів з 12 можливих</div>
+        <div class="sub">ГР 1 + ГР 2 + ГР 3 · ${dateStr}</div>
+      </div>
+    </div>
+
+    <div class="gr-row">
+      <div class="gr-score">${gr1s}<small>/4</small></div>
+      <div>
+        <div class="gr-label">ГР 1 — Аналіз тексту</div>
+        <div class="gr-text">${gr1t || 'Оцінка знань сюжету та художніх деталей твору.'}</div>
+      </div>
+    </div>
+    <div class="gr-row">
+      <div class="gr-score">${gr2s}<small>/4</small></div>
+      <div>
+        <div class="gr-label">ГР 2 — Власне висловлювання</div>
+        <div class="gr-text">${gr2t || 'Логіка та послідовність побудови власної позиції.'}</div>
+      </div>
+    </div>
+    <div class="gr-row" style="border:none">
+      <div class="gr-score">${gr3s}<small>/4</small></div>
+      <div>
+        <div class="gr-label">ГР 3 — Взаємодія / Стійкість</div>
+        <div class="gr-text">${gr3t || 'Стійкість до маніпуляцій, культура дискусії.'}</div>
+      </div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">🖨 Роздрукувати звіт</button>
+  `;
+}
+
+// ─────────────────────────────────────────────
+//  UI HELPERS
+// ─────────────────────────────────────────────
+function appendBubble(who, text, choiceLabel) {
+  const msgs = document.getElementById('messages');
+  const div = document.createElement('div');
+  div.className = `bubble ${who}`;
+  if (who === 'student') {
+    div.innerHTML = `<strong>${studentName} · Варіант ${choiceLabel}</strong>${escHtml(text)}`;
+  } else {
+    div.innerHTML = escHtml(text).replace(/\*(.*?)\*/g, '<em>$1</em>');
+  }
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping(show) {
+  const t = document.getElementById('typing');
+  if (show) {
+    t.classList.add('active');
+    document.getElementById('messages').appendChild(t);
+    document.getElementById('messages').scrollTop = 9999;
+  } else {
+    t.classList.remove('active');
+  }
+}
+
+function setOptions(opts) {
+  const area = document.getElementById('optionsArea');
+  area.innerHTML = '';
+  opts.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<strong>${o.label}</strong>${escHtml(o.text)}`;
+    btn.onclick = () => {
+      area.querySelectorAll('button').forEach(b => b.disabled = true);
+      selectOption(o.label, o.text);
+    };
+    area.appendChild(btn);
+  });
+}
+
+function updateRoundBadge() {
+  document.getElementById('roundBadge').textContent = `Раунд ${round} / 4`;
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>
