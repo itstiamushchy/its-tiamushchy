@@ -246,7 +246,7 @@
     margin-bottom:20px;box-shadow:4px 4px 0 var(--shadow)}
   .answers-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#999;margin-bottom:14px}
   /* ── v5.2: зображення в тестах (мобільний пріоритет) ─────────────── */
-  .q-image{display:block;width:100%;max-height:42vh;object-fit:contain;
+  .q-image{display:block;width:100%;max-height:22vh;object-fit:contain;
     border-radius:10px;margin-bottom:12px;background:#f5f2ea}
   .opt-image{display:block;width:100%;max-height:22vh;object-fit:contain;
     border-radius:6px;margin-bottom:6px}
@@ -328,12 +328,12 @@
     .catalog-filters{flex-direction:column}.catalog-bottom{flex-direction:column;align-items:stretch}
     .identity-card,.results-card{padding:28px 20px}.score-big{font-size:3.5rem}
     header{padding:14px 20px}.logo{font-size:1.2rem}.question-text{font-size:1rem}
-    .q-image{max-height:34vh}.opt-image{max-height:18vh}
+    .q-image{max-height:18vh}.opt-image{max-height:18vh}
     .answers-grid.img-mode .answer-btn{min-height:120px;padding:8px 6px}
     .answers-grid.img-mode .opt-label{font-size:.74rem}}
   /* Горизонтальна орієнтація телефону — зображення компактніші */
   @media(max-height:500px) and (orientation:landscape){
-    .q-image{max-height:40vh;margin-bottom:8px}
+    .q-image{max-height:30vh;margin-bottom:8px}
     .opt-image{max-height:30vh}
     .answers-grid.img-mode .answer-btn{min-height:90px}}
 </style>
@@ -1141,6 +1141,22 @@ function startQuiz() {
 
 // ── ПЕРЕМІШУВАННЯ (Fisher-Yates) ──────────────────────
 // Повертає новий перемішаний масив (оригінал не змінює).
+// ── ОЧИЩЕННЯ СЛУЖБОВИХ ТЕГІВ ───────────────────────────
+// Методист позначає формат картинок тегами [F1]/[F2]/[F3] (на початку
+// тексту питання) та [IMG] (де саме має бути зображення — у питанні
+// та/або у варіантах). Учень НЕ повинен бачити ці теги — функція
+// прибирає їх для показу. Прапорець наявності [IMG] перевіряти
+// ДО очищення (hasImgTag), бо після cleanLabel його вже не видно.
+function hasImgTag(s) {
+  return /\[IMG\]/i.test(String(s||''));
+}
+function cleanLabel(s) {
+  return String(s||'')
+    .replace(/^\s*\[F[123]\]\s*/i, '')
+    .replace(/\s*\[IMG\]\s*/ig, ' ')
+    .trim();
+}
+
 function shuffle(arr) {
   const a = [...arr];
   for (let i = a.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
@@ -1226,7 +1242,7 @@ function renderQuestion() {
   document.getElementById('qCounter').textContent = `Питання ${currentIdx+1} / ${total}`;
   const labels = { single:'Одна відповідь', multiple:'Кілька відповідей', truefalse:'Правда / Хибно' };
   document.getElementById('qTypeTag').textContent = labels[q.type] || 'Відповідь';
-  document.getElementById('questionText').textContent = q.text;
+  document.getElementById('questionText').textContent = cleanLabel(q.text);
   document.getElementById('answersLabel').textContent = q.type==='multiple' ? 'Оберіть усі правильні відповіді' : 'Оберіть відповідь';
 
   // ── v5.2: ЗОБРАЖЕННЯ ДО ПИТАННЯ ────────────────────────────────────
@@ -1272,23 +1288,29 @@ function renderQuestion() {
     if (currentTestId && q._rowNum) {
       // Спроба завантажити зображення варіанту (qNN_a/b/v/g)
       const nn   = String(q._rowNum).padStart(2,'0');
-      const lat  = LAT[opt.key] || opt.key.toLowerCase();
+      const lat  = LAT[opt.orig || opt.key] || (opt.orig || opt.key).toLowerCase();
       const ob   = `TESTS/images/${currentTestId}/q${nn}_${lat}`;
+      const optHasImg = hasImgTag(opt.val);
       btn.innerHTML = `<span class="letter">${opt.key}</span>`;
       const oi = document.createElement('img');
       oi.className = 'opt-image';
-      oi.onload  = () => { grid.classList.add('img-mode'); };
+      const lbl = document.createElement('span');
+      lbl.className = 'opt-label'; lbl.textContent = cleanLabel(opt.val);
+      oi.onload  = () => {
+        grid.classList.add('img-mode');
+        // Якщо у варіанта є власна картинка — текстовий підпис ховаємо,
+        // щоб не "спойлерити" відповідь написом під зображенням.
+        if (optHasImg) lbl.style.display = 'none';
+      };
       oi.onerror = () => {
         if (oi.src.endsWith('.webp')) { oi.src = ob + '.png'; }
         else { oi.remove(); }
       };
       oi.src = ob + '.webp';
       btn.appendChild(oi);
-      const lbl = document.createElement('span');
-      lbl.className = 'opt-label'; lbl.textContent = opt.val;
       btn.appendChild(lbl);
     } else {
-      btn.innerHTML = `<span class="letter">${opt.key}</span><span>${opt.val}</span>`;
+      btn.innerHTML = `<span class="letter">${opt.key}</span><span>${cleanLabel(opt.val)}</span>`;
     }
 
     btn.onclick = () => selectAnswer(btn, q);
@@ -1366,7 +1388,7 @@ function revealAnswer(q) {
   const hint = document.getElementById('hintText');
   const corrLabel = correctKeys.map(k => {
     const o = (shuffledQuestions[currentIdx]._opts||[]).find(x=>x.key===k);
-    return o ? `${k}: ${o.val}` : k;
+    return o ? `${k}: ${cleanLabel(o.val)}` : k;
   }).join(', ');
 
   if (partialRatio === 1) {
@@ -1381,7 +1403,7 @@ function revealAnswer(q) {
 
   stopInactivityDetector();
   const answerTime = Math.round((Date.now() - questionStartTime) / 1000);
-  results.push({ text:q.text, type:q.type, selected, correct:correctKeys, partialRatio, skipped:false, suspicious:questionSuspicious, answerTime });
+  results.push({ text:cleanLabel(q.text), type:q.type, selected, correct:correctKeys, partialRatio, skipped:false, suspicious:questionSuspicious, answerTime });
   document.getElementById('btnNext').style.display = 'inline-flex';
 }
 
@@ -1412,7 +1434,7 @@ function autoSkip() {
   const q = shuffledQuestions[currentIdx];
   const correctKeys = (q._correct||q.correct).toUpperCase().split(',').map(x=>x.trim());
   stopInactivityDetector();
-  results.push({ text:q.text, type:q.type, selected:[], correct:correctKeys, partialRatio:0, skipped:true, suspicious:false, answerTime:0 });
+  results.push({ text:cleanLabel(q.text), type:q.type, selected:[], correct:correctKeys, partialRatio:0, skipped:true, suspicious:false, answerTime:0 });
   answered = true;
   const ov = document.getElementById('timeUpOverlay');
   ov.classList.add('visible');
