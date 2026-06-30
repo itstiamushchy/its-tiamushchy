@@ -647,6 +647,7 @@ function appendBubble(who, text, choiceLabel) {
   if (who === 'student') {
     div.innerHTML = `<strong>${studentName} · Варіант ${choiceLabel}</strong>${escHtml(text)}`;
   } else {
+    lastScroogeText = text;
     div.innerHTML = escHtml(text).replace(/\*(.*?)\*/g, '<em>$1</em>');
     speakScrooge(text);
   }
@@ -669,10 +670,27 @@ if ('speechSynthesis' in window) {
   speechSynthesis.onvoiceschanged = pickUkVoice;
 }
 
+let lastScroogeText = '';
+
 window.toggleVoice = function() {
-  voiceEnabled = !voiceEnabled;
-  document.getElementById('voiceToggle').textContent = voiceEnabled ? '🔊' : '🔇';
-  if (!voiceEnabled) speechSynthesis.cancel();
+  if (!('speechSynthesis' in window)) return;
+  pickUkVoice();
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+    document.getElementById('voiceToggle').textContent = '🔊';
+    return;
+  }
+  if (!lastScroogeText) return;
+  document.getElementById('voiceToggle').textContent = '🔇';
+  const clean = lastScroogeText.replace(/\*/g, '').replace(/[⚠📜🕯🎩⚙]/g, '').trim();
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = 'uk-UA';
+  if (ukVoice) utter.voice = ukVoice;
+  utter.rate = 0.92;
+  utter.pitch = 0.85;
+  utter.onend = () => document.getElementById('voiceToggle').textContent = '🔊';
+  utter.onerror = () => document.getElementById('voiceToggle').textContent = '🔊';
+  speechSynthesis.speak(utter);
 }
 
 function unlockVoice() {
