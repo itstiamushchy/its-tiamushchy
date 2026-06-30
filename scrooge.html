@@ -692,7 +692,7 @@ async function speakScrooge(text) {
   if (!clean) return;
   speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(clean);
-  utter.lang = 'en-US';
+  utter.lang = 'uk-UA';
   utter.rate = 0.85;
   utter.pitch = 0.8;
   speechSynthesis.speak(utter);
