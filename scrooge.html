@@ -445,9 +445,11 @@ async function gemini(messages, systemPrompt) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      system_instruction: { parts: [{ text: systemPrompt }] },
-      contents: messages,
-      generationConfig: { temperature: 0.7 }
+      body: {
+        system_instruction: { parts: [{ text: systemPrompt }] },
+        contents: messages,
+        generationConfig: { temperature: 0.7 }
+      }
     })
   });
   const data = await res.json();
