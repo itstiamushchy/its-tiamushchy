@@ -687,19 +687,15 @@ function unlockVoice() {
 }
 
 async function speakScrooge(text) {
+  if (!('speechSynthesis' in window)) return;
   const clean = text.replace(/\*/g, '').replace(/[⚠📜🕯🎩⚙]/g, '').trim();
   if (!clean) return;
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'tts', body: { text: clean } })
-    });
-    const data = await res.json();
-    if (!data.audioContent) return;
-    const audio = new Audio('data:audio/mp3;base64,' + data.audioContent);
-    audio.play();
-  } catch(e) { console.error('TTS error:', e); }
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(clean);
+  utter.lang = 'en-US';
+  utter.rate = 0.85;
+  utter.pitch = 0.8;
+  speechSynthesis.speak(utter);
 }
 
 function showTyping(show) {
