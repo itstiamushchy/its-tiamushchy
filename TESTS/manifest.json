@@ -1340,7 +1340,7 @@
     "module": 2,
     "code": "ZU10M205"
   },
- {
+  {
     "file": "zakhyst_10_m2_zvannia2.xlsx",
     "id": "zakhyst_10_m2_zvannia2",
     "subject": "Захист України",
@@ -1582,5 +1582,3515 @@
     "title": "Модуль 6. Військові професії. Бойові медики",
     "module": 6,
     "code": "ZU10M612"
+  },
+  {
+    "file": "inf_10_1-1.xlsx",
+    "id": "inf_10_1-1",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Тенденції розвитку IT",
+    "module": 1,
+    "code": "IN10M101"
+  },
+  {
+    "file": "inf_10_1-10.xlsx",
+    "id": "inf_10_1-10",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Комплексний кіберзахист",
+    "module": 1,
+    "code": "IN10M110"
+  },
+  {
+    "file": "inf_10_1-2.xlsx",
+    "id": "inf_10_1-2",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Інформаційне суспільство",
+    "module": 1,
+    "code": "IN10M102"
+  },
+  {
+    "file": "inf_10_1-3.xlsx",
+    "id": "inf_10_1-3",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Правові та етичні норми в IT",
+    "module": 1,
+    "code": "IN10M103"
+  },
+  {
+    "file": "inf_10_1-4.xlsx",
+    "id": "inf_10_1-4",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Захист інтелектуальної власності",
+    "module": 1,
+    "code": "IN10M104"
+  },
+  {
+    "file": "inf_10_1-5.xlsx",
+    "id": "inf_10_1-5",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Цифрова репутація",
+    "module": 1,
+    "code": "IN10M105"
+  },
+  {
+    "file": "inf_10_1-6.xlsx",
+    "id": "inf_10_1-6",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Протидія кібербулінгу",
+    "module": 1,
+    "code": "IN10M106"
+  },
+  {
+    "file": "inf_10_1-7.xlsx",
+    "id": "inf_10_1-7",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Принципи криптографії",
+    "module": 1,
+    "code": "IN10M107"
+  },
+  {
+    "file": "inf_10_1-8.xlsx",
+    "id": "inf_10_1-8",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Кваліфікований електронний підпис",
+    "module": 1,
+    "code": "IN10M108"
+  },
+  {
+    "file": "inf_10_1-9.xlsx",
+    "id": "inf_10_1-9",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Законодавство про захист персональних даних",
+    "module": 1,
+    "code": "IN10M109"
+  },
+  {
+    "file": "inf_10_2-1.xlsx",
+    "id": "inf_10_2-1",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Принципи побудови мереж",
+    "module": 2,
+    "code": "IN10M201"
+  },
+  {
+    "file": "inf_10_2-10.xlsx",
+    "id": "inf_10_2-10",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Налаштування середовища співпраці",
+    "module": 2,
+    "code": "IN10M210"
+  },
+  {
+    "file": "inf_10_2-2.xlsx",
+    "id": "inf_10_2-2",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Протоколи та IP-адресація",
+    "module": 2,
+    "code": "IN10M202"
+  },
+  {
+    "file": "inf_10_2-3.xlsx",
+    "id": "inf_10_2-3",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Принцип роботи DNS",
+    "module": 2,
+    "code": "IN10M203"
+  },
+  {
+    "file": "inf_10_2-4.xlsx",
+    "id": "inf_10_2-4",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Мережеве обладнання",
+    "module": 2,
+    "code": "IN10M204"
+  },
+  {
+    "file": "inf_10_2-5.xlsx",
+    "id": "inf_10_2-5",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Хмарна інфраструктура",
+    "module": 2,
+    "code": "IN10M205"
+  },
+  {
+    "file": "inf_10_2-6.xlsx",
+    "id": "inf_10_2-6",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Сервіси тайм-менеджменту",
+    "module": 2,
+    "code": "IN10M206"
+  },
+  {
+    "file": "inf_10_2-7.xlsx",
+    "id": "inf_10_2-7",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Платформи відеокомунікації",
+    "module": 2,
+    "code": "IN10M207"
+  },
+  {
+    "file": "inf_10_2-8.xlsx",
+    "id": "inf_10_2-8",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Корпоративне хмарне сховище",
+    "module": 2,
+    "code": "IN10M208"
+  },
+  {
+    "file": "inf_10_2-9.xlsx",
+    "id": "inf_10_2-9",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Адміністрування прав доступу",
+    "module": 2,
+    "code": "IN10M209"
+  },
+  {
+    "file": "inf_10_3-1.xlsx",
+    "id": "inf_10_3-1",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Етапи проєктування БД",
+    "module": 3,
+    "code": "IN10M301"
+  },
+  {
+    "file": "inf_10_3-10.xlsx",
+    "id": "inf_10_3-10",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Обчислення в запитах СУБД",
+    "module": 3,
+    "code": "IN10M310"
+  },
+  {
+    "file": "inf_10_3-11.xlsx",
+    "id": "inf_10_3-11",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Генерація звітів у БД",
+    "module": 3,
+    "code": "IN10M311"
+  },
+  {
+    "file": "inf_10_3-12.xlsx",
+    "id": "inf_10_3-12",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Імпорт та експорт даних у СУБД",
+    "module": 3,
+    "code": "IN10M312"
+  },
+  {
+    "file": "inf_10_3-2.xlsx",
+    "id": "inf_10_3-2",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Сутності та атрибути в БД",
+    "module": 3,
+    "code": "IN10M302"
+  },
+  {
+    "file": "inf_10_3-3.xlsx",
+    "id": "inf_10_3-3",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Типи зв'язків між таблицями",
+    "module": 3,
+    "code": "IN10M303"
+  },
+  {
+    "file": "inf_10_3-4.xlsx",
+    "id": "inf_10_3-4",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Основи нормалізації БД",
+    "module": 3,
+    "code": "IN10M304"
+  },
+  {
+    "file": "inf_10_3-5.xlsx",
+    "id": "inf_10_3-5",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Створення таблиць у СУБД",
+    "module": 3,
+    "code": "IN10M305"
+  },
+  {
+    "file": "inf_10_3-6.xlsx",
+    "id": "inf_10_3-6",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Типи даних та обмеження в БД",
+    "module": 3,
+    "code": "IN10M306"
+  },
+  {
+    "file": "inf_10_3-7.xlsx",
+    "id": "inf_10_3-7",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Схема даних та зв'язки",
+    "module": 3,
+    "code": "IN10M307"
+  },
+  {
+    "file": "inf_10_3-8.xlsx",
+    "id": "inf_10_3-8",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Форми в СУБД",
+    "module": 3,
+    "code": "IN10M308"
+  },
+  {
+    "file": "inf_10_3-9.xlsx",
+    "id": "inf_10_3-9",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Складні запити на вибірку",
+    "module": 3,
+    "code": "IN10M309"
+  },
+  {
+    "file": "inf_10_rik.xlsx",
+    "id": "inf_10_rik",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Річний. Інформатика 10 клас",
+    "module": null,
+    "code": "IN10R"
+  },
+  {
+    "file": "inf_10_sem1.xlsx",
+    "id": "inf_10_sem1",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Семестровий 1. Модулі 1-2",
+    "module": null,
+    "code": "IN10S1"
+  },
+  {
+    "file": "inf_10_sem2.xlsx",
+    "id": "inf_10_sem2",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Семестровий 2. Модуль 3",
+    "module": null,
+    "code": "IN10S2"
+  },
+  {
+    "file": "inf_10_tem1.xlsx",
+    "id": "inf_10_tem1",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Тематичний. Інформаційне суспільство та кібербезпека",
+    "module": null,
+    "code": "IN10T1"
+  },
+  {
+    "file": "inf_10_tem2.xlsx",
+    "id": "inf_10_tem2",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Тематичний. Мережеві технології та хмарні сервіси",
+    "module": null,
+    "code": "IN10T2"
+  },
+  {
+    "file": "inf_10_tem3.xlsx",
+    "id": "inf_10_tem3",
+    "subject": "Інформатика",
+    "grade": 10,
+    "title": "Тематичний. Проєктування та робота з Базами Даних",
+    "module": null,
+    "code": "IN10T3"
+  },
+  {
+    "file": "inf_11_1-1.xlsx",
+    "id": "inf_11_1-1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Порівняння растрової та векторної графіки",
+    "module": 1,
+    "code": "IN11M101"
+  },
+  {
+    "file": "inf_11_1-2.xlsx",
+    "id": "inf_11_1-2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Графічні формати файлів",
+    "module": 1,
+    "code": "IN11M102"
+  },
+  {
+    "file": "inf_11_1-3.xlsx",
+    "id": "inf_11_1-3",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Колірні моделі в компʼютерній графіці",
+    "module": 1,
+    "code": "IN11M103"
+  },
+  {
+    "file": "inf_11_1-4.xlsx",
+    "id": "inf_11_1-4",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Основи графічного дизайну",
+    "module": 1,
+    "code": "IN11M104"
+  },
+  {
+    "file": "inf_11_1-5.xlsx",
+    "id": "inf_11_1-5",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Векторні обʼєкти та криві",
+    "module": 1,
+    "code": "IN11M105"
+  },
+  {
+    "file": "inf_11_1-6.xlsx",
+    "id": "inf_11_1-6",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Ретуш та кольорокорекція",
+    "module": 1,
+    "code": "IN11M106"
+  },
+  {
+    "file": "inf_11_1-7.xlsx",
+    "id": "inf_11_1-7",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Опрацювання аудіоданих",
+    "module": 1,
+    "code": "IN11M107"
+  },
+  {
+    "file": "inf_11_1-8.xlsx",
+    "id": "inf_11_1-8",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Основи відеомонтажу",
+    "module": 1,
+    "code": "IN11M108"
+  },
+  {
+    "file": "inf_11_2-1.xlsx",
+    "id": "inf_11_2-1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Методи аналізу даних",
+    "module": 2,
+    "code": "IN11M201"
+  },
+  {
+    "file": "inf_11_2-2.xlsx",
+    "id": "inf_11_2-2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Статистичні вибірки",
+    "module": 2,
+    "code": "IN11M202"
+  },
+  {
+    "file": "inf_11_2-3.xlsx",
+    "id": "inf_11_2-3",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Лінії тренду та прогнозування",
+    "module": 2,
+    "code": "IN11M203"
+  },
+  {
+    "file": "inf_11_2-4.xlsx",
+    "id": "inf_11_2-4",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Аналіз «Що-якщо» та Пошук рішення",
+    "module": 2,
+    "code": "IN11M204"
+  },
+  {
+    "file": "inf_11_2-5.xlsx",
+    "id": "inf_11_2-5",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Розвʼязання оптимізаційних задач",
+    "module": 2,
+    "code": "IN11M205"
+  },
+  {
+    "file": "inf_11_2-6.xlsx",
+    "id": "inf_11_2-6",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Прикладні компʼютерні моделі",
+    "module": 2,
+    "code": "IN11M206"
+  },
+  {
+    "file": "inf_11_2-7.xlsx",
+    "id": "inf_11_2-7",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Оцінка точності моделювання",
+    "module": 2,
+    "code": "IN11M207"
+  },
+  {
+    "file": "inf_11_2-8.xlsx",
+    "id": "inf_11_2-8",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Візуалізація складних моделей",
+    "module": 2,
+    "code": "IN11M208"
+  },
+  {
+    "file": "inf_11_3-1.xlsx",
+    "id": "inf_11_3-1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Етапи розробки вебсайту",
+    "module": 3,
+    "code": "IN11M301"
+  },
+  {
+    "file": "inf_11_3-2.xlsx",
+    "id": "inf_11_3-2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Юзабіліті та зручність сайтів",
+    "module": 3,
+    "code": "IN11M302"
+  },
+  {
+    "file": "inf_11_3-3.xlsx",
+    "id": "inf_11_3-3",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Макетування вебсторінок",
+    "module": 3,
+    "code": "IN11M303"
+  },
+  {
+    "file": "inf_11_3-4.xlsx",
+    "id": "inf_11_3-4",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Основи систем CMS",
+    "module": 3,
+    "code": "IN11M304"
+  },
+  {
+    "file": "inf_11_3-5.xlsx",
+    "id": "inf_11_3-5",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Онлайн-конструктори сайтів",
+    "module": 3,
+    "code": "IN11M305"
+  },
+  {
+    "file": "inf_11_3-6.xlsx",
+    "id": "inf_11_3-6",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Управління контентом сайту",
+    "module": 3,
+    "code": "IN11M306"
+  },
+  {
+    "file": "inf_11_3-7.xlsx",
+    "id": "inf_11_3-7",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Адаптивний вебдизайн",
+    "module": 3,
+    "code": "IN11M307"
+  },
+  {
+    "file": "inf_11_3-8.xlsx",
+    "id": "inf_11_3-8",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Основи SEO-оптимізації",
+    "module": 3,
+    "code": "IN11M308"
+  },
+  {
+    "file": "inf_11_3-9.xlsx",
+    "id": "inf_11_3-9",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Хостинг та публікація сайту",
+    "module": 3,
+    "code": "IN11M309"
+  },
+  {
+    "file": "inf_11_4-1.xlsx",
+    "id": "inf_11_4-1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Основи Штучного Інтелекту",
+    "module": 4,
+    "code": "IN11M401"
+  },
+  {
+    "file": "inf_11_4-2.xlsx",
+    "id": "inf_11_4-2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Машинне навчання",
+    "module": 4,
+    "code": "IN11M402"
+  },
+  {
+    "file": "inf_11_4-3.xlsx",
+    "id": "inf_11_4-3",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Генеративні нейромережі",
+    "module": 4,
+    "code": "IN11M403"
+  },
+  {
+    "file": "inf_11_4-4.xlsx",
+    "id": "inf_11_4-4",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Технології Big Data",
+    "module": 4,
+    "code": "IN11M404"
+  },
+  {
+    "file": "inf_11_4-5.xlsx",
+    "id": "inf_11_4-5",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Інтернет речей (IoT)",
+    "module": 4,
+    "code": "IN11M405"
+  },
+  {
+    "file": "inf_11_4-6.xlsx",
+    "id": "inf_11_4-6",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Віртуалізація та хмарні обчислення",
+    "module": 4,
+    "code": "IN11M406"
+  },
+  {
+    "file": "inf_11_4-7.xlsx",
+    "id": "inf_11_4-7",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Етика та майбутнє технологій",
+    "module": 4,
+    "code": "IN11M407"
+  },
+  {
+    "file": "inf_11_rik.xlsx",
+    "id": "inf_11_rik",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Річний тест 11 клас",
+    "module": null,
+    "code": "IN11R"
+  },
+  {
+    "file": "inf_11_sem1.xlsx",
+    "id": "inf_11_sem1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Семестровий тест І семестр (М1+М2)",
+    "module": null,
+    "code": "IN11S1"
+  },
+  {
+    "file": "inf_11_sem2.xlsx",
+    "id": "inf_11_sem2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Семестровий тест ІІ семестр (М3+М4)",
+    "module": null,
+    "code": "IN11S2"
+  },
+  {
+    "file": "inf_11_tem1.xlsx",
+    "id": "inf_11_tem1",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Тематичний тест М1: Компʼютерна графіка та медіа",
+    "module": null,
+    "code": "IN11T1"
+  },
+  {
+    "file": "inf_11_tem2.xlsx",
+    "id": "inf_11_tem2",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Тематичний тест М2: Аналіз даних та моделювання",
+    "module": null,
+    "code": "IN11T2"
+  },
+  {
+    "file": "inf_11_tem3.xlsx",
+    "id": "inf_11_tem3",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Тематичний тест М3: Вебдизайн та публікація",
+    "module": null,
+    "code": "IN11T3"
+  },
+  {
+    "file": "inf_11_tem4.xlsx",
+    "id": "inf_11_tem4",
+    "subject": "Інформатика",
+    "grade": 11,
+    "title": "Тематичний тест М4: Сучасні технології та ШІ",
+    "module": null,
+    "code": "IN11T4"
+  },
+  {
+    "file": "inf_12_1-1.xlsx",
+    "id": "inf_12_1-1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Розширені бази даних",
+    "module": 1,
+    "code": "IN12M101"
+  },
+  {
+    "file": "inf_12_1-2.xlsx",
+    "id": "inf_12_1-2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Основи мови SQL",
+    "module": 1,
+    "code": "IN12M102"
+  },
+  {
+    "file": "inf_12_1-3.xlsx",
+    "id": "inf_12_1-3",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Умови вибірки в SQL",
+    "module": 1,
+    "code": "IN12M103"
+  },
+  {
+    "file": "inf_12_1-4.xlsx",
+    "id": "inf_12_1-4",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Угруповання даних в SQL",
+    "module": 1,
+    "code": "IN12M104"
+  },
+  {
+    "file": "inf_12_1-5.xlsx",
+    "id": "inf_12_1-5",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Обʼєднання таблиць в SQL",
+    "module": 1,
+    "code": "IN12M105"
+  },
+  {
+    "file": "inf_12_1-6.xlsx",
+    "id": "inf_12_1-6",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Очищення та підготовка даних",
+    "module": 1,
+    "code": "IN12M106"
+  },
+  {
+    "file": "inf_12_1-7.xlsx",
+    "id": "inf_12_1-7",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Обробка аномалій у даних",
+    "module": 1,
+    "code": "IN12M107"
+  },
+  {
+    "file": "inf_12_1-8.xlsx",
+    "id": "inf_12_1-8",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Зведені таблиці для аналітики",
+    "module": 1,
+    "code": "IN12M108"
+  },
+  {
+    "file": "inf_12_1-9.xlsx",
+    "id": "inf_12_1-9",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Побудова аналітичних дашбордів",
+    "module": 1,
+    "code": "IN12M109"
+  },
+  {
+    "file": "inf_12_2-1.xlsx",
+    "id": "inf_12_2-1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Автоматизація завдань скриптами",
+    "module": 2,
+    "code": "IN12M201"
+  },
+  {
+    "file": "inf_12_2-2.xlsx",
+    "id": "inf_12_2-2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Файлові операції в Python",
+    "module": 2,
+    "code": "IN12M202"
+  },
+  {
+    "file": "inf_12_2-3.xlsx",
+    "id": "inf_12_2-3",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Обробка помилок try-except",
+    "module": 2,
+    "code": "IN12M203"
+  },
+  {
+    "file": "inf_12_2-4.xlsx",
+    "id": "inf_12_2-4",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Системні бібліотеки Python",
+    "module": 2,
+    "code": "IN12M204"
+  },
+  {
+    "file": "inf_12_2-5.xlsx",
+    "id": "inf_12_2-5",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Основи бібліотеки NumPy",
+    "module": 2,
+    "code": "IN12M205"
+  },
+  {
+    "file": "inf_12_2-6.xlsx",
+    "id": "inf_12_2-6",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Структури даних Pandas",
+    "module": 2,
+    "code": "IN12M206"
+  },
+  {
+    "file": "inf_12_2-7.xlsx",
+    "id": "inf_12_2-7",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Фільтрація датафреймів",
+    "module": 2,
+    "code": "IN12M207"
+  },
+  {
+    "file": "inf_12_2-8.xlsx",
+    "id": "inf_12_2-8",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Візуалізація кодом Matplotlib",
+    "module": 2,
+    "code": "IN12M208"
+  },
+  {
+    "file": "inf_12_2-9.xlsx",
+    "id": "inf_12_2-9",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Підготовка підсумкового скрипту",
+    "module": 2,
+    "code": "IN12M209"
+  },
+  {
+    "file": "inf_12_3-1.xlsx",
+    "id": "inf_12_3-1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Клієнт-серверна модель",
+    "module": 3,
+    "code": "IN12M301"
+  },
+  {
+    "file": "inf_12_3-2.xlsx",
+    "id": "inf_12_3-2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Протокол HTTP та запити",
+    "module": 3,
+    "code": "IN12M302"
+  },
+  {
+    "file": "inf_12_3-3.xlsx",
+    "id": "inf_12_3-3",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Формат JSON та API",
+    "module": 3,
+    "code": "IN12M303"
+  },
+  {
+    "file": "inf_12_3-4.xlsx",
+    "id": "inf_12_3-4",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Компоненти Frontend і Backend",
+    "module": 3,
+    "code": "IN12M304"
+  },
+  {
+    "file": "inf_12_3-5.xlsx",
+    "id": "inf_12_3-5",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Основи системи Git",
+    "module": 3,
+    "code": "IN12M305"
+  },
+  {
+    "file": "inf_12_3-6.xlsx",
+    "id": "inf_12_3-6",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Віддалені репозиторії GitHub",
+    "module": 3,
+    "code": "IN12M306"
+  },
+  {
+    "file": "inf_12_3-7.xlsx",
+    "id": "inf_12_3-7",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Хостинг та деплой проєктів",
+    "module": 3,
+    "code": "IN12M307"
+  },
+  {
+    "file": "inf_12_3-8.xlsx",
+    "id": "inf_12_3-8",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Тестування та валідація коду",
+    "module": 3,
+    "code": "IN12M308"
+  },
+  {
+    "file": "inf_12_4-1.xlsx",
+    "id": "inf_12_4-1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Поняття віртуалізації",
+    "module": 4,
+    "code": "IN12M401"
+  },
+  {
+    "file": "inf_12_4-2.xlsx",
+    "id": "inf_12_4-2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Моделі хмарних сервісів",
+    "module": 4,
+    "code": "IN12M402"
+  },
+  {
+    "file": "inf_12_4-3.xlsx",
+    "id": "inf_12_4-3",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Стратегії резервування даних",
+    "module": 4,
+    "code": "IN12M403"
+  },
+  {
+    "file": "inf_12_4-4.xlsx",
+    "id": "inf_12_4-4",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Аналіз вразливостей систем",
+    "module": 4,
+    "code": "IN12M404"
+  },
+  {
+    "file": "inf_12_4-5.xlsx",
+    "id": "inf_12_4-5",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Аудит безпеки систем",
+    "module": 4,
+    "code": "IN12M405"
+  },
+  {
+    "file": "inf_12_4-6.xlsx",
+    "id": "inf_12_4-6",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Проєктування цифрового рішення",
+    "module": 4,
+    "code": "IN12M406"
+  },
+  {
+    "file": "inf_12_4-7.xlsx",
+    "id": "inf_12_4-7",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Оформлення підсумкового проєкту",
+    "module": 4,
+    "code": "IN12M407"
+  },
+  {
+    "file": "inf_12_rik.xlsx",
+    "id": "inf_12_rik",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Річний тест (Модулі 1-4)",
+    "module": null,
+    "code": "IN12R"
+  },
+  {
+    "file": "inf_12_sem1.xlsx",
+    "id": "inf_12_sem1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Семестровий тест №1 (Модулі 1-2)",
+    "module": null,
+    "code": "IN12S1"
+  },
+  {
+    "file": "inf_12_sem2.xlsx",
+    "id": "inf_12_sem2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Семестровий тест №2 (Модулі 3-4)",
+    "module": null,
+    "code": "IN12S2"
+  },
+  {
+    "file": "inf_12_tem1.xlsx",
+    "id": "inf_12_tem1",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Поглиблене управління даними та аналітика",
+    "module": null,
+    "code": "IN12T1"
+  },
+  {
+    "file": "inf_12_tem2.xlsx",
+    "id": "inf_12_tem2",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Прикладне програмування та автоматизація",
+    "module": null,
+    "code": "IN12T2"
+  },
+  {
+    "file": "inf_12_tem3.xlsx",
+    "id": "inf_12_tem3",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Веброзробка та інформаційна архітектура",
+    "module": null,
+    "code": "IN12T3"
+  },
+  {
+    "file": "inf_12_tem4.xlsx",
+    "id": "inf_12_tem4",
+    "subject": "Інформатика",
+    "grade": 12,
+    "title": "Цифрова інженерія та захист інформації",
+    "module": null,
+    "code": "IN12T4"
+  },
+  {
+    "file": "inf_5_1-1.xlsx",
+    "id": "inf_5_1-1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Правила безпеки та робоче місце",
+    "module": 1,
+    "code": "IN5M101"
+  },
+  {
+    "file": "inf_5_1-10.xlsx",
+    "id": "inf_5_1-10",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Файли, папки та ярлики",
+    "module": 1,
+    "code": "IN5M110"
+  },
+  {
+    "file": "inf_5_1-11.xlsx",
+    "id": "inf_5_1-11",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Типи та розширення файлів",
+    "module": 1,
+    "code": "IN5M111"
+  },
+  {
+    "file": "inf_5_1-12.xlsx",
+    "id": "inf_5_1-12",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Операції з файлами та папками",
+    "module": 1,
+    "code": "IN5M112"
+  },
+  {
+    "file": "inf_5_1-13.xlsx",
+    "id": "inf_5_1-13",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пошук об'єктів у системи",
+    "module": 1,
+    "code": "IN5M113"
+  },
+  {
+    "file": "inf_5_1-14.xlsx",
+    "id": "inf_5_1-14",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Впорядкування файлових об'єктів",
+    "module": 1,
+    "code": "IN5M114"
+  },
+  {
+    "file": "inf_5_1-2.xlsx",
+    "id": "inf_5_1-2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Поняття та види інформації",
+    "module": 1,
+    "code": "IN5M102"
+  },
+  {
+    "file": "inf_5_1-3.xlsx",
+    "id": "inf_5_1-3",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Властивості інформації",
+    "module": 1,
+    "code": "IN5M103"
+  },
+  {
+    "file": "inf_5_1-4.xlsx",
+    "id": "inf_5_1-4",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Інформаційні процеси",
+    "module": 1,
+    "code": "IN5M104"
+  },
+  {
+    "file": "inf_5_1-5.xlsx",
+    "id": "inf_5_1-5",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Складові комп’ютера",
+    "module": 1,
+    "code": "IN5M105"
+  },
+  {
+    "file": "inf_5_1-6.xlsx",
+    "id": "inf_5_1-6",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пристрої введення даних",
+    "module": 1,
+    "code": "IN5M106"
+  },
+  {
+    "file": "inf_5_1-7.xlsx",
+    "id": "inf_5_1-7",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пристрої виведення даних",
+    "module": 1,
+    "code": "IN5M107"
+  },
+  {
+    "file": "inf_5_1-8.xlsx",
+    "id": "inf_5_1-8",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пам'ять комп'ютера",
+    "module": 1,
+    "code": "IN5M108"
+  },
+  {
+    "file": "inf_5_1-9.xlsx",
+    "id": "inf_5_1-9",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Призначення операційної системи",
+    "module": 1,
+    "code": "IN5M109"
+  },
+  {
+    "file": "inf_5_2-1.xlsx",
+    "id": "inf_5_2-1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Види комп’ютерних мереж",
+    "module": 2,
+    "code": "IN5M201"
+  },
+  {
+    "file": "inf_5_2-10.xlsx",
+    "id": "inf_5_2-10",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Достовірність вебджерел",
+    "module": 2,
+    "code": "IN5M210"
+  },
+  {
+    "file": "inf_5_2-11.xlsx",
+    "id": "inf_5_2-11",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Основи авторського права",
+    "module": 2,
+    "code": "IN5M211"
+  },
+  {
+    "file": "inf_5_2-12.xlsx",
+    "id": "inf_5_2-12",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Правила цифрової гігієни",
+    "module": 2,
+    "code": "IN5M212"
+  },
+  {
+    "file": "inf_5_2-2.xlsx",
+    "id": "inf_5_2-2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Поняття Інтернету та WWW",
+    "module": 2,
+    "code": "IN5M202"
+  },
+  {
+    "file": "inf_5_2-3.xlsx",
+    "id": "inf_5_2-3",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Робота з браузером",
+    "module": 2,
+    "code": "IN5M203"
+  },
+  {
+    "file": "inf_5_2-4.xlsx",
+    "id": "inf_5_2-4",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пошукові системи та запити",
+    "module": 2,
+    "code": "IN5M204"
+  },
+  {
+    "file": "inf_5_2-5.xlsx",
+    "id": "inf_5_2-5",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Безпечний пошук в Інтернеті",
+    "module": 2,
+    "code": "IN5M205"
+  },
+  {
+    "file": "inf_5_2-6.xlsx",
+    "id": "inf_5_2-6",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Збереження інформації з вебсторінок",
+    "module": 2,
+    "code": "IN5M206"
+  },
+  {
+    "file": "inf_5_2-7.xlsx",
+    "id": "inf_5_2-7",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Інтернет-загрози та ризики",
+    "module": 2,
+    "code": "IN5M207"
+  },
+  {
+    "file": "inf_5_2-8.xlsx",
+    "id": "inf_5_2-8",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Захист персональних даних",
+    "module": 2,
+    "code": "IN5M208"
+  },
+  {
+    "file": "inf_5_2-9.xlsx",
+    "id": "inf_5_2-9",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Мережевий етикет",
+    "module": 2,
+    "code": "IN5M209"
+  },
+  {
+    "file": "inf_5_3-1.xlsx",
+    "id": "inf_5_3-1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Інтерфейс текстового процесора",
+    "module": 3,
+    "code": "IN5M301"
+  },
+  {
+    "file": "inf_5_3-10.xlsx",
+    "id": "inf_5_3-10",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Створення графічних примітивів",
+    "module": 3,
+    "code": "IN5M310"
+  },
+  {
+    "file": "inf_5_3-11.xlsx",
+    "id": "inf_5_3-11",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Трансформація об’єктів у малюнку",
+    "module": 3,
+    "code": "IN5M311"
+  },
+  {
+    "file": "inf_5_3-12.xlsx",
+    "id": "inf_5_3-12",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Текст у графічному редакторі",
+    "module": 3,
+    "code": "IN5M312"
+  },
+  {
+    "file": "inf_5_3-13.xlsx",
+    "id": "inf_5_3-13",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Формати текстових та графічних файлів",
+    "module": 3,
+    "code": "IN5M313"
+  },
+  {
+    "file": "inf_5_3-2.xlsx",
+    "id": "inf_5_3-2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Введення та редагування тексту",
+    "module": 3,
+    "code": "IN5M302"
+  },
+  {
+    "file": "inf_5_3-3.xlsx",
+    "id": "inf_5_3-3",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Перевірка правопису",
+    "module": 3,
+    "code": "IN5M303"
+  },
+  {
+    "file": "inf_5_3-4.xlsx",
+    "id": "inf_5_3-4",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Форматування символів",
+    "module": 3,
+    "code": "IN5M304"
+  },
+  {
+    "file": "inf_5_3-5.xlsx",
+    "id": "inf_5_3-5",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Форматування абзаців",
+    "module": 3,
+    "code": "IN5M305"
+  },
+  {
+    "file": "inf_5_3-6.xlsx",
+    "id": "inf_5_3-6",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Графіка в текстовому документі",
+    "module": 3,
+    "code": "IN5M306"
+  },
+  {
+    "file": "inf_5_3-7.xlsx",
+    "id": "inf_5_3-7",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Редагування зображень у тексті",
+    "module": 3,
+    "code": "IN5M307"
+  },
+  {
+    "file": "inf_5_3-8.xlsx",
+    "id": "inf_5_3-8",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Види комп’ютерної графіки",
+    "module": 3,
+    "code": "IN5M308"
+  },
+  {
+    "file": "inf_5_3-9.xlsx",
+    "id": "inf_5_3-9",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Інструменти графічного редактора",
+    "module": 3,
+    "code": "IN5M309"
+  },
+  {
+    "file": "inf_5_4-1.xlsx",
+    "id": "inf_5_4-1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Поняття алгоритму та виконавця",
+    "module": 4,
+    "code": "IN5M401"
+  },
+  {
+    "file": "inf_5_4-2.xlsx",
+    "id": "inf_5_4-2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Форми подання алгоритмів",
+    "module": 4,
+    "code": "IN5M402"
+  },
+  {
+    "file": "inf_5_4-3.xlsx",
+    "id": "inf_5_4-3",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Інтерфейс середовища Scratch",
+    "module": 4,
+    "code": "IN5M403"
+  },
+  {
+    "file": "inf_5_4-4.xlsx",
+    "id": "inf_5_4-4",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Образи та тло в Scratch",
+    "module": 4,
+    "code": "IN5M404"
+  },
+  {
+    "file": "inf_5_4-5.xlsx",
+    "id": "inf_5_4-5",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Лінійні алгоритми",
+    "module": 4,
+    "code": "IN5M405"
+  },
+  {
+    "file": "inf_5_4-6.xlsx",
+    "id": "inf_5_4-6",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Команди руху в Scratch",
+    "module": 4,
+    "code": "IN5M406"
+  },
+  {
+    "file": "inf_5_4-7.xlsx",
+    "id": "inf_5_4-7",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Зовнішній вигляд та звук у Scratch",
+    "module": 4,
+    "code": "IN5M407"
+  },
+  {
+    "file": "inf_5_4-8.xlsx",
+    "id": "inf_5_4-8",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Пошук помилок у програмі",
+    "module": 4,
+    "code": "IN5M408"
+  },
+  {
+    "file": "inf_5_4-9.xlsx",
+    "id": "inf_5_4-9",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Розробка підсумкового проєкту",
+    "module": 4,
+    "code": "IN5M409"
+  },
+  {
+    "file": "inf_5_rik.xlsx",
+    "id": "inf_5_rik",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Річний тест",
+    "module": null,
+    "code": "IN5R"
+  },
+  {
+    "file": "inf_5_sem1.xlsx",
+    "id": "inf_5_sem1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Семестровий тест. 1 семестр",
+    "module": null,
+    "code": "IN5S1"
+  },
+  {
+    "file": "inf_5_sem2.xlsx",
+    "id": "inf_5_sem2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Семестровий тест. 2 семестр",
+    "module": null,
+    "code": "IN5S2"
+  },
+  {
+    "file": "inf_5_tem1.xlsx",
+    "id": "inf_5_tem1",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Тематичний тест. Модуль 1",
+    "module": null,
+    "code": "IN5T1"
+  },
+  {
+    "file": "inf_5_tem2.xlsx",
+    "id": "inf_5_tem2",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Тематичний тест. Модуль 2",
+    "module": null,
+    "code": "IN5T2"
+  },
+  {
+    "file": "inf_5_tem3.xlsx",
+    "id": "inf_5_tem3",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Тематичний тест. Модуль 3",
+    "module": null,
+    "code": "IN5T3"
+  },
+  {
+    "file": "inf_5_tem4.xlsx",
+    "id": "inf_5_tem4",
+    "subject": "Інформатика",
+    "grade": 5,
+    "title": "Тематичний тест. Модуль 4",
+    "module": null,
+    "code": "IN5T4"
+  },
+  {
+    "file": "inf_6_1-1.xlsx",
+    "id": "inf_6_1-1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Інформаційні ресурси та безпека",
+    "module": 1,
+    "code": "IN6M101"
+  },
+  {
+    "file": "inf_6_1-10.xlsx",
+    "id": "inf_6_1-10",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Правила цитування",
+    "module": 1,
+    "code": "IN6M110"
+  },
+  {
+    "file": "inf_6_1-11.xlsx",
+    "id": "inf_6_1-11",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Захист авторських прав",
+    "module": 1,
+    "code": "IN6M111"
+  },
+  {
+    "file": "inf_6_1-12.xlsx",
+    "id": "inf_6_1-12",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Аналіз медіатекстів",
+    "module": 1,
+    "code": "IN6M112"
+  },
+  {
+    "file": "inf_6_1-2.xlsx",
+    "id": "inf_6_1-2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Формування пошукових запитів",
+    "module": 1,
+    "code": "IN6M102"
+  },
+  {
+    "file": "inf_6_1-3.xlsx",
+    "id": "inf_6_1-3",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Логічні оператори в пошуку",
+    "module": 1,
+    "code": "IN6M103"
+  },
+  {
+    "file": "inf_6_1-4.xlsx",
+    "id": "inf_6_1-4",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Критерії достовірності джерел",
+    "module": 1,
+    "code": "IN6M104"
+  },
+  {
+    "file": "inf_6_1-5.xlsx",
+    "id": "inf_6_1-5",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Розпізнавання фейків",
+    "module": 1,
+    "code": "IN6M105"
+  },
+  {
+    "file": "inf_6_1-6.xlsx",
+    "id": "inf_6_1-6",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Методи фактчекінгу",
+    "module": 1,
+    "code": "IN6M106"
+  },
+  {
+    "file": "inf_6_1-7.xlsx",
+    "id": "inf_6_1-7",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Цифрове авторське право",
+    "module": 1,
+    "code": "IN6M107"
+  },
+  {
+    "file": "inf_6_1-8.xlsx",
+    "id": "inf_6_1-8",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Відкриті ліцензії Creative Commons",
+    "module": 1,
+    "code": "IN6M108"
+  },
+  {
+    "file": "inf_6_1-9.xlsx",
+    "id": "inf_6_1-9",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Академічна доброчесність",
+    "module": 1,
+    "code": "IN6M109"
+  },
+  {
+    "file": "inf_6_2-1.xlsx",
+    "id": "inf_6_2-1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Принцип роботи електронної пошти",
+    "module": 2,
+    "code": "IN6M201"
+  },
+  {
+    "file": "inf_6_2-10.xlsx",
+    "id": "inf_6_2-10",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Спільне редагування у хмарі",
+    "module": 2,
+    "code": "IN6M210"
+  },
+  {
+    "file": "inf_6_2-11.xlsx",
+    "id": "inf_6_2-11",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Онлайн-інструменти групової роботи",
+    "module": 2,
+    "code": "IN6M211"
+  },
+  {
+    "file": "inf_6_2-12.xlsx",
+    "id": "inf_6_2-12",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Онлайн-форми та опитування",
+    "module": 2,
+    "code": "IN6M212"
+  },
+  {
+    "file": "inf_6_2-13.xlsx",
+    "id": "inf_6_2-13",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Організація хмарного проєкту",
+    "module": 2,
+    "code": "IN6M213"
+  },
+  {
+    "file": "inf_6_2-2.xlsx",
+    "id": "inf_6_2-2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Налаштування поштової скриньки",
+    "module": 2,
+    "code": "IN6M202"
+  },
+  {
+    "file": "inf_6_2-3.xlsx",
+    "id": "inf_6_2-3",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Написання та надсилання листів",
+    "module": 2,
+    "code": "IN6M203"
+  },
+  {
+    "file": "inf_6_2-4.xlsx",
+    "id": "inf_6_2-4",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Вкладення в електронних листах",
+    "module": 2,
+    "code": "IN6M204"
+  },
+  {
+    "file": "inf_6_2-5.xlsx",
+    "id": "inf_6_2-5",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Адресна книга та групи",
+    "module": 2,
+    "code": "IN6M205"
+  },
+  {
+    "file": "inf_6_2-6.xlsx",
+    "id": "inf_6_2-6",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Етикет електронної переписки",
+    "module": 2,
+    "code": "IN6M206"
+  },
+  {
+    "file": "inf_6_2-7.xlsx",
+    "id": "inf_6_2-7",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Поняття хмарних сховищ",
+    "module": 2,
+    "code": "IN6M207"
+  },
+  {
+    "file": "inf_6_2-8.xlsx",
+    "id": "inf_6_2-8",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Управління файлами в хмарі",
+    "module": 2,
+    "code": "IN6M208"
+  },
+  {
+    "file": "inf_6_2-9.xlsx",
+    "id": "inf_6_2-9",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Рівні спільного доступу",
+    "module": 2,
+    "code": "IN6M209"
+  },
+  {
+    "file": "inf_6_3-1.xlsx",
+    "id": "inf_6_3-1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Поняття мультимедіа",
+    "module": 3,
+    "code": "IN6M301"
+  },
+  {
+    "file": "inf_6_3-10.xlsx",
+    "id": "inf_6_3-10",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Анімація об'єктів слайду",
+    "module": 3,
+    "code": "IN6M310"
+  },
+  {
+    "file": "inf_6_3-11.xlsx",
+    "id": "inf_6_3-11",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Переходи між слайдами",
+    "module": 3,
+    "code": "IN6M311"
+  },
+  {
+    "file": "inf_6_3-12.xlsx",
+    "id": "inf_6_3-12",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Демонстрація презентацій",
+    "module": 3,
+    "code": "IN6M312"
+  },
+  {
+    "file": "inf_6_3-13.xlsx",
+    "id": "inf_6_3-13",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Збереження та поширення презентацій",
+    "module": 3,
+    "code": "IN6M313"
+  },
+  {
+    "file": "inf_6_3-2.xlsx",
+    "id": "inf_6_3-2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Складові мультимедіа",
+    "module": 3,
+    "code": "IN6M302"
+  },
+  {
+    "file": "inf_6_3-3.xlsx",
+    "id": "inf_6_3-3",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Програми для роботи з мультимедіа",
+    "module": 3,
+    "code": "IN6M303"
+  },
+  {
+    "file": "inf_6_3-4.xlsx",
+    "id": "inf_6_3-4",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Поняття презентації",
+    "module": 3,
+    "code": "IN6M304"
+  },
+  {
+    "file": "inf_6_3-5.xlsx",
+    "id": "inf_6_3-5",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Середовище програми презентацій",
+    "module": 3,
+    "code": "IN6M305"
+  },
+  {
+    "file": "inf_6_3-6.xlsx",
+    "id": "inf_6_3-6",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Елементи та структура слайду",
+    "module": 3,
+    "code": "IN6M306"
+  },
+  {
+    "file": "inf_6_3-7.xlsx",
+    "id": "inf_6_3-7",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Макети та теми оформлення",
+    "module": 3,
+    "code": "IN6M307"
+  },
+  {
+    "file": "inf_6_3-8.xlsx",
+    "id": "inf_6_3-8",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Вставка та форматування тексту",
+    "module": 3,
+    "code": "IN6M308"
+  },
+  {
+    "file": "inf_6_3-9.xlsx",
+    "id": "inf_6_3-9",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Вставка зображень та фігур",
+    "module": 3,
+    "code": "IN6M309"
+  },
+  {
+    "file": "inf_6_4-1.xlsx",
+    "id": "inf_6_4-1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Поняття логічного висловлювання",
+    "module": 4,
+    "code": "IN6M401"
+  },
+  {
+    "file": "inf_6_4-10.xlsx",
+    "id": "inf_6_4-10",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Узагальнення: логічні висловлювання",
+    "module": 4,
+    "code": "IN6M410"
+  },
+  {
+    "file": "inf_6_4-2.xlsx",
+    "id": "inf_6_4-2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Логічні значення: істина та хибність",
+    "module": 4,
+    "code": "IN6M402"
+  },
+  {
+    "file": "inf_6_4-3.xlsx",
+    "id": "inf_6_4-3",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Операція заперечення (НЕ)",
+    "module": 4,
+    "code": "IN6M403"
+  },
+  {
+    "file": "inf_6_4-4.xlsx",
+    "id": "inf_6_4-4",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Операція кон'юнкції (І)",
+    "module": 4,
+    "code": "IN6M404"
+  },
+  {
+    "file": "inf_6_4-5.xlsx",
+    "id": "inf_6_4-5",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Операція диз'юнкції (АБО)",
+    "module": 4,
+    "code": "IN6M405"
+  },
+  {
+    "file": "inf_6_4-6.xlsx",
+    "id": "inf_6_4-6",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Таблиці істинності",
+    "module": 4,
+    "code": "IN6M406"
+  },
+  {
+    "file": "inf_6_4-7.xlsx",
+    "id": "inf_6_4-7",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Складені логічні вирази",
+    "module": 4,
+    "code": "IN6M407"
+  },
+  {
+    "file": "inf_6_4-8.xlsx",
+    "id": "inf_6_4-8",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Логічні схеми",
+    "module": 4,
+    "code": "IN6M408"
+  },
+  {
+    "file": "inf_6_4-9.xlsx",
+    "id": "inf_6_4-9",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Застосування логічних операцій",
+    "module": 4,
+    "code": "IN6M409"
+  },
+  {
+    "file": "inf_6_ric.xlsx",
+    "id": "inf_6_rik",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Річний: Інформатика 6 клас",
+    "module": null,
+    "code": "IN6R"
+  },
+  {
+    "file": "inf_6_sem1.xlsx",
+    "id": "inf_6_sem1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Семестр 1: Інформаційна безпека, Комунікація, Мультимедіа",
+    "module": null,
+    "code": "IN6S1"
+  },
+  {
+    "file": "inf_6_sem2.xlsx",
+    "id": "inf_6_sem2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Семестр 2: Логіка та алгоритми",
+    "module": null,
+    "code": "IN6S2"
+  },
+  {
+    "file": "inf_6_tem1.xlsx",
+    "id": "inf_6_tem1",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Інформаційна безпека та медіаграмотність",
+    "module": null,
+    "code": "IN6T1"
+  },
+  {
+    "file": "inf_6_tem2.xlsx",
+    "id": "inf_6_tem2",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Комунікація та хмарні технології",
+    "module": null,
+    "code": "IN6T2"
+  },
+  {
+    "file": "inf_6_tem3.xlsx",
+    "id": "inf_6_tem3",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Мультимедіа та презентації",
+    "module": null,
+    "code": "IN6T3"
+  },
+  {
+    "file": "inf_6_tem4.xlsx",
+    "id": "inf_6_tem4",
+    "subject": "Інформатика",
+    "grade": 6,
+    "title": "Логіка та алгоритми",
+    "module": null,
+    "code": "IN6T4"
+  },
+  {
+    "file": "inf_7_1-1.xlsx",
+    "id": "inf_7_1-1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Служби Інтернету",
+    "module": 1,
+    "code": "IN7M101"
+  },
+  {
+    "file": "inf_7_1-2.xlsx",
+    "id": "inf_7_1-2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Адресація в Інтернеті",
+    "module": 1,
+    "code": "IN7M102"
+  },
+  {
+    "file": "inf_7_1-3.xlsx",
+    "id": "inf_7_1-3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Веб 2.0",
+    "module": 1,
+    "code": "IN7M103"
+  },
+  {
+    "file": "inf_7_1-4.xlsx",
+    "id": "inf_7_1-4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Ліцензування цифрового вмісту",
+    "module": 1,
+    "code": "IN7M104"
+  },
+  {
+    "file": "inf_7_1-5.xlsx",
+    "id": "inf_7_1-5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Хмарні текстові документи",
+    "module": 1,
+    "code": "IN7M105"
+  },
+  {
+    "file": "inf_7_1-6.xlsx",
+    "id": "inf_7_1-6",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Колективна робота в мережі",
+    "module": 1,
+    "code": "IN7M106"
+  },
+  {
+    "file": "inf_7_1-7.xlsx",
+    "id": "inf_7_1-7",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Версії документів",
+    "module": 1,
+    "code": "IN7M107"
+  },
+  {
+    "file": "inf_7_1-8.xlsx",
+    "id": "inf_7_1-8",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Мережева взаємодія",
+    "module": 1,
+    "code": "IN7M108"
+  },
+  {
+    "file": "inf_7_2-1.xlsx",
+    "id": "inf_7_2-1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Стилі оформлення документа",
+    "module": 2,
+    "code": "IN7M201"
+  },
+  {
+    "file": "inf_7_2-2.xlsx",
+    "id": "inf_7_2-2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Колонтитули документа",
+    "module": 2,
+    "code": "IN7M202"
+  },
+  {
+    "file": "inf_7_2-3.xlsx",
+    "id": "inf_7_2-3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Списки в документі",
+    "module": 2,
+    "code": "IN7M203"
+  },
+  {
+    "file": "inf_7_2-4.xlsx",
+    "id": "inf_7_2-4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Таблиці в текстовому документі",
+    "module": 2,
+    "code": "IN7M204"
+  },
+  {
+    "file": "inf_7_2-5.xlsx",
+    "id": "inf_7_2-5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Обчислення в таблицях Word",
+    "module": 2,
+    "code": "IN7M205"
+  },
+  {
+    "file": "inf_7_2-6.xlsx",
+    "id": "inf_7_2-6",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Автоматичний зміст",
+    "module": 2,
+    "code": "IN7M206"
+  },
+  {
+    "file": "inf_7_2-7.xlsx",
+    "id": "inf_7_2-7",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Покажчики",
+    "module": 2,
+    "code": "IN7M207"
+  },
+  {
+    "file": "inf_7_2-8.xlsx",
+    "id": "inf_7_2-8",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Злиття документів",
+    "module": 2,
+    "code": "IN7M208"
+  },
+  {
+    "file": "inf_7_2-9.xlsx",
+    "id": "inf_7_2-9",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Параметри друку",
+    "module": 2,
+    "code": "IN7M209"
+  },
+  {
+    "file": "inf_7_3-1.xlsx",
+    "id": "inf_7_3-1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Поняття моделі та моделювання",
+    "module": 3,
+    "code": "IN7M301"
+  },
+  {
+    "file": "inf_7_3-2.xlsx",
+    "id": "inf_7_3-2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Типи комп'ютерних моделей",
+    "module": 3,
+    "code": "IN7M302"
+  },
+  {
+    "file": "inf_7_3-3.xlsx",
+    "id": "inf_7_3-3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Форми подання моделей",
+    "module": 3,
+    "code": "IN7M303"
+  },
+  {
+    "file": "inf_7_3-4.xlsx",
+    "id": "inf_7_3-4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Етапи комп'ютерного моделювання",
+    "module": 3,
+    "code": "IN7M304"
+  },
+  {
+    "file": "inf_7_3-5.xlsx",
+    "id": "inf_7_3-5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Табличні моделі",
+    "module": 3,
+    "code": "IN7M305"
+  },
+  {
+    "file": "inf_7_3-6.xlsx",
+    "id": "inf_7_3-6",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Графічні моделі та карти знань",
+    "module": 3,
+    "code": "IN7M306"
+  },
+  {
+    "file": "inf_7_3-7.xlsx",
+    "id": "inf_7_3-7",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Дослідження комп'ютерної моделі",
+    "module": 3,
+    "code": "IN7M307"
+  },
+  {
+    "file": "inf_7_3-8.xlsx",
+    "id": "inf_7_3-8",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Аналіз результатів моделювання",
+    "module": 3,
+    "code": "IN7M308"
+  },
+  {
+    "file": "inf_7_4-1.xlsx",
+    "id": "inf_7_4-1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Середовище програмування Python",
+    "module": 4,
+    "code": "IN7M401"
+  },
+  {
+    "file": "inf_7_4-2.xlsx",
+    "id": "inf_7_4-2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Синтаксис мови Python",
+    "module": 4,
+    "code": "IN7M402"
+  },
+  {
+    "file": "inf_7_4-3.xlsx",
+    "id": "inf_7_4-3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Змінні в Python",
+    "module": 4,
+    "code": "IN7M403"
+  },
+  {
+    "file": "inf_7_4-4.xlsx",
+    "id": "inf_7_4-4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Типи даних Python",
+    "module": 4,
+    "code": "IN7M404"
+  },
+  {
+    "file": "inf_7_4-5.xlsx",
+    "id": "inf_7_4-5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Функції print() та input()",
+    "module": 4,
+    "code": "IN7M405"
+  },
+  {
+    "file": "inf_7_4-6.xlsx",
+    "id": "inf_7_4-6",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Лінійні програми",
+    "module": 4,
+    "code": "IN7M406"
+  },
+  {
+    "file": "inf_7_4-7.xlsx",
+    "id": "inf_7_4-7",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Розгалуження в Python",
+    "module": 4,
+    "code": "IN7M407"
+  },
+  {
+    "file": "inf_7_5-1.xlsx",
+    "id": "inf_7_5-1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Поняття бази даних",
+    "module": 5,
+    "code": "IN7M501"
+  },
+  {
+    "file": "inf_7_5-10.xlsx",
+    "id": "inf_7_5-10",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Індекси в базі даних",
+    "module": 5,
+    "code": "IN7M510"
+  },
+  {
+    "file": "inf_7_5-11.xlsx",
+    "id": "inf_7_5-11",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Безпека баз даних",
+    "module": 5,
+    "code": "IN7M511"
+  },
+  {
+    "file": "inf_7_5-12.xlsx",
+    "id": "inf_7_5-12",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Хмарні бази даних",
+    "module": 5,
+    "code": "IN7M512"
+  },
+  {
+    "file": "inf_7_5-2.xlsx",
+    "id": "inf_7_5-2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Моделі даних",
+    "module": 5,
+    "code": "IN7M502"
+  },
+  {
+    "file": "inf_7_5-3.xlsx",
+    "id": "inf_7_5-3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "СУБД",
+    "module": 5,
+    "code": "IN7M503"
+  },
+  {
+    "file": "inf_7_5-4.xlsx",
+    "id": "inf_7_5-4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Таблиці та зв'язки в БД",
+    "module": 5,
+    "code": "IN7M504"
+  },
+  {
+    "file": "inf_7_5-5.xlsx",
+    "id": "inf_7_5-5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Первинний і зовнішній ключ",
+    "module": 5,
+    "code": "IN7M505"
+  },
+  {
+    "file": "inf_7_5-6.xlsx",
+    "id": "inf_7_5-6",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "SQL SELECT та WHERE",
+    "module": 5,
+    "code": "IN7M506"
+  },
+  {
+    "file": "inf_7_5-7.xlsx",
+    "id": "inf_7_5-7",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "SQL INSERT, UPDATE, DELETE",
+    "module": 5,
+    "code": "IN7M507"
+  },
+  {
+    "file": "inf_7_5-8.xlsx",
+    "id": "inf_7_5-8",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Форми та звіти в БД",
+    "module": 5,
+    "code": "IN7M508"
+  },
+  {
+    "file": "inf_7_5-9.xlsx",
+    "id": "inf_7_5-9",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Нормалізація бази даних",
+    "module": 5,
+    "code": "IN7M509"
+  },
+  {
+    "file": "inf_7_rik.xlsx",
+    "id": "inf_7_rik",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Річний 7 клас",
+    "module": null,
+    "code": "IN7R"
+  },
+  {
+    "file": "inf_7_sem1.xlsx",
+    "id": "inf_7_sem1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Семестр 1 (М1-М2)",
+    "module": null,
+    "code": "IN7S1"
+  },
+  {
+    "file": "inf_7_sem2.xlsx",
+    "id": "inf_7_sem2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Семестр 2 (М3-М5)",
+    "module": null,
+    "code": "IN7S2"
+  },
+  {
+    "file": "inf_7_tem1.xlsx",
+    "id": "inf_7_tem1",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Інтернет-технології",
+    "module": null,
+    "code": "IN7T1"
+  },
+  {
+    "file": "inf_7_tem2.xlsx",
+    "id": "inf_7_tem2",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Word розширений",
+    "module": null,
+    "code": "IN7T2"
+  },
+  {
+    "file": "inf_7_tem3.xlsx",
+    "id": "inf_7_tem3",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Комп'ютерне моделювання",
+    "module": null,
+    "code": "IN7T3"
+  },
+  {
+    "file": "inf_7_tem4.xlsx",
+    "id": "inf_7_tem4",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Python початок",
+    "module": null,
+    "code": "IN7T4"
+  },
+  {
+    "file": "inf_7_tem5.xlsx",
+    "id": "inf_7_tem5",
+    "subject": "Інформатика",
+    "grade": 7,
+    "title": "Бази даних",
+    "module": null,
+    "code": "IN7T5"
+  },
+  {
+    "file": "inf_8_1-1.xlsx",
+    "id": "inf_8_1-1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Принципи побудови та архітектура ПК",
+    "module": 1,
+    "code": "IN8M101"
+  },
+  {
+    "file": "inf_8_1-2.xlsx",
+    "id": "inf_8_1-2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Характеристики процесора",
+    "module": 1,
+    "code": "IN8M102"
+  },
+  {
+    "file": "inf_8_1-3.xlsx",
+    "id": "inf_8_1-3",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Оперативна та постійна пам'ять",
+    "module": 1,
+    "code": "IN8M103"
+  },
+  {
+    "file": "inf_8_1-4.xlsx",
+    "id": "inf_8_1-4",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Зовнішні носії інформації",
+    "module": 1,
+    "code": "IN8M104"
+  },
+  {
+    "file": "inf_8_1-5.xlsx",
+    "id": "inf_8_1-5",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Материнська плата та шини",
+    "module": 1,
+    "code": "IN8M105"
+  },
+  {
+    "file": "inf_8_1-6.xlsx",
+    "id": "inf_8_1-6",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Класифікація програмного забезпечення",
+    "module": 1,
+    "code": "IN8M106"
+  },
+  {
+    "file": "inf_8_1-7.xlsx",
+    "id": "inf_8_1-7",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Системні програми та утиліти",
+    "module": 1,
+    "code": "IN8M107"
+  },
+  {
+    "file": "inf_8_1-8.xlsx",
+    "id": "inf_8_1-8",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Обслуговування ПК та профілактика",
+    "module": 1,
+    "code": "IN8M108"
+  },
+  {
+    "file": "inf_8_2-1.xlsx",
+    "id": "inf_8_2-1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Призначення та інтерфейс ЕТ",
+    "module": 2,
+    "code": "IN8M201"
+  },
+  {
+    "file": "inf_8_2-2.xlsx",
+    "id": "inf_8_2-2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Об'єкти електронної таблиці",
+    "module": 2,
+    "code": "IN8M202"
+  },
+  {
+    "file": "inf_8_2-3.xlsx",
+    "id": "inf_8_2-3",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Типи даних у комірках",
+    "module": 2,
+    "code": "IN8M203"
+  },
+  {
+    "file": "inf_8_2-4.xlsx",
+    "id": "inf_8_2-4",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Форматування електронних таблиць",
+    "module": 2,
+    "code": "IN8M204"
+  },
+  {
+    "file": "inf_8_2-5.xlsx",
+    "id": "inf_8_2-5",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Маркер автозаповнення",
+    "module": 2,
+    "code": "IN8M205"
+  },
+  {
+    "file": "inf_8_2-6.xlsx",
+    "id": "inf_8_2-6",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Правила запису формул в ЕТ",
+    "module": 2,
+    "code": "IN8M206"
+  },
+  {
+    "file": "inf_8_2-7.xlsx",
+    "id": "inf_8_2-7",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Відносні посилання",
+    "module": 2,
+    "code": "IN8M207"
+  },
+  {
+    "file": "inf_8_2-8.xlsx",
+    "id": "inf_8_2-8",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Абсолютні та мішані посилання",
+    "module": 2,
+    "code": "IN8M208"
+  },
+  {
+    "file": "inf_8_2-9.xlsx",
+    "id": "inf_8_2-9",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Візуалізація даних діаграмами",
+    "module": 2,
+    "code": "IN8M209"
+  },
+  {
+    "file": "inf_8_3-1.xlsx",
+    "id": "inf_8_3-1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Поняття про бази даних. СУБД",
+    "module": 3,
+    "code": "IN8M301"
+  },
+  {
+    "file": "inf_8_3-2.xlsx",
+    "id": "inf_8_3-2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Таблиці у СУБД Access. Типи полів",
+    "module": 3,
+    "code": "IN8M302"
+  },
+  {
+    "file": "inf_8_3-3.xlsx",
+    "id": "inf_8_3-3",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Форми у СУБД Access",
+    "module": 3,
+    "code": "IN8M303"
+  },
+  {
+    "file": "inf_8_3-4.xlsx",
+    "id": "inf_8_3-4",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Запити у СУБД Access",
+    "module": 3,
+    "code": "IN8M304"
+  },
+  {
+    "file": "inf_8_3-5.xlsx",
+    "id": "inf_8_3-5",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Звіти у СУБД Access",
+    "module": 3,
+    "code": "IN8M305"
+  },
+  {
+    "file": "inf_8_3-6.xlsx",
+    "id": "inf_8_3-6",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Зв'язки між таблицями. Нормалізація",
+    "module": 3,
+    "code": "IN8M306"
+  },
+  {
+    "file": "inf_8_3-7.xlsx",
+    "id": "inf_8_3-7",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Пошук і фільтрація даних у СУБД",
+    "module": 3,
+    "code": "IN8M307"
+  },
+  {
+    "file": "inf_8_3-8.xlsx",
+    "id": "inf_8_3-8",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Поняття програмування. Мова Python",
+    "module": 3,
+    "code": "IN8M308"
+  },
+  {
+    "file": "inf_8_4-1.xlsx",
+    "id": "inf_8_4-1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Розгалуження в Python. Оператор if",
+    "module": 4,
+    "code": "IN8M401"
+  },
+  {
+    "file": "inf_8_4-2.xlsx",
+    "id": "inf_8_4-2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Цикли в Python. while і for",
+    "module": 4,
+    "code": "IN8M402"
+  },
+  {
+    "file": "inf_8_4-3.xlsx",
+    "id": "inf_8_4-3",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Функції у Python",
+    "module": 4,
+    "code": "IN8M403"
+  },
+  {
+    "file": "inf_8_4-4.xlsx",
+    "id": "inf_8_4-4",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Списки у Python",
+    "module": 4,
+    "code": "IN8M404"
+  },
+  {
+    "file": "inf_8_4-5.xlsx",
+    "id": "inf_8_4-5",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Рядки у Python. Методи рядків",
+    "module": 4,
+    "code": "IN8M405"
+  },
+  {
+    "file": "inf_8_4-6.xlsx",
+    "id": "inf_8_4-6",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Словники, кортежі, множини у Python",
+    "module": 4,
+    "code": "IN8M406"
+  },
+  {
+    "file": "inf_8_4-7.xlsx",
+    "id": "inf_8_4-7",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Модулі у Python. math та random",
+    "module": 4,
+    "code": "IN8M407"
+  },
+  {
+    "file": "inf_8_rik.xlsx",
+    "id": "inf_8_rik",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Річний тест",
+    "module": null,
+    "code": "IN8R"
+  },
+  {
+    "file": "inf_8_sem1.xlsx",
+    "id": "inf_8_sem1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Семестровий тест. Семестр 1",
+    "module": null,
+    "code": "IN8S1"
+  },
+  {
+    "file": "inf_8_sem2.xlsx",
+    "id": "inf_8_sem2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Семестровий тест. Семестр 2",
+    "module": null,
+    "code": "IN8S2"
+  },
+  {
+    "file": "inf_8_tem1.xlsx",
+    "id": "inf_8_tem1",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Тематичний тест. Модуль 1. Апаратне та програмне забезпечення",
+    "module": null,
+    "code": "IN8T1"
+  },
+  {
+    "file": "inf_8_tem2.xlsx",
+    "id": "inf_8_tem2",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Тематичний тест. Модуль 2. Табличний процесор",
+    "module": null,
+    "code": "IN8T2"
+  },
+  {
+    "file": "inf_8_tem3.xlsx",
+    "id": "inf_8_tem3",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Тематичний тест. Модуль 3. Бази даних",
+    "module": null,
+    "code": "IN8T3"
+  },
+  {
+    "file": "inf_8_tem4.xlsx",
+    "id": "inf_8_tem4",
+    "subject": "Інформатика",
+    "grade": 8,
+    "title": "Тематичний тест. Модуль 4. Програмування на Python",
+    "module": null,
+    "code": "IN8T4"
+  },
+  {
+    "file": "inf_9_1-1.xlsx",
+    "id": "inf_9_1-1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Математичні та статистичні функції",
+    "module": 1,
+    "code": "IN9M101"
+  },
+  {
+    "file": "inf_9_1-2.xlsx",
+    "id": "inf_9_1-2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Функції підрахунку в ЕТ",
+    "module": 1,
+    "code": "IN9M102"
+  },
+  {
+    "file": "inf_9_1-3.xlsx",
+    "id": "inf_9_1-3",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Логічна функція IF",
+    "module": 1,
+    "code": "IN9M103"
+  },
+  {
+    "file": "inf_9_1-4.xlsx",
+    "id": "inf_9_1-4",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Складні логічні вирази в ЕТ",
+    "module": 1,
+    "code": "IN9M104"
+  },
+  {
+    "file": "inf_9_1-5.xlsx",
+    "id": "inf_9_1-5",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Сортування табличних даних",
+    "module": 1,
+    "code": "IN9M105"
+  },
+  {
+    "file": "inf_9_1-6.xlsx",
+    "id": "inf_9_1-6",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Використання автофільтра",
+    "module": 1,
+    "code": "IN9M106"
+  },
+  {
+    "file": "inf_9_1-7.xlsx",
+    "id": "inf_9_1-7",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Розширене фільтрування даних",
+    "module": 1,
+    "code": "IN9M107"
+  },
+  {
+    "file": "inf_9_1-8.xlsx",
+    "id": "inf_9_1-8",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Правила умовного форматування",
+    "module": 1,
+    "code": "IN9M108"
+  },
+  {
+    "file": "inf_9_1-9.xlsx",
+    "id": "inf_9_1-9",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Практичний аналіз даних у таблицях",
+    "module": 1,
+    "code": "IN9M109"
+  },
+  {
+    "file": "inf_9_2-1.xlsx",
+    "id": "inf_9_2-1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Цикл for у Python",
+    "module": 2,
+    "code": "IN9M201"
+  },
+  {
+    "file": "inf_9_2-2.xlsx",
+    "id": "inf_9_2-2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Функція range()",
+    "module": 2,
+    "code": "IN9M202"
+  },
+  {
+    "file": "inf_9_2-3.xlsx",
+    "id": "inf_9_2-3",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Цикл while у Python",
+    "module": 2,
+    "code": "IN9M203"
+  },
+  {
+    "file": "inf_9_2-4.xlsx",
+    "id": "inf_9_2-4",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Створення списків у Python",
+    "module": 2,
+    "code": "IN9M204"
+  },
+  {
+    "file": "inf_9_2-5.xlsx",
+    "id": "inf_9_2-5",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Індексація елементів списку",
+    "module": 2,
+    "code": "IN9M205"
+  },
+  {
+    "file": "inf_9_2-6.xlsx",
+    "id": "inf_9_2-6",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Методи списків",
+    "module": 2,
+    "code": "IN9M206"
+  },
+  {
+    "file": "inf_9_2-7.xlsx",
+    "id": "inf_9_2-7",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Обхід елементів списку",
+    "module": 2,
+    "code": "IN9M207"
+  },
+  {
+    "file": "inf_9_2-8.xlsx",
+    "id": "inf_9_2-8",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Статистика над списками",
+    "module": 2,
+    "code": "IN9M208"
+  },
+  {
+    "file": "inf_9_2-9.xlsx",
+    "id": "inf_9_2-9",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Пошук у списках за критерієм",
+    "module": 2,
+    "code": "IN9M209"
+  },
+  {
+    "file": "inf_9_3-1.xlsx",
+    "id": "inf_9_3-1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Основи вебтехнологій та HTML",
+    "module": 3,
+    "code": "IN9M301"
+  },
+  {
+    "file": "inf_9_3-2.xlsx",
+    "id": "inf_9_3-2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Структура HTML-сторінки",
+    "module": 3,
+    "code": "IN9M302"
+  },
+  {
+    "file": "inf_9_3-3.xlsx",
+    "id": "inf_9_3-3",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Форматування тексту в HTML",
+    "module": 3,
+    "code": "IN9M303"
+  },
+  {
+    "file": "inf_9_3-4.xlsx",
+    "id": "inf_9_3-4",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Списки на вебсторінці",
+    "module": 3,
+    "code": "IN9M304"
+  },
+  {
+    "file": "inf_9_3-5.xlsx",
+    "id": "inf_9_3-5",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Посилання та зображення в HTML",
+    "module": 3,
+    "code": "IN9M305"
+  },
+  {
+    "file": "inf_9_3-6.xlsx",
+    "id": "inf_9_3-6",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Вступ до таблиць стилів CSS",
+    "module": 3,
+    "code": "IN9M306"
+  },
+  {
+    "file": "inf_9_3-7.xlsx",
+    "id": "inf_9_3-7",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Селектори та властивості CSS",
+    "module": 3,
+    "code": "IN9M307"
+  },
+  {
+    "file": "inf_9_3-8.xlsx",
+    "id": "inf_9_3-8",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Оформлення стилів вебсторінки",
+    "module": 3,
+    "code": "IN9M308"
+  },
+  {
+    "file": "inf_9_3-9.xlsx",
+    "id": "inf_9_3-9",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Розгортання статичного вебсайту",
+    "module": 3,
+    "code": "IN9M309"
+  },
+  {
+    "file": "inf_9_4-1.xlsx",
+    "id": "inf_9_4-1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Види кіберзагроз",
+    "module": 4,
+    "code": "IN9M401"
+  },
+  {
+    "file": "inf_9_4-2.xlsx",
+    "id": "inf_9_4-2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Види шкідливого програмного забезпечення",
+    "module": 4,
+    "code": "IN9M402"
+  },
+  {
+    "file": "inf_9_4-3.xlsx",
+    "id": "inf_9_4-3",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Фішинг та соціальна інженерія",
+    "module": 4,
+    "code": "IN9M403"
+  },
+  {
+    "file": "inf_9_4-4.xlsx",
+    "id": "inf_9_4-4",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Методи автентифікації та паролі",
+    "module": 4,
+    "code": "IN9M404"
+  },
+  {
+    "file": "inf_9_4-5.xlsx",
+    "id": "inf_9_4-5",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Засоби захисту та бекап",
+    "module": 4,
+    "code": "IN9M405"
+  },
+  {
+    "file": "inf_9_rik.xlsx",
+    "id": "inf_9_rik",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Річний контроль",
+    "module": null,
+    "code": "IN9R"
+  },
+  {
+    "file": "inf_9_sem1.xlsx",
+    "id": "inf_9_sem1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Семестровий контроль 1",
+    "module": null,
+    "code": "IN9S1"
+  },
+  {
+    "file": "inf_9_sem2.xlsx",
+    "id": "inf_9_sem2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Семестровий контроль 2",
+    "module": null,
+    "code": "IN9S2"
+  },
+  {
+    "file": "inf_9_tem1.xlsx",
+    "id": "inf_9_tem1",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Аналіз даних у табличному процесорі",
+    "module": null,
+    "code": "IN9T1"
+  },
+  {
+    "file": "inf_9_tem2.xlsx",
+    "id": "inf_9_tem2",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Програмування: Цикли та списки Python",
+    "module": null,
+    "code": "IN9T2"
+  },
+  {
+    "file": "inf_9_tem3.xlsx",
+    "id": "inf_9_tem3",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Основи вебтехнологій",
+    "module": null,
+    "code": "IN9T3"
+  },
+  {
+    "file": "inf_9_tem4.xlsx",
+    "id": "inf_9_tem4",
+    "subject": "Інформатика",
+    "grade": 9,
+    "title": "Кібербезпека та захист даних",
+    "module": null,
+    "code": "IN9T4"
+  },
+  {
+    "file": "prir_5_1-1.xlsx",
+    "id": "prir_5_1-1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Методи дослідження природи",
+    "module": 1,
+    "code": "PN5M101"
+  },
+  {
+    "file": "prir_5_1-2.xlsx",
+    "id": "prir_5_1-2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Прилади та правила безпеки в дослідженнях",
+    "module": 1,
+    "code": "PN5M102"
+  },
+  {
+    "file": "prir_5_2-1.xlsx",
+    "id": "prir_5_2-1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Тіла, речовини, атоми й молекули",
+    "module": 2,
+    "code": "PN5M201"
+  },
+  {
+    "file": "prir_5_2-2.xlsx",
+    "id": "prir_5_2-2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Агрегатні стани речовин. Суміші",
+    "module": 2,
+    "code": "PN5M202"
+  },
+  {
+    "file": "prir_5_2-3.xlsx",
+    "id": "prir_5_2-3",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Властивості води й повітря",
+    "module": 2,
+    "code": "PN5M203"
+  },
+  {
+    "file": "prir_5_3-1.xlsx",
+    "id": "prir_5_3-1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Оболонки Землі",
+    "module": 3,
+    "code": "PN5M301"
+  },
+  {
+    "file": "prir_5_3-2.xlsx",
+    "id": "prir_5_3-2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Ґрунти",
+    "module": 3,
+    "code": "PN5M302"
+  },
+  {
+    "file": "prir_5_3-3.xlsx",
+    "id": "prir_5_3-3",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Погода і клімат",
+    "module": 3,
+    "code": "PN5M303"
+  },
+  {
+    "file": "prir_5_3-4.xlsx",
+    "id": "prir_5_3-4",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Материки та океани",
+    "module": 3,
+    "code": "PN5M304"
+  },
+  {
+    "file": "prir_5_4-1.xlsx",
+    "id": "prir_5_4-1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Клітина — будова і функції",
+    "module": 4,
+    "code": "PN5M401"
+  },
+  {
+    "file": "prir_5_4-2.xlsx",
+    "id": "prir_5_4-2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Рослини: будова і особливості",
+    "module": 4,
+    "code": "PN5M402"
+  },
+  {
+    "file": "prir_5_4-3.xlsx",
+    "id": "prir_5_4-3",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Тварини, гриби і бактерії",
+    "module": 4,
+    "code": "PN5M403"
+  },
+  {
+    "file": "prir_5_4-4.xlsx",
+    "id": "prir_5_4-4",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Пристосування організмів до середовища",
+    "module": 4,
+    "code": "PN5M404"
+  },
+  {
+    "file": "prir_5_5-1.xlsx",
+    "id": "prir_5_5-1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Будова організму людини. Здоровий спосіб життя",
+    "module": 5,
+    "code": "PN5M501"
+  },
+  {
+    "file": "prir_5_5-2.xlsx",
+    "id": "prir_5_5-2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Взаємодія людини з природою. Екологія",
+    "module": 5,
+    "code": "PN5M502"
+  },
+  {
+    "file": "prir_5_rik.xlsx",
+    "id": "prir_5_rik",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Річна контрольна робота",
+    "module": null,
+    "code": "PN5R"
+  },
+  {
+    "file": "prir_5_sem1.xlsx",
+    "id": "prir_5_sem1",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Семестрова контрольна робота 1",
+    "module": null,
+    "code": "PN5S1"
+  },
+  {
+    "file": "prir_5_sem2.xlsx",
+    "id": "prir_5_sem2",
+    "subject": "Пізнаємо природу",
+    "grade": 5,
+    "title": "Семестрова контрольна робота 2",
+    "module": null,
+    "code": "PN5S2"
+  },
+  {
+    "file": "prir_6_1-1.xlsx",
+    "id": "prir_6_1-1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Вступ. Планування досліджень. Моделювання",
+    "module": 1,
+    "code": "PN6M101"
+  },
+  {
+    "file": "prir_6_2-1.xlsx",
+    "id": "prir_6_2-1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 1. Механічні та теплові явища",
+    "module": 2,
+    "code": "PN6M201"
+  },
+  {
+    "file": "prir_6_2-2.xlsx",
+    "id": "prir_6_2-2",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 1. Звукові та світлові явища",
+    "module": 2,
+    "code": "PN6M202"
+  },
+  {
+    "file": "prir_6_2-3.xlsx",
+    "id": "prir_6_2-3",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 1. Електричні явища",
+    "module": 2,
+    "code": "PN6M203"
+  },
+  {
+    "file": "prir_6_2-4.xlsx",
+    "id": "prir_6_2-4",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 1. Хімічні та біологічні явища",
+    "module": 2,
+    "code": "PN6M204"
+  },
+  {
+    "file": "prir_6_3-1.xlsx",
+    "id": "prir_6_3-1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 2. Будова Сонячної системи",
+    "module": 3,
+    "code": "PN6M301"
+  },
+  {
+    "file": "prir_6_3-2.xlsx",
+    "id": "prir_6_3-2",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 2. Рухи Землі. Місяць. Затемнення",
+    "module": 3,
+    "code": "PN6M302"
+  },
+  {
+    "file": "prir_6_4-1.xlsx",
+    "id": "prir_6_4-1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 3. Середовища існування",
+    "module": 4,
+    "code": "PN6M401"
+  },
+  {
+    "file": "prir_6_4-2.xlsx",
+    "id": "prir_6_4-2",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 3. Екосистеми та ланцюги живлення",
+    "module": 4,
+    "code": "PN6M402"
+  },
+  {
+    "file": "prir_6_4-3.xlsx",
+    "id": "prir_6_4-3",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 3. Природні угруповання та охорона",
+    "module": 4,
+    "code": "PN6M403"
+  },
+  {
+    "file": "prir_6_5-1.xlsx",
+    "id": "prir_6_5-1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 4. Вплив людини на довкілля",
+    "module": 5,
+    "code": "PN6M501"
+  },
+  {
+    "file": "prir_6_5-2.xlsx",
+    "id": "prir_6_5-2",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Тема 4. Енергоощадження. Сталий розвиток",
+    "module": 5,
+    "code": "PN6M502"
+  },
+  {
+    "file": "prir_6_rik.xlsx",
+    "id": "prir_6_rik",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Річна контрольна робота",
+    "module": null,
+    "code": "PN6R"
+  },
+  {
+    "file": "prir_6_sem1.xlsx",
+    "id": "prir_6_sem1",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Семестрова контрольна робота 1",
+    "module": null,
+    "code": "PN6S1"
+  },
+  {
+    "file": "prir_6_sem2.xlsx",
+    "id": "prir_6_sem2",
+    "subject": "Пізнаємо природу",
+    "grade": 6,
+    "title": "Семестрова контрольна робота 2",
+    "module": null,
+    "code": "PN6S2"
   }
 ]
