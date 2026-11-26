@@ -1017,7 +1017,7 @@ function parseXlsxBuffer(buf) {
   const questions = rows.map((r, i) => ({
     id:      r['ID'] || r['id'] || (i+1),
     group:   String(r['Група'] || r['Group'] || '').trim(),
-    type:    String(r['Тип']  || r['Type']    || 'single').toLowerCase().trim(),
+    type:    String(r['Тип']  || r['Type']    || 'single').toLowerCase().trim().replace(/^multiple[23]$/, 'multiple'),
     text:    String(r['Питання'] || r['Question'] || ''),
     a:       String(r['Варіант_А'] || r['A'] || r['А'] || ''),
     b:       String(r['Варіант_Б'] || r['B'] || r['Б'] || ''),
@@ -1061,7 +1061,7 @@ async function useSelectedTest() {
 
     // Title comes from the FILE's Мета sheet, not from manifest
     const title   = String(meta['Тема']    || selectedTest.title);
-    const subject = String(meta['Предмет'] || selectedTest.subject);
+    const subject = String(meta['Предмет'] || selectedTest.subject).replace(/’/g, "'");
     const grade   = parseInt(meta['Клас']  || selectedTest.grade) || 0;
 
     allQuestions = questions;
