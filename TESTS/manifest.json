@@ -6532,5 +6532,689 @@
     "title": "Семестровий контроль 2",
     "module": null,
     "code": "PFG9S2"
+  },
+  {
+    "file": "astr_10_1-1.xlsx",
+    "id": "astr_10_1-1",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Вступ. Предмет і методи астрономії",
+    "module": 1,
+    "code": "AS10M101"
+  },
+  {
+    "file": "astr_10_1-2.xlsx",
+    "id": "astr_10_1-2",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Небесна сфера та небесні координати",
+    "module": 1,
+    "code": "AS10M102"
+  },
+  {
+    "file": "astr_10_1-3.xlsx",
+    "id": "astr_10_1-3",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Видимий рух світил. Сузір'я",
+    "module": 1,
+    "code": "AS10M103"
+  },
+  {
+    "file": "astr_10_1-4.xlsx",
+    "id": "astr_10_1-4",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Вимірювання часу. Календарі",
+    "module": 1,
+    "code": "AS10M104"
+  },
+  {
+    "file": "astr_10_1-5.xlsx",
+    "id": "astr_10_1-5",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Практикум: Визначення координат світил",
+    "module": 1,
+    "code": "AS10M105"
+  },
+  {
+    "file": "astr_10_1-6.xlsx",
+    "id": "astr_10_1-6",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Розвиток уявлень про будову світу",
+    "module": 1,
+    "code": "AS10M106"
+  },
+  {
+    "file": "astr_10_1-7.xlsx",
+    "id": "astr_10_1-7",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Узагальнення з Модуля 1",
+    "module": 1,
+    "code": "AS10M107"
+  },
+  {
+    "file": "astr_10_2-1.xlsx",
+    "id": "astr_10_2-1",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Закони руху планет (закони Кеплера)",
+    "module": 2,
+    "code": "AS10M201"
+  },
+  {
+    "file": "astr_10_2-2.xlsx",
+    "id": "astr_10_2-2",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Конфігурації планет і синодичний період",
+    "module": 2,
+    "code": "AS10M202"
+  },
+  {
+    "file": "astr_10_2-3.xlsx",
+    "id": "astr_10_2-3",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Закон всесвітнього тяжіння та рух небесних тіл",
+    "module": 2,
+    "code": "AS10M203"
+  },
+  {
+    "file": "astr_10_2-4.xlsx",
+    "id": "astr_10_2-4",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Космічні швидкості та рух космічних апаратів",
+    "module": 2,
+    "code": "AS10M204"
+  },
+  {
+    "file": "astr_10_2-5.xlsx",
+    "id": "astr_10_2-5",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Рух і фази Місяця. Затемнення",
+    "module": 2,
+    "code": "AS10M205"
+  },
+  {
+    "file": "astr_10_2-6.xlsx",
+    "id": "astr_10_2-6",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Практикум: Задачі з небесної механіки",
+    "module": 2,
+    "code": "AS10M206"
+  },
+  {
+    "file": "astr_10_2-7.xlsx",
+    "id": "astr_10_2-7",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Узагальнення та перевірка знань з Модуля 2",
+    "module": 2,
+    "code": "AS10M207"
+  },
+  {
+    "file": "astr_10_3-1.xlsx",
+    "id": "astr_10_3-1",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Загальна характеристика Сонячної системи",
+    "module": 3,
+    "code": "AS10M301"
+  },
+  {
+    "file": "astr_10_3-2.xlsx",
+    "id": "astr_10_3-2",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Земля як планета",
+    "module": 3,
+    "code": "AS10M302"
+  },
+  {
+    "file": "astr_10_3-3.xlsx",
+    "id": "astr_10_3-3",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Природа Місяця",
+    "module": 3,
+    "code": "AS10M303"
+  },
+  {
+    "file": "astr_10_3-4.xlsx",
+    "id": "astr_10_3-4",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Меркурій і Венера",
+    "module": 3,
+    "code": "AS10M304"
+  },
+  {
+    "file": "astr_10_3-5.xlsx",
+    "id": "astr_10_3-5",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Марс",
+    "module": 3,
+    "code": "AS10M305"
+  },
+  {
+    "file": "astr_10_3-6.xlsx",
+    "id": "astr_10_3-6",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Юпітер і Сатурн",
+    "module": 3,
+    "code": "AS10M306"
+  },
+  {
+    "file": "astr_10_3-7.xlsx",
+    "id": "astr_10_3-7",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Уран і Нептун",
+    "module": 3,
+    "code": "AS10M307"
+  },
+  {
+    "file": "astr_10_3-8.xlsx",
+    "id": "astr_10_3-8",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Карликові планети та транснептунові об'єкти",
+    "module": 3,
+    "code": "AS10M308"
+  },
+  {
+    "file": "astr_10_3-9.xlsx",
+    "id": "astr_10_3-9",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Астероїди, метеороїди, метеори та боліди",
+    "module": 3,
+    "code": "AS10M309"
+  },
+  {
+    "file": "astr_10_3-10.xlsx",
+    "id": "astr_10_3-10",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Комети та міжпланетне середовище",
+    "module": 3,
+    "code": "AS10M310"
+  },
+  {
+    "file": "astr_10_3-11.xlsx",
+    "id": "astr_10_3-11",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Практикум / Узагальнення з Модуля 3",
+    "module": 3,
+    "code": "AS10M311"
+  },
+  {
+    "file": "astr_10_4-1.xlsx",
+    "id": "astr_10_4-1",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Електромагнітне випромінювання в астрономії",
+    "module": 4,
+    "code": "AS10M401"
+  },
+  {
+    "file": "astr_10_4-2.xlsx",
+    "id": "astr_10_4-2",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Телескопи та приймачі випромінювання",
+    "module": 4,
+    "code": "AS10M402"
+  },
+  {
+    "file": "astr_10_4-3.xlsx",
+    "id": "astr_10_4-3",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Спектральний аналіз в астрономії",
+    "module": 4,
+    "code": "AS10M403"
+  },
+  {
+    "file": "astr_10_4-4.xlsx",
+    "id": "astr_10_4-4",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Сонце як зоря: загальні характеристики і будова",
+    "module": 4,
+    "code": "AS10M404"
+  },
+  {
+    "file": "astr_10_4-5.xlsx",
+    "id": "astr_10_4-5",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Джерела енергії Сонця та термоядерні реакції",
+    "module": 4,
+    "code": "AS10M405"
+  },
+  {
+    "file": "astr_10_4-6.xlsx",
+    "id": "astr_10_4-6",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Сонячна активність і цикли Сонця",
+    "module": 4,
+    "code": "AS10M406"
+  },
+  {
+    "file": "astr_10_4-7.xlsx",
+    "id": "astr_10_4-7",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Сонячний вітер та космічна погода",
+    "module": 4,
+    "code": "AS10M407"
+  },
+  {
+    "file": "astr_10_4-8.xlsx",
+    "id": "astr_10_4-8",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Практикум: Аналіз сонячної активності та спектрів",
+    "module": 4,
+    "code": "AS10M408"
+  },
+  {
+    "file": "astr_10_4-9.xlsx",
+    "id": "astr_10_4-9",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Навчальний проєкт з тем 10 класу",
+    "module": 4,
+    "code": "AS10M409"
+  },
+  {
+    "file": "astr_10_4-10.xlsx",
+    "id": "astr_10_4-10",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Підсумковий урок за 10 клас",
+    "module": 4,
+    "code": "AS10M410"
+  },
+  {
+    "file": "astr_11_1-1.xlsx",
+    "id": "astr_11_1-1",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Вступ. Основні характеристики зір",
+    "module": 1,
+    "code": "AS11M101"
+  },
+  {
+    "file": "astr_11_1-2.xlsx",
+    "id": "astr_11_1-2",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Спектральна класифікація зір",
+    "module": 1,
+    "code": "AS11M102"
+  },
+  {
+    "file": "astr_11_1-3.xlsx",
+    "id": "astr_11_1-3",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Діаграма Герцшпрунга — Рассела",
+    "module": 1,
+    "code": "AS11M103"
+  },
+  {
+    "file": "astr_11_1-4.xlsx",
+    "id": "astr_11_1-4",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Подвійні та кратні зорі",
+    "module": 1,
+    "code": "AS11M104"
+  },
+  {
+    "file": "astr_11_1-5.xlsx",
+    "id": "astr_11_1-5",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Фізичні змінні та нестаціонарні зорі",
+    "module": 1,
+    "code": "AS11M105"
+  },
+  {
+    "file": "astr_11_1-6.xlsx",
+    "id": "astr_11_1-6",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Народження та еволюція зір малої і середньої маси",
+    "module": 1,
+    "code": "AS11M106"
+  },
+  {
+    "file": "astr_11_1-7.xlsx",
+    "id": "astr_11_1-7",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Еволюція масивних зір та кінцеві стадії",
+    "module": 1,
+    "code": "AS11M107"
+  },
+  {
+    "file": "astr_11_1-8.xlsx",
+    "id": "astr_11_1-8",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Зоряні скупчення та асоціації",
+    "module": 1,
+    "code": "AS11M108"
+  },
+  {
+    "file": "astr_11_1-9.xlsx",
+    "id": "astr_11_1-9",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Міжзоряне середовище",
+    "module": 1,
+    "code": "AS11M109"
+  },
+  {
+    "file": "astr_11_1-10.xlsx",
+    "id": "astr_11_1-10",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Практикум: Робота з діаграмою Г—Р",
+    "module": 1,
+    "code": "AS11M110"
+  },
+  {
+    "file": "astr_11_1-11.xlsx",
+    "id": "astr_11_1-11",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Практикум: Розв'язування астрофізичних задач",
+    "module": 1,
+    "code": "AS11M111"
+  },
+  {
+    "file": "astr_11_1-12.xlsx",
+    "id": "astr_11_1-12",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Узагальнення та контроль знань з Модуля 1",
+    "module": 1,
+    "code": "AS11M112"
+  },
+  {
+    "file": "astr_11_2-1.xlsx",
+    "id": "astr_11_2-1",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Наша Галактика — Чумацький Шлях",
+    "module": 2,
+    "code": "AS11M201"
+  },
+  {
+    "file": "astr_11_2-2.xlsx",
+    "id": "astr_11_2-2",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Обертання Галактики та галактична орбіта Сонця",
+    "module": 2,
+    "code": "AS11M202"
+  },
+  {
+    "file": "astr_11_2-3.xlsx",
+    "id": "astr_11_2-3",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Населення Галактики та хімічна еволюція",
+    "module": 2,
+    "code": "AS11M203"
+  },
+  {
+    "file": "astr_11_2-4.xlsx",
+    "id": "astr_11_2-4",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Центр Галактики та темна матерія",
+    "module": 2,
+    "code": "AS11M204"
+  },
+  {
+    "file": "astr_11_2-5.xlsx",
+    "id": "astr_11_2-5",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Космічні промені та високоенергетичні процеси",
+    "module": 2,
+    "code": "AS11M205"
+  },
+  {
+    "file": "astr_11_2-6.xlsx",
+    "id": "astr_11_2-6",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Практикум: Дослідження структури та обертання Галактики",
+    "module": 2,
+    "code": "AS11M206"
+  },
+  {
+    "file": "astr_11_2-7.xlsx",
+    "id": "astr_11_2-7",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Узагальнення з Модуля 2",
+    "module": 2,
+    "code": "AS11M207"
+  },
+  {
+    "file": "astr_11_3-1.xlsx",
+    "id": "astr_11_3-1",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Різноманіття та класифікація галактик",
+    "module": 3,
+    "code": "AS11M301"
+  },
+  {
+    "file": "astr_11_3-2.xlsx",
+    "id": "astr_11_3-2",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Активні ядра галактик і квазари",
+    "module": 3,
+    "code": "AS11M302"
+  },
+  {
+    "file": "astr_11_3-3.xlsx",
+    "id": "astr_11_3-3",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Велика структура Всесвіту",
+    "module": 3,
+    "code": "AS11M303"
+  },
+  {
+    "file": "astr_11_3-4.xlsx",
+    "id": "astr_11_3-4",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Закон Габбла та розширення Всесвіту",
+    "module": 3,
+    "code": "AS11M304"
+  },
+  {
+    "file": "astr_11_3-5.xlsx",
+    "id": "astr_11_3-5",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Основи релятивістської космології та модель Великого вибуху",
+    "module": 3,
+    "code": "AS11M305"
+  },
+  {
+    "file": "astr_11_3-6.xlsx",
+    "id": "astr_11_3-6",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Реліктове випромінювання та первинний нуклеосинтез",
+    "module": 3,
+    "code": "AS11M306"
+  },
+  {
+    "file": "astr_11_3-7.xlsx",
+    "id": "astr_11_3-7",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Темна матерія та темна енергія",
+    "module": 3,
+    "code": "AS11M307"
+  },
+  {
+    "file": "astr_11_3-8.xlsx",
+    "id": "astr_11_3-8",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Сучасні космологічні моделі та майбутнє Всесвіту",
+    "module": 3,
+    "code": "AS11M308"
+  },
+  {
+    "file": "astr_11_3-9.xlsx",
+    "id": "astr_11_3-9",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Практикум: Закон Габбла і космологічні оцінки",
+    "module": 3,
+    "code": "AS11M309"
+  },
+  {
+    "file": "astr_11_3-10.xlsx",
+    "id": "astr_11_3-10",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Практикум: Аналіз космологічних даних і графіків",
+    "module": 3,
+    "code": "AS11M310"
+  },
+  {
+    "file": "astr_11_3-11.xlsx",
+    "id": "astr_11_3-11",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Узагальнення та контроль знань з Модуля 3",
+    "module": 3,
+    "code": "AS11M311"
+  },
+  {
+    "file": "astr_11_4-1.xlsx",
+    "id": "astr_11_4-1",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Екзопланети та методи їх виявлення",
+    "module": 4,
+    "code": "AS11M401"
+  },
+  {
+    "file": "astr_11_4-2.xlsx",
+    "id": "astr_11_4-2",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Астробіологія та зона придатності для життя",
+    "module": 4,
+    "code": "AS11M402"
+  },
+  {
+    "file": "astr_11_4-3.xlsx",
+    "id": "astr_11_4-3",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Проблема позаземних цивілізацій",
+    "module": 4,
+    "code": "AS11M403"
+  },
+  {
+    "file": "astr_11_4-4.xlsx",
+    "id": "astr_11_4-4",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Захист навчальних проєктів з астрономії",
+    "module": 4,
+    "code": "AS11M404"
+  },
+  {
+    "file": "astr_11_4-5.xlsx",
+    "id": "astr_11_4-5",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Підсумковий урок за курс 11 класу",
+    "module": 4,
+    "code": "AS11M405"
+  },
+  {
+    "file": "astr_10_sem1.xlsx",
+    "id": "astr_10_sem1",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Семестровий тест 1 (Модулі 1–2), 10 клас",
+    "module": null,
+    "code": "AS10S1"
+  },
+  {
+    "file": "astr_10_sem2.xlsx",
+    "id": "astr_10_sem2",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Семестровий тест 2 (Модулі 3–4), 10 клас",
+    "module": null,
+    "code": "AS10S2"
+  },
+  {
+    "file": "astr_10_rik.xlsx",
+    "id": "astr_10_rik",
+    "subject": "Астрономія",
+    "grade": 10,
+    "title": "Річний підсумковий тест, 10 клас",
+    "module": null,
+    "code": "AS10RK"
+  },
+  {
+    "file": "astr_11_sem1.xlsx",
+    "id": "astr_11_sem1",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Семестровий тест 1 (Модулі 1–2), 11 клас",
+    "module": null,
+    "code": "AS11S1"
+  },
+  {
+    "file": "astr_11_sem2.xlsx",
+    "id": "astr_11_sem2",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Семестровий тест 2 (Модулі 3–4), 11 клас",
+    "module": null,
+    "code": "AS11S2"
+  },
+  {
+    "file": "astr_11_rik.xlsx",
+    "id": "astr_11_rik",
+    "subject": "Астрономія",
+    "grade": 11,
+    "title": "Річний підсумковий тест, 11 клас",
+    "module": null,
+    "code": "AS11RK"
   }
 ]
